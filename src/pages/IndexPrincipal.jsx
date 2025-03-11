@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import './IndexPrincipal.css';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import left from "../assets/left.png";
 import right from "../assets/right.png";
+import { AuthContext } from '../AuthContext.jsx';
 
 const IndexPrincipal = () => {
   const [data, setData] = useState([]);
   const [menuAberto, setMenuAberto] = useState(false);
+  const [isAltered, setIsAltered] = useState(false); // Estado para alternar entre versões
   const carousel = useRef(null);
+  const { user, role } = useContext(AuthContext);
 
   useEffect(() => {
     fetch('/Carrossel.json')
@@ -29,6 +32,10 @@ const IndexPrincipal = () => {
 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+
+  const toggleVersion = () => {
+    setIsAltered(!isAltered);
   };
 
   if (!data || !data.length) return null;
@@ -64,8 +71,14 @@ const IndexPrincipal = () => {
             </button>
           </form>
           <div className="painel-usuario">
-            <Link to={'/Login'} className="link-usuario">Login</Link>
-            <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+            {user ? (
+              <Link to={'/Perfil'} className="link-usuario">Perfil</Link>
+            ) : (
+              <>
+                <Link to={'/Login'} className="link-usuario">Login</Link>
+                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -134,6 +147,26 @@ const IndexPrincipal = () => {
           &copy; gamelegends.com | Feito pelo time do Game Legends 
         </div>
       </footer>
+      
+      <div className="button-container">
+        {/* Botão para alternar entre versões */}
+        <button onClick={toggleVersion} className="toggle-button">
+          {isAltered ? "Voltar para versão original" : "Ir para versão alterada"}
+        </button>
+
+        {/* Botões adicionais para links */}
+        <Link to={'/Perfil'}><button className="link-button"> -Perfil</button></Link>
+        <Link to={'/Descricao'}><button className="link-button"> -Descrição</button></Link>
+        <Link to={'/Criar'}><button className="link-button"> -Criação projeto</button></Link>
+      </div>
+
+      {/* Exibe a versão alterada se isAltered for true */}
+      {isAltered && (
+        <div className="altered-version">
+          <h2>Esta é a versão alterada do site para testes</h2>
+          <p>Altere o código conforme necessário para testar diferentes funcionalidades.</p>
+        </div>
+      )}
     </div>
   );
 };

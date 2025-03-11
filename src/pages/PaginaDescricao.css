@@ -1,257 +1,338 @@
-/* Container principal */
-.app7{
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+.app7 {
   height: 99vh;
 }
+
+.cabecalho {
+  background: #90017F;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.conteudo-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  margin: 0;
+}
+
+.logo img {
+  width: 120px;
+}
+
+.navegacao {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 0 5px;
+  background: #780069;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.nav-item i {
+  margin-right: 8px;
+}
+
+.nav-item:hover {
+  background: #A0008D;
+}
+
+.hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.formulario-pesquisa {
+  display: flex;
+  align-items: center;
+}
+
+.input-pesquisa {
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  outline: none;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.botao-pesquisa {
+  padding: 5px 10px;
+  border: none;
+  background: #780069;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+.painel-usuario {
+  display: flex;
+  align-items: center;
+}
+
+.link-usuario {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  background: #780069;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.link-usuario:hover {
+  background: #A0008D;
+}
+
 .game-profile-container {
-    max-width: 1200px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Header com o perfil do desenvolvedor */
-  .game-profile-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .developer-profile {
-    display: flex;
-    align-items: center;
-  }
-  
-  .developer-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 15px;
-  }
-  
-  /* Conteúdo principal */
-  .game-profile-content {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .main-content {
-    width: 70%;
-  }
-  
-  .main-game-img {
+  max-width: 1200px;
+  margin: -650px auto 0 auto; /* Reduz a distância da navbar */
+  padding: 0; /* Remove o padding para aproximar mais do navbar */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteúdo principal */
+.game-profile-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 10px;
+}
+
+.main-game-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+.description h1 {
+  font-size: 30px;
+}
+
+.description p {
+  font-size: 20px;
+}
+
+.credits {
+  margin-top: 20px;
+}
+
+.credits a {
+  color: #6b47dc;
+  text-decoration: none;
+}
+
+.credits a:hover {
+  text-decoration: underline;
+}
+
+/* Imagens extras de descrição */
+.extra-images {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.extra-images img {
+  flex: 0 0 200px; /* Define a largura fixa das imagens extras */
+  height: 150px; /* Define a altura fixa das imagens extras */
+  border-radius: 10px;
+}
+
+/* Rodapé com os botões */
+.game-profile-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.download-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #6b47dc;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #5a39bc;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navegacao {
+    display: none;
+    flex-direction: column;
     width: 100%;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    background: #90017F;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 1000;
   }
-  
-  .description {
+
+  .nav-item {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    border-bottom: 1px solid #A0008D;
+  }
+
+  .navegacao.ativo {
+    display: flex;
+  }
+
+  .hamburguer {
+    display: block;
+  }
+
+  .formulario-pesquisa {
+    width: 100%;
     margin-top: 10px;
   }
-  .description h1 {
-    font-size: 30px;
-    margin-left: 155px;
-  }
-  .description p {
-    font-size: 20px;
-  }
-  
-  .credits {
-    margin-top: 20px;
-  }
-  
-  .credits a {
-    color: #6b47dc;
-    text-decoration: none;
-  }
-  
-  .credits a:hover {
-    text-decoration: underline;
-  }
-  /* Imagens extras de descrição */
-  .extra-images {
-    width: 28%;
-    display: flex;
-    flex-direction: column;
-    height: 437px;
-    background-color: lightgray;
-    border-radius: 10px;
-  }
-  
-  .desc1-img {
+
+  .input-pesquisa {
     width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
   }
-  .desc1-img:first-child{
-    margin-bottom: 65px;
+
+  .game-profile-content {
+    padding: 0 10px; /* Adiciona padding nas laterais para versão mobile */
   }
-  
-  /* Rodapé com os botões */
-  .game-profile-footer {
-    display: flex;
-    justify-content: space-between;
+
+  .extra-images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .extra-images img {
+    width: 100%; /* Faz com que as imagens extras preencham a largura disponível */
+    height: auto; /* Mantém a proporção das imagens */
+  }
+
+  .description {
+    width: 100%;
+  }
+
+  .description h1 {
+    margin-top: 10px;
+  }
+
+  .seta {
+    position: static;
     margin-top: 20px;
+    width: 50px;
   }
-  
-  .Download-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 80px;
-  }
-  
-  .Download-btn {
-    background-color: #6b47dc;
-  }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgb(160, 50, 145);
-    padding: 10px;
-    color: #fff;
-    z-index: 1000;
-  }
- 
-  .nav {
-    display: flex;
-    align-items: center; /* Alinha os itens verticalmente */
-  }
- 
-  /* Estilos padrão para links de texto */
-  .nav-text {
-    margin: 0 15px;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem; /* Tamanho da fonte para texto */
-  }
- 
-  /* Estilos para os ícones */
-  .nav-icon {
-    display: none; /* Oculta os ícones por padrão */
-  }
-  @media (min-width: 769px) {
-    .game-profile-content .extra-images1{
-      display:none
-    }
-  }
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .nav-text {
-        display: none; /* Oculta o texto em telas menores */
-    }
-    .nav-icon {
-        display: inline-block; /* Mostra os ícones em telas menores */
-        font-size: 30px; /* Ajusta o tamanho dos ícones */
-        margin: 0 10px; /* Margem entre os ícones */
-        margin-right: -50px ;
-    }
-    .logo img {
-      width: 40px; /* Ajusta o tamanho da logo em telas menores */
-  }
- 
-  .search input {
-      width: 100px; /* Largura da barra de pesquisa em telas menores */
-  }
-  .game-profile-content .extra-images1 img{
-    display: inline;
-    background: none;
-    
-    max-width:800%;
-    width: 290%;
-    height: 160px;
-    margin-top: -10%;
-  }
-  .game-profile-content .extra-images1 img:first-child{
-    display: inline;
-    background: none;
-    margin-right: 0%;
-    max-width:800%;
-    width:290%;
-    margin-top: 4%;
-    margin-left: 40%;
-  }
-  .main-content .main-game-img{
-    height: 30%;
-    width: fit-content;
-    margin-left: 0%;
-    max-width: 800%;
-    width: 143%;
-  }
-  .game-profile-content .extra-images{
-    display: none;
-  }
-  .game-profile-content .extra-images1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-  .description{
-    width: 150%;
-  }
-  .description h1{
-    margin-top: -8%;
-    
-  }
-  }
- 
- 
-  .search {
-    display: flex;
-    align-items: center; /* Alinha o ícone de pesquisa e o input verticalmente */
-  }
- 
-  .search input {
-    padding: 5px;
-    border-radius: 50px;
-    border: none;
-    color: #000;
-  }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgb(160, 50, 145);
-    padding: 10px;
-    color: #fff;
-    z-index: 1000;
-  }
- 
-  .logo img {
-    width: 50px; /* Ajuste o tamanho da logo */
-    height: auto; /* Mantém a proporção da imagem */
-  }
- 
-  .search {
-    display: flex;
-    align-items: center;
-  }
- 
-  .search input {
-    padding: 5px;
-    border-radius: 25px; /* Tornar a pesquisa mais arredondada */
-    border: none;
-    color: #000;
-    width: 150px; /* Define uma largura fixa para a barra de pesquisa */
-    margin-right: 10px; /* Espaço entre a barra de pesquisa e o ícone do perfil */
-  }
- 
-  .search i {
-    font-size: 20px; /* Ajusta o tamanho do ícone de pesquisa */
-  }
- 
-  .login-btn {
-    background-color: #00bfa5;
-    color: white;
-    border: none;
-    padding: 8px 12px; /* Tamanho do botão de login */
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  
+}
+
+/* Estilo do rodapé */
+.rodape {
+  background: #90017F;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.conteudo-rodape {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.secao-rodape {
+  flex: 1;
+  padding: 10px;
+  min-width: 200px;
+}
+
+.logo-rodape {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.contato-rodape span {
+  display: block;
+  margin: 10px 0;
+}
+
+.redes-sociais a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.links ul a {
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 0;
+  display: block;
+}
+
+.links ul a:hover {
+  color: #A0008D;
+}
+
+.rodape-inferior {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #A0008D;
+  margin-top: 10px;
+}

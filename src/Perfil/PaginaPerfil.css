@@ -1,18 +1,135 @@
-.perfil-container {
-  background: linear-gradient(to bottom, #90017F, #6a11cb, #2575fc);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 100vh;
-  padding: 20px;
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.perfil-title {
-  text-align: center;
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+.pagina-perfil-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden; /* Evita que a tela fique maior do que deveria */
+}
+
+.pagina-perfil-cabecalho {
+  background: #90017F;
   color: #fff;
-  height: 100px;
-  font-size: 1.4rem;
+  padding: 10px 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.perfil-info-container {
+.pagina-perfil-conteudo-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.pagina-perfil-logo {
+  margin: 0;
+}
+
+.pagina-perfil-logo img {
+  width: 120px;
+}
+
+.pagina-perfil-navegacao {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pagina-perfil-nav-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 0 5px;
+  background: #780069;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.pagina-perfil-nav-item i {
+  margin-right: 8px;
+}
+
+.pagina-perfil-nav-item:hover {
+  background: #A0008D;
+}
+
+.pagina-perfil-hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.pagina-perfil-formulario-pesquisa {
+  display: flex;
+  align-items: center;
+}
+
+.pagina-perfil-input-pesquisa {
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  outline: none;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.pagina-perfil-botao-pesquisa {
+  padding: 5px 10px;
+  border: none;
+  background: #780069;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+.pagina-perfil-painel-usuario {
+  display: flex;
+  align-items: center;
+}
+
+.pagina-perfil-link-usuario {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  background: #780069;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.pagina-perfil-link-usuario:hover {
+  background: #A0008D;
+}
+
+.pagina-perfil-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative; /* Para posicionar a seta */
+}
+
+.pagina-perfil-info-container {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 20px;
@@ -20,47 +137,35 @@
   margin: 20px 0; /* Espaçamento superior e inferior */
 }
 
-.perfil-info p {
+.pagina-perfil-info p {
   font-size: 1.1rem; /* Tamanho da fonte */
   margin: 10px 0; /* Espaçamento entre as informações */
   color: #333; /* Cor do texto */
 }
 
-.perfil-button {
+.pagina-perfil-button {
   padding: 10px;
   background: #6b47dc;
   color: #fff;
   border: none;
   border-radius: 9px;
   cursor: pointer;
+  margin: 10px;
 }
 
-.perfil-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(160, 50, 145);
-  padding: 25px;
+.pagina-perfil-delete {
+  background: #f44336; /* Cor vermelha para o botão de excluir */
+}
+
+.pagina-perfil-title {
+  text-align: center;
   color: #fff;
-}
-
-.perfil-logo img {
-  width: 140px;
-}
-
-.nav {
-  display: flex;
-}
-
-.nav-text {
-  text-decoration: none;
-  color: #fff;
-  font-size: 2rem;
-  margin: 0 15px;
+  height: 100px;
+  font-size: 1.4rem;
 }
 
 /* Estilos do Modal */
-.modal {
+.pagina-perfil-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -73,7 +178,7 @@
   z-index: 1000; /* Garante que o modal fique sobre outros elementos */
 }
 
-.modal-content {
+.pagina-perfil-modal-content {
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -82,17 +187,17 @@
   max-width: 500px; /* Limita a largura máxima do modal */
 }
 
-.modal-content h2 {
+.pagina-perfil-modal-content h2 {
   margin-bottom: 20px; /* Espaçamento inferior */
   color: #6b47dc; /* Cor do título */
 }
 
-.modal-content label {
+.pagina-perfil-modal-content label {
   display: block;
   margin-bottom: 10px; /* Espaçamento inferior */
 }
 
-.modal-content input {
+.pagina-perfil-modal-content input {
   width: 100%; /* Largura total */
   padding: 10px; /* Espaçamento interno */
   border-radius: 5px; /* Bordas arredondadas */
@@ -100,7 +205,7 @@
   margin-bottom: 15px; /* Espaçamento entre campos */
 }
 
-.modal-content button {
+.pagina-perfil-modal-content button {
   padding: 10px;
   background: #6b47dc;
   color: #fff;
@@ -110,6 +215,116 @@
   transition: background 0.3s;
 }
 
-.modal-content button:hover {
+.pagina-perfil-modal-content button:hover {
   background: #5a39bc; /* Cor de fundo do botão no hover */
+}
+
+.pagina-perfil-rodape {
+  background: #90017F;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: auto;
+}
+
+.pagina-perfil-conteudo-rodape {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.pagina-perfil-secao-rodape {
+  flex: 1;
+  padding: 10px;
+  min-width: 200px;
+}
+
+.pagina-perfil-logo-rodape {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.pagina-perfil-contato-rodape span {
+  display: block;
+  margin: 10px 0;
+}
+
+.pagina-perfil-redes-sociais a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.pagina-perfil-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pagina-perfil-links ul a {
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 0;
+  display: block;
+}
+
+.pagina-perfil-links ul a:hover {
+  color: #A0008D;
+}
+
+.pagina-perfil-rodape-inferior {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #A0008D;
+  margin-top: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .pagina-perfil-navegacao {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #90017F;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .pagina-perfil-nav-item {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    border-bottom: 1px solid #A0008D;
+  }
+
+  .pagina-perfil-navegacao.ativo {
+    display: flex;
+  }
+
+  .pagina-perfil-hamburguer {
+    display: block;
+  }
+
+  .pagina-perfil-formulario-pesquisa {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .pagina-perfil-input-pesquisa {
+    width: 100%;
+  }
+
+  .pagina-perfil-info-container {
+    width: 90%;
+  }
+
+  .pagina-perfil-modal-content {
+    width: 95%;
+  }
 }

@@ -103,37 +103,95 @@ function PaginaPerfil() {
     }
 
     return (
-        <div className="perfil-container">
-            <header className="perfil-header">
-                <div className="perfil-logo"><img src={Logo} alt="Logo" /></div>
-                <nav className="nav">
-                    <Link to='/Index' className="nav-text">Início</Link>
-                    <Link to='/' className="nav-text">Games</Link>
-                    <Link to='/Que' className="nav-text">Sobre</Link>
-                    <Link to='/Suporte' className="nav-text">Suporte</Link>
-                </nav>
+        <div className="pagina-perfil-app">
+            <header className="pagina-perfil-cabecalho">
+                <div className="pagina-perfil-conteudo-cabecalho">
+                    <h1 className="pagina-perfil-logo">
+                        <Link to="/" title="Game Legends">
+                            <img src={Logo} alt="Logo do Game Legends" />
+                        </Link>
+                    </h1>
+                    <nav className="pagina-perfil-navegacao">
+                        <Link to='/Index' className="pagina-perfil-nav-text pagina-perfil-nav-item"><i className="fas fa-home"></i><span className="pagina-perfil-nav-label">Início</span></Link>
+                        <Link to='/' className="pagina-perfil-nav-text pagina-perfil-nav-item"><i className="fas fa-gamepad"></i><span className="pagina-perfil-nav-label">Games</span></Link>
+                        <Link to='/Que' className="pagina-perfil-nav-text pagina-perfil-nav-item"><i className="fas fa-question-circle"></i><span className="pagina-perfil-nav-label">Sobre</span></Link>
+                        <Link to='/Suporte' className="pagina-perfil-nav-text pagina-perfil-nav-item"><i className="fas fa-headset"></i><span className="pagina-perfil-nav-label">Suporte</span></Link>
+                    </nav>
+                    <button className="pagina-perfil-hamburguer" onClick={() => setMenuAberto(!menuAberto)}>
+                        <i className="fas fa-bars"></i>
+                    </button>
+                    <form className="pagina-perfil-formulario-pesquisa" action="/search">
+                        <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="pagina-perfil-input-pesquisa" type="text"/>
+                        <button className="pagina-perfil-botao-pesquisa" aria-label="Search">
+                            <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="pagina-perfil-icone-pesquisa" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </form>
+                    <div className="pagina-perfil-painel-usuario">
+                        <Link className="pagina-perfil-link-usuario" to="/login">Login</Link>
+                        <Link className="pagina-perfil-link-usuario" to="/register">Registre-se</Link>
+                    </div>
+                </div>
             </header>
 
-            <div className="perfil-info-container">
-                <h2 className="perfil-title">MEU PERFIL</h2>
-                <div className="perfil-info">
-                    <p><strong>Nome:</strong> {formData.nome}</p>
-                    <p><strong>CPF:</strong> {formData.cpf}</p>
-                    <p><strong>Data de Nascimento:</strong> {formData.dataNascimento}</p>
-                    <p><strong>Email:</strong> {formData.email}</p>
-                    <p><strong>Telefone:</strong> {formData.telefone}</p>
+            <main className="pagina-perfil-main">
+                <div className="pagina-perfil-info-container">
+                    <h2 className="pagina-perfil-title">MEU PERFIL</h2>
+                    <div className="pagina-perfil-info">
+                        <p><strong>Nome:</strong> {formData.nome}</p>
+                        <p><strong>CPF:</strong> {formData.cpf}</p>
+                        <p><strong>Data de Nascimento:</strong> {formData.dataNascimento}</p>
+                        <p><strong>Email:</strong> {formData.email}</p>
+                        <p><strong>Telefone:</strong> {formData.telefone}</p>
+                    </div>
+                    <button onClick={handleEdit} className="pagina-perfil-button">Editar Perfil</button>
+                    <button onClick={handleDelete} className="pagina-perfil-button pagina-perfil-delete">Excluir Perfil</button>
                 </div>
-                <button onClick={handleEdit} className="perfil-button">Editar Perfil</button>
-                <button onClick={handleDelete} className="perfil-button perfil-delete">Excluir Perfil</button>
-            </div>
 
-            {modalVisible && (
-                <Modal
-                    formData={formData}
-                    onClose={() => setModalVisible(false)}
-                    onSave={handleSave}
-                />
-            )}
+                {modalVisible && (
+                    <Modal
+                        formData={formData}
+                        onClose={() => setModalVisible(false)}
+                        onSave={handleSave}
+                    />
+                )}
+            </main>
+
+            <footer className="pagina-perfil-rodape">
+                <div className="pagina-perfil-conteudo-rodape">
+                    <div className="pagina-perfil-secao-rodape sobre">
+                        <h1 className="pagina-perfil-logo-rodape"><span>Game</span>Legends</h1>
+                        <p>
+                            Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
+                        </p>
+                        <div className="pagina-perfil-contato-rodape">
+                            <span><i className="fas fa-phone"></i> &nbsp; (99) 99999-9999</span>
+                            <span><i className="fas fa-envelope"></i> &nbsp; info@gamelegends.com</span>
+                        </div>
+                        <div className="pagina-perfil-redes-sociais">
+                            <a href="#"><i className="fab fa-facebook"></i></a>
+                            <a href="#"><i className="fab fa-twitter"></i></a>
+                            <a href="#"><i className="fab fa-instagram"></i></a>
+                            <a href="#"><i className="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div className="pagina-perfil-secao-rodape links">
+                        <h2>Links Rápidos</h2>
+                        <ul>
+                            <a href="#"><li>Eventos</li></a>
+                            <a href="#"><li>Equipe</li></a>
+                            <a href="#"><li>Missão</li></a>
+                            <a href="#"><li>Serviços</li></a>
+                            <a href="#"><li>Afiliados</li></a>
+                        </ul>
+                    </div>
+                </div>
+                <div className="pagina-perfil-rodape-inferior">
+                    &copy; gamelegends.com | Feito pelo time do Game Legends 
+                </div>
+            </footer>
         </div>
     );
 }
@@ -166,8 +224,8 @@ const Modal = ({ formData, onClose, onSave }) => {
     };
 
     return (
-        <div className="modal">
-            <div className="modal-content">
+        <div className="pagina-perfil-modal">
+            <div className="pagina-perfil-modal-content">
                 <h2>Editar Perfil</h2>
                 <label>
                     Nome:

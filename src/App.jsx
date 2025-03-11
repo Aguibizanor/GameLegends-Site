@@ -1,12 +1,16 @@
 import React from "react";
-import Logo from "./assets/logo.site.tcc.png";
+import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./pages/AppRoutes";
+import { AuthProvider } from "./AuthContext.jsx";
 
 function App() {
     return (
-        <AppRoutes/>
+        <AuthProvider>
+            <Router>
+                <AppRoutes />
+            </Router>
+        </AuthProvider>
     );
 }
 
-export default App
-
+export default App;

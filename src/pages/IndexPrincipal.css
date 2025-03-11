@@ -131,6 +131,9 @@ body {
   flex: 1;
   margin: 20px;
   padding: 20px;
+  background-color: #90017F;
+  color: #fff;
+  border-radius: 10px;
 }
 
 .intro h1 {
@@ -139,10 +142,11 @@ body {
   margin-bottom: 10px;
   border-left: solid;
   border-left-width: 8px;
+  padding-left: 10px;
 }
 
 .intro p {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #cfcfcf;
   margin-bottom: 20px;
 }
@@ -173,8 +177,8 @@ body {
   overflow-x: scroll;
   scroll-behavior: smooth;
   width: 100%;
-  max-width: 400px; /* Ajusta largura máxima */
-  height: calc(100vh - 300px); /* Ajusta altura */
+  max-width: 800px; /* Ajusta largura máxima */
+  height: calc(100vh - 400px); /* Ajusta altura */
 }
 
 .carrossel::-webkit-scrollbar {
@@ -188,9 +192,8 @@ body {
   min-width: 250px; /* Define a largura mínima dos itens */
   max-width: 350px;
   flex: none;
-  border: solid;
-  border-color: lightgray;
-  border-width: 6px;
+  border: solid 1px #ddd;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centraliza o conteúdo verticalmente */
@@ -235,16 +238,17 @@ body {
 }
 
 .carrossel .item .info .texto {
-  font-size: 1.2rem;
+  font-size: 1rem;
   flex-grow: 1;
 }
 
 .carrossel .item .info .butao {
-  font-size: 1.55rem;
+  font-size: 1.2rem;
   background-color: #8e24aa;
   border-radius: 22px;
   color: #fff;
   margin-top: 8px;
+  padding: 5px 10px;
 }
 
 .carrossel-container .left, .carrossel-container .right {
@@ -397,4 +401,26 @@ body {
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
+}
+
+/* Estilos para a versão alterada */
+.altered-version {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  text-align: center;
+}
+
+.toggle-button {
+  background-color: #8e24aa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.2em;
 }
