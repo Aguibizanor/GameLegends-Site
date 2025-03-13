@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
-import './IndexPrincipal.css';
+import './IndexPrincipal.css'; // Usar o mesmo CSS para consistência
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import left from "../assets/left.png";
@@ -10,6 +10,7 @@ const IndexPrincipal = () => {
   const [data, setData] = useState([]);
   const [menuAberto, setMenuAberto] = useState(false);
   const [isAltered, setIsAltered] = useState(false); // Estado para alternar entre versões
+  const [focusedIndex, setFocusedIndex] = useState(null); // Estado para o item focado
   const carousel = useRef(null);
   const { user, role } = useContext(AuthContext);
 
@@ -18,6 +19,14 @@ const IndexPrincipal = () => {
       .then((response) => response.json())
       .then(setData)
       .catch((error) => console.error('Erro ao carregar os dados:', error));
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleRightClick();
+    }, 60000); // Mover a cada 60 segundos
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleLeftClick = () => {
@@ -38,15 +47,23 @@ const IndexPrincipal = () => {
     setIsAltered(!isAltered);
   };
 
+  const handleMouseEnter = (index) => {
+    setFocusedIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setFocusedIndex(null);
+  };
+
   if (!data || !data.length) return null;
 
   return (
     <div className="app">
-      <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-      </head>
       <header className="cabecalho">
         <div className="conteudo-cabecalho">
+        <head>
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+        </head>
           <h1 className="logo">
             <a href="/" title="Game Legends">
               <img src={Logo} alt="Logo do Game Legends" />
@@ -93,10 +110,16 @@ const IndexPrincipal = () => {
           <div className="carrossel-container">
             <button className="left" onClick={handleLeftClick}><img src={left} alt="esquerda" /></button>
             <div className="carrossel" ref={carousel}>
-              {data.map((item) => {
+              {data.map((item, index) => {
                 const { id, name, descricao, imagem } = item;
+                const isFocused = index === focusedIndex;
                 return (
-                  <div className="item" key={id}>
+                  <div
+                    className={`item ${isFocused ? 'focused' : ''}`}
+                    key={id}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                  >
                     <div className="imag">
                       <img src={imagem} alt={name} />
                     </div>
@@ -127,9 +150,9 @@ const IndexPrincipal = () => {
             </div>
             <div className="redes-sociais">
               <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
           </div>
           <div className="secao-rodape links">

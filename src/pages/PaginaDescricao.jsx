@@ -9,9 +9,39 @@ import esquerda from "../assets/esquerda.png";
 
 const PaginaDescricao = () => {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [modalImagemAberto, setModalImagemAberto] = useState(false);
+  const [imagemAtual, setImagemAtual] = useState(0);
+  const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
+
+  const imagens = [gato1, gato2, gato1];
 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+
+  const abrirModalImagem = (index) => {
+    setImagemAtual(index);
+    setModalImagemAberto(true);
+  };
+
+  const fecharModalImagem = () => {
+    setModalImagemAberto(false);
+  };
+
+  const imagemAnterior = () => {
+    setImagemAtual((imagemAtual - 1 + imagens.length) % imagens.length);
+  };
+
+  const proximaImagem = () => {
+    setImagemAtual((imagemAtual + 1) % imagens.length);
+  };
+
+  const abrirModalDownload = () => {
+    setModalDownloadAberto(true);
+  };
+
+  const fecharModalDownload = () => {
+    setModalDownloadAberto(false);
   };
 
   return (
@@ -53,9 +83,15 @@ const PaginaDescricao = () => {
           <div className="main-content">
             <img src={gato3} alt="Happy Cat Tavern" className="main-game-img" />
             <div className="extra-images">
-              <img src={gato1} alt="Descrição 1" className="extra-img" />
-              <img src={gato2} alt="Descrição 2" className="extra-img" />
-              <img src={gato1} alt="Descrição 3" className="extra-img" />
+              {imagens.map((imagem, index) => (
+                <img
+                  key={index}
+                  src={imagem}
+                  alt={`Descrição ${index + 1}`}
+                  className="extra-img"
+                  onClick={() => abrirModalImagem(index)}
+                />
+              ))}
             </div>
             <div className="description">
               <h1>Happy Cat Tavern: Typing Challenge</h1>
@@ -66,31 +102,54 @@ const PaginaDescricao = () => {
                 desbloquear conquistas!
               </p>
               <div className="credits">
-                <h3>Créditos:</h3>
-                <p>
-                  <strong>Artista:</strong> Miyaualit (
-                  <a href="https://twitter.com" target="_blank" rel="noreferrer">
-                    Twitter
-                  </a>{' '}
-                  /{' '}
-                  <a href="https://etsy.com" target="_blank" rel="noreferrer">
-                    Etsy
-                  </a>
-                  )<br />
-                  <strong>Programador:</strong> OnyxHeart (
-                  <a href="https://twitter.com" target="_blank" rel="noreferrer">
-                    Twitter
-                  </a>
-                  )
-                </p>
+                <div>
+                  <h3>Créditos:</h3>
+                  <p>
+                    <strong>Artista:</strong> Miyaualit (
+                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
+                      Twitter
+                    </a>{' '}
+                    /{' '}
+                    <a href="https://etsy.com" target="_blank" rel="noreferrer">
+                      Etsy
+                    </a>
+                    )<br />
+                    <strong>Programador:</strong> OnyxHeart (
+                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
+                      Twitter
+                    </a>
+                    )
+                  </p>
+                </div>
+                <button className="download-btn" onClick={abrirModalDownload}>Download</button>
               </div>
             </div>
           </div>
         </div>
-        <div className="game-profile-footer">
-          <button className="download-btn">Download</button>
-        </div>
       </div>
+      {modalImagemAberto && (
+        <div className="modal-imagem">
+          <span className="fechar" onClick={fecharModalImagem}>&times;</span>
+          <img className="modal-conteudo" src={imagens[imagemAtual]} alt={`Imagem ${imagemAtual + 1}`} />
+          <a className="anterior" onClick={imagemAnterior}>&#10094;</a>
+          <a className="proxima" onClick={proximaImagem}>&#10095;</a>
+        </div>
+      )}
+      {modalDownloadAberto && (
+        <div className="modal-download">
+          <div className="modal-download-content">
+            <span className="fechar" onClick={fecharModalDownload}>&times;</span>
+            <h2>Agradecemos pela escolha de download!</h2>
+            <p>Se considerar doar para o projeto e avaliar, use o aplicativo mobile! Baixe em uma das três opções abaixo:</p>
+            <div className="download-options">
+              <button className="download-option">Opção 1</button>
+              <button className="download-option">Opção 2</button>
+              <button className="download-option">Opção 3</button>
+            </div>
+            <p>Link para o aplicativo Mobile: <a href="https://example.com">Exemplo Link</a></p>
+          </div>
+        </div>
+      )}
       <Link to={'/'}><img src={esquerda} alt="Seta" className="seta" /></Link>
       <footer className="rodape">
         <div className="conteudo-rodape">
@@ -105,9 +164,9 @@ const PaginaDescricao = () => {
             </div>
             <div className="redes-sociais">
               <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
           </div>
           <div className="secao-rodape links">

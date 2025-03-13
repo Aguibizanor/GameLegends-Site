@@ -167,9 +167,10 @@ body {
   align-items: center;
   justify-content: center; /* Centraliza o carrossel */
   width: 100%;
-  max-width: 1200px;
+  max-width: 1600px; /* Aumenta a largura máxima */
   margin: 0 auto;
   position: relative;
+  z-index: 1050; /* Garante que o carrossel sobreponha o Navbar e o Footer */
 }
 
 .carrossel {
@@ -177,8 +178,8 @@ body {
   overflow-x: scroll;
   scroll-behavior: smooth;
   width: 100%;
-  max-width: 800px; /* Ajusta largura máxima */
-  height: calc(100vh - 400px); /* Ajusta altura */
+  max-width: 1200px; /* Ajusta largura máxima */
+  height: calc(100vh - 300px); /* Ajusta altura */
 }
 
 .carrossel::-webkit-scrollbar {
@@ -198,6 +199,19 @@ body {
   flex-direction: column;
   justify-content: center; /* Centraliza o conteúdo verticalmente */
   align-items: center; /* Centraliza o conteúdo horizontalmente */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.carrossel .item.focused {
+  transform: scale(1.2); /* Aumenta o item */
+  z-index: 10; /* Sobrepõe os itens ao redor */
+  opacity: 1; /* Torna o item totalmente opaco */
+}
+
+.carrossel .item.focused .info .butao {
+  margin-top: 0; /* Remove a margem superior */
+  position: relative;
+  top: -30px; /* Move o botão para cima */
 }
 
 .carrossel .item .imag {
@@ -287,7 +301,7 @@ body {
 /* Responsividade */
 @media (max-width: 1024px) {
   .carrossel {
-    height: calc(100vh - 300px); /* Ajusta altura */
+    height: calc(100vh - 200px); /* Ajusta altura */
   }
 }
 
@@ -345,6 +359,7 @@ body {
   color: #fff;
   padding: 20px 0;
   text-align: center;
+  margin-top: auto; /* Garante que o rodapé fique na parte inferior da página */
 }
 
 .conteudo-rodape {
@@ -420,6 +435,22 @@ body {
   padding: 10px 20px;
   margin: 20px auto;
   display: block;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.button-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.link-button {
+  background-color: #8e24aa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
   border-radius: 50px;
   cursor: pointer;
   font-size: 1.2em;

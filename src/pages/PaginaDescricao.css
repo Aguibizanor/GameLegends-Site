@@ -9,10 +9,13 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app7 {
-  height: 99vh;
+  flex: 1;
 }
 
 .cabecalho {
@@ -119,11 +122,12 @@ body {
 
 .game-profile-container {
   max-width: 1200px;
-  margin: -650px auto 0 auto; /* Reduz a distância da navbar */
+  margin: 20px auto; /* Ajusta a posição da caixa branca para mais perto do Navbar */
   padding: 0; /* Remove o padding para aproximar mais do navbar */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  flex: 1;
 }
 
 /* Conteúdo principal */
@@ -160,6 +164,13 @@ body {
 
 .credits {
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.credits-info {
+  flex: 1;
 }
 
 .credits a {
@@ -169,6 +180,22 @@ body {
 
 .credits a:hover {
   text-decoration: underline;
+}
+
+.download-btn {
+  margin-left: 20px; /* Espaçamento à esquerda do botão */
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #6b47dc;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #5a39bc;
 }
 
 /* Imagens extras de descrição */
@@ -183,6 +210,7 @@ body {
   flex: 0 0 200px; /* Define a largura fixa das imagens extras */
   height: 150px; /* Define a altura fixa das imagens extras */
   border-radius: 10px;
+  cursor: pointer; /* Adiciona um cursor de ponteiro para indicar que é clicável */
 }
 
 /* Rodapé com os botões */
@@ -192,7 +220,125 @@ body {
   margin-top: 20px;
 }
 
-.download-btn {
+/* Modal de Imagem */
+.modal-imagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-conteudo {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+.fechar {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.anterior,
+.proxima {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 3px;
+  user-select: none;
+}
+
+.anterior {
+  left: 0;
+}
+
+.proxima {
+  right: 0;
+}
+
+.anterior:hover,
+.proxima:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Modal de Download */
+.modal-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-download-content {
+  background-color: #f4f4f4;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-download-content .fechar {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: #aaa;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.modal-download-content .fechar:hover,
+.modal-download-content .fechar:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-download-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-download-content p {
+  margin-bottom: 20px;
+}
+
+.download-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.download-option {
   padding: 10px 20px;
   font-size: 1rem;
   color: white;
@@ -203,7 +349,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.download-btn:hover {
+.download-option:hover {
   background-color: #5a39bc;
 }
 
@@ -271,6 +417,16 @@ body {
     margin-top: 20px;
     width: 50px;
   }
+
+  .credits {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .download-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
 
 /* Estilo do rodapé */
@@ -279,6 +435,7 @@ body {
   color: #fff;
   padding: 20px 0;
   text-align: center;
+  margin-top: auto; /* Faz o rodapé ficar no final da página */
 }
 
 .conteudo-rodape {

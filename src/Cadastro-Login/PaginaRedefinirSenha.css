@@ -157,8 +157,9 @@ body {
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 800px;
+  width: 800px; /* Mais largura */
   max-width: 90%;
+  min-height: 400px; /* Menos altura */
 }
 
 .pagina-redefinir-senha-h {
@@ -292,6 +293,7 @@ body {
   margin-top: 10px;
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
   .pagina-redefinir-senha-navegacao {
     display: none;
@@ -335,6 +337,8 @@ body {
   .pagina-redefinir-senha-container {
     width: 90%;
     max-width: 100%;
+    padding: 20px; /* Ajuste adicional para responsividade */
+    min-height: 400px; /* Ajuste de altura para responsividade */
   }
 
   .pagina-redefinir-senha-content {
