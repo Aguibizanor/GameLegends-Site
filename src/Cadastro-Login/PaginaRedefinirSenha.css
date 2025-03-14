@@ -90,6 +90,7 @@ body {
   outline: none;
   width: 200px;
   transition: width 0.3s ease;
+  color: #000000;
 }
 
 .pagina-redefinir-senha-botao-pesquisa {
