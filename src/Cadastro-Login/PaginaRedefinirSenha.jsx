@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo.site.tcc.png";
 import mario from "../assets/mario.png";
 import esquerda from "../assets/esquerda.png";
-
+ 
 const PaginaRedefinirSenha = () => {
   const [menuAberto, setMenuAberto] = useState(false);
-
+ 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
-
+ 
   return (
     <div className="pagina-redefinir-senha-app">
       <head>
@@ -48,7 +48,7 @@ const PaginaRedefinirSenha = () => {
           </div>
         </div>
       </header>
-
+ 
       <main className="pagina-redefinir-senha-main">
         <div className="pagina-redefinir-senha-oia">
           <div className="pagina-redefinir-senha-aaa1">
@@ -80,7 +80,7 @@ const PaginaRedefinirSenha = () => {
           </div>
         </div>
       </main>
-
+ 
       <footer className="pagina-redefinir-senha-rodape">
         <div className="pagina-redefinir-senha-conteudo-rodape">
           <div className="pagina-redefinir-senha-secao-rodape sobre">
@@ -111,11 +111,12 @@ const PaginaRedefinirSenha = () => {
           </div>
         </div>
         <div className="pagina-redefinir-senha-rodape-inferior">
-          &copy; gamelegends.com | Feito pelo time do Game Legends 
+          &copy; gamelegends.com | Feito pelo time do Game Legends
         </div>
       </footer>
     </div>
   );
 };
-
+ 
 export default PaginaRedefinirSenha;
+ 

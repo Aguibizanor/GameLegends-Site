@@ -4,20 +4,20 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
 }
-
+ 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden; /* Evita que a tela fique maior do que deveria */
 }
-
+ 
 .cabecalho {
   background: #90017F;
   color: #fff;
@@ -27,28 +27,28 @@ body {
   top: 0;
   z-index: 1000;
 }
-
+ 
 .conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-
+ 
 .logo {
   margin: 0;
 }
-
+ 
 .logo img {
   width: 120px;
 }
-
+ 
 .navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
+ 
 .nav-item {
   display: flex;
   align-items: center;
@@ -60,15 +60,15 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .nav-item i {
   margin-right: 8px;
 }
-
+ 
 .nav-item:hover {
   background: #A0008D;
 }
-
+ 
 .hamburguer {
   display: none;
   background: none;
@@ -77,12 +77,12 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+ 
 .formulario-pesquisa {
   display: flex;
   align-items: center;
 }
-
+ 
 .input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -92,7 +92,7 @@ body {
   transition: width 0.3s ease;
   color: #000000;
 }
-
+ 
 .botao-pesquisa {
   padding: 5px 10px;
   border: none;
@@ -101,12 +101,12 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
-
+ 
 .painel-usuario {
   display: flex;
   align-items: center;
 }
-
+ 
 .link-usuario {
   color: #fff;
   text-decoration: none;
@@ -116,17 +116,17 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .link-usuario:hover {
   background: #A0008D;
 }
-
+ 
 .principal {
   display: flex;
   flex: 1;
   padding: 20px;
 }
-
+ 
 .intro {
   text-align: left;
   flex: 1;
@@ -136,7 +136,17 @@ body {
   color: #fff;
   border-radius: 10px;
 }
-
+ 
+.intro-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.intro-text {
+  max-width: 50%;
+}
+ 
 .intro h1 {
   font-size: 3rem;
   color: #fff;
@@ -145,13 +155,22 @@ body {
   border-left-width: 8px;
   padding-left: 10px;
 }
-
+ 
 .intro p {
   font-size: 1.5rem;
   color: #cfcfcf;
   margin-bottom: 20px;
 }
-
+ 
+.intro-image {
+  max-width: 50%;
+}
+ 
+.intro-image img {
+  width: 100%;
+  height: auto;
+}
+ 
 .cta-button {
   background-color: #8e24aa;
   color: white;
@@ -162,7 +181,7 @@ body {
   cursor: pointer;
   font-size: 1.5em;
 }
-
+ 
 .carrossel-container {
   display: flex;
   align-items: center;
@@ -173,7 +192,7 @@ body {
   position: relative;
   z-index: 1050; /* Garante que o carrossel sobreponha o Navbar e o Footer */
 }
-
+ 
 .carrossel {
   display: flex;
   overflow-x: scroll;
@@ -182,11 +201,11 @@ body {
   max-width: 1200px; /* Ajusta largura máxima */
   height: calc(100vh - 300px); /* Ajusta altura */
 }
-
+ 
 .carrossel::-webkit-scrollbar {
   display: none;
 }
-
+ 
 .carrossel .item {
   background-color: #fff;
   margin: 10px;
@@ -202,19 +221,19 @@ body {
   align-items: center; /* Centraliza o conteúdo horizontalmente */
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
+ 
 .carrossel .item.focused {
   transform: scale(1.2); /* Aumenta o item */
   z-index: 10; /* Sobrepõe os itens ao redor */
   opacity: 1; /* Torna o item totalmente opaco */
 }
-
+ 
 .carrossel .item.focused .info .butao {
   margin-top: 0; /* Remove a margem superior */
   position: relative;
   top: -30px; /* Move o botão para cima */
 }
-
+ 
 .carrossel .item .imag {
   height: 60%; /* Define a altura da imagem */
   width: 100%; /* Define a largura da imagem */
@@ -222,13 +241,13 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+ 
 .carrossel .item .imag img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
-
+ 
 .carrossel .item .info {
   padding: 10px;
   height: 40%; /* Ajusta altura da info */
@@ -237,7 +256,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+ 
 .carrossel .item .info span {
   display: block;
   text-align: center;
@@ -245,18 +264,18 @@ body {
   padding: 5px;
   border-radius: 10px;
 }
-
+ 
 .carrossel .item .info .name {
   font-size: 1.2em;
   font-weight: bold;
   margin: 10px 0;
 }
-
+ 
 .carrossel .item .info .texto {
   font-size: 1rem;
   flex-grow: 1;
 }
-
+ 
 .carrossel .item .info .butao {
   font-size: 1.2rem;
   background-color: #8e24aa;
@@ -265,7 +284,7 @@ body {
   margin-top: 8px;
   padding: 5px 10px;
 }
-
+ 
 .carrossel-container .left, .carrossel-container .right {
   background-color: #8e24aa;
   border: none;
@@ -281,31 +300,31 @@ body {
   transform: translateY(-50%);
   opacity: 0.7;
 }
-
+ 
 .carrossel-container .left:hover, .carrossel-container .right:hover {
   opacity: 1;
 }
-
+ 
 .carrossel-container .left {
   left: -30px; /* Ajusta posição da seta esquerda */
 }
-
+ 
 .carrossel-container .right {
   right: -30px; /* Ajusta posição da seta direita */
 }
-
+ 
 .carrossel-container .left img, .carrossel-container .right img {
   width: 20px;
   height: 20px;
 }
-
+ 
 /* Responsividade */
 @media (max-width: 1024px) {
   .carrossel {
     height: calc(100vh - 200px); /* Ajusta altura */
   }
 }
-
+ 
 @media (max-width: 768px) {
   .navegacao {
     display: none;
@@ -315,144 +334,146 @@ body {
     position: absolute;
     top: 60px;
     left: 0;
-    z-index: 1000;
-  }
-
-  .nav-item {
-    width: 100%;
-    justify-content: center;
-    margin: 0;
-    border-bottom: 1px solid #A0008D;
-  }
-
-  .navegacao.ativo {
-    display: flex;
-  }
-
-  .hamburguer {
-    display: block;
-  }
-
-  .principal {
-    flex-direction: column;
-  }
-
-  .formulario-pesquisa {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .input-pesquisa {
-    width: 100%;
-  }
-
-  .carrossel-container {
-    display: none; /* Desaparece na versão de celular */
-  }
-
-  .intro {
-    margin-right: -60%;
-  }
+ 
+  z-index: 1000;
 }
-
-.rodape {
-  background: #90017F;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-  margin-top: auto; /* Garante que o rodapé fique na parte inferior da página */
+ 
+.nav-item {
+  width: 100%;
+  justify-content: center;
+  margin: 0;
+  border-bottom: 1px solid #A0008D;
 }
-
-.conteudo-rodape {
+ 
+.navegacao.ativo {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
 }
-
-.secao-rodape {
-  flex: 1;
-  padding: 10px;
-  min-width: 200px;
-}
-
-.logo-rodape {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.contato-rodape span {
-  display: block;
-  margin: 10px 0;
-}
-
-.redes-sociais a {
-  margin: 0 10px;
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-.links ul {
-  list-style: none;
-  padding: 0;
-}
-
-.links ul a {
-  color: #fff;
-  text-decoration: none;
-  margin: 5px 0;
+ 
+.hamburguer {
   display: block;
 }
-
-.links ul a:hover {
-  color: #A0008D;
+ 
+.principal {
+  flex-direction: column;
 }
-
-.rodape-inferior {
-  text-align: center;
-  padding: 10px;
-  border-top: 1px solid #A0008D;
+ 
+.formulario-pesquisa {
+  width: 100%;
   margin-top: 10px;
 }
-
+ 
+.input-pesquisa {
+  width: 100%;
+}
+ 
+.carrossel-container {
+  display: none; /* Desaparece na versão de celular */
+}
+ 
+.intro {
+  margin-right: -60%;
+}
+ 
+.rodape {
+background: #90017F;
+color: #fff;
+padding: 20px 0;
+text-align: center;
+margin-top: auto; /* Garante que o rodapé fique na parte inferior da página */
+}
+ 
+.conteudo-rodape {
+display: flex;
+justify-content: space-around;
+align-items: flex-start;
+flex-wrap: wrap;
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+ 
+.secao-rodape {
+flex: 1;
+padding: 10px;
+min-width: 200px;
+}
+ 
+.logo-rodape {
+font-size: 1.5rem;
+font-weight: bold;
+}
+ 
+.contato-rodape span {
+display: block;
+margin: 10px 0;
+}
+ 
+.redes-sociais a {
+margin: 0 10px;
+color: #fff;
+text-decoration: none;
+font-size: 1.2rem;
+}
+ 
+.links ul {
+list-style: none;
+padding: 0;
+}
+ 
+.links ul a {
+color: #fff;
+text-decoration: none;
+margin: 5px 0;
+display: block;
+}
+ 
+.links ul a:hover {
+color: #A0008D;
+}
+ 
+.rodape-inferior {
+text-align: center;
+padding: 10px;
+border-top: 1px solid #A0008D;
+margin-top: 10px;
+}
+ 
 /* Estilos para a versão alterada */
 .altered-version {
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 20px;
-  text-align: center;
+background-color: #f0f0f0;
+color: #333;
+padding: 20px;
+border-radius: 10px;
+margin: 20px;
+text-align: center;
 }
-
+ 
 .toggle-button {
-  background-color: #8e24aa;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 20px auto;
-  display: block;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.2em;
+background-color: #8e24aa;
+color: white;
+border: none;
+padding: 10px 20px;
+margin: 20px auto;
+display: block;
+border-radius: 50px;
+cursor: pointer;
+font-size: 1.2em;
 }
-
+ 
 .button-container {
-  text-align: center;
-  margin: 20px 0;
+text-align: center;
+margin: 20px 0;
 }
-
+ 
 .link-button {
-  background-color: #8e24aa;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.2em;
+background-color: #8e24aa;
+color: white;
+border: none;
+padding: 10px 20px;
+margin: 10px;
+border-radius: 50px;
+cursor: pointer;
+font-size: 1.2em;
 }
+}
+ 

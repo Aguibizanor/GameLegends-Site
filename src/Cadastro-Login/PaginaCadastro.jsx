@@ -14,23 +14,66 @@ function PaginaCadastro() {
         telefone: '',
         senha: '',
         confirmarSenha: '',
+        tipoUsuario: ''
     });
 
     const [mensagem, setMensagem] = useState('');
     const navigate = useNavigate(); // Hook para navegação
 
     const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        // Formatação automática do CPF
+        if (name === 'cpf') {
+            let cpf = value.replace(/\D/g, '').slice(0, 11);
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            setFormData({ ...formData, cpf });
+            return;
+        }
+
+        // Formatação automática do telefone
+        if (name === 'telefone') {
+            let telefone = value.replace(/\D/g, '').slice(0, 11);
+            telefone = telefone.replace(/(\d{2})(\d)/, '($1) $2');
+            telefone = telefone.replace(/(\d{5})(\d)/, '$1-$2');
+            setFormData({ ...formData, telefone });
+            return;
+        }
+
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // Verificação da idade mínima
+        const hoje = new Date();
+        const dataNascimento = new Date(formData.dataNascimento);
+        let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+        const mes = hoje.getMonth() - dataNascimento.getMonth();
+        if (mes < 0 || (mes === 0 && hoje.getDate() < dataNascimento.getDate())) {
+            idade--;
+        }
+        if (idade < 16) {
+            setMensagem('Você deve ter pelo menos 16 anos para se cadastrar.');
+            return;
+        }
+
+        // Verificação das senhas
         if (formData.senha !== formData.confirmarSenha) {
             setMensagem('As senhas não correspondem!');
+            return;
+        }
+
+        // Regex para validar o formato do email
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@(yahoo|gmail|email)\.com(\.br)?$/;
+        if (!emailRegex.test(formData.email)) {
+            setMensagem("Formato de email inválido. Use um email válido como yahoo, gmail ou email.");
             return;
         }
 
@@ -112,7 +155,7 @@ function PaginaCadastro() {
                         </div>
                         <div className="grupo-formulario">
                             <label htmlFor="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" value={formData.cpf} onChange={handleChange} className="input-formulario" required />
+                            <input type="text" id="cpf" name="cpf" value={formData.cpf} onChange={handleChange} className="input-formulario" maxLength="14" required />
                         </div>
                         <div className="grupo-formulario">
                             <label htmlFor="dataNascimento">Data de Nascimento:</label>
@@ -120,11 +163,11 @@ function PaginaCadastro() {
                         </div>
                         <div className="grupo-formulario">
                             <label htmlFor="email">Email:</label>
-                            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="input-formulario" required />
+                            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="input-formulario" placeholder="Ex: exemplo@gmail.com" required />
                         </div>
                         <div className="grupo-formulario">
                             <label htmlFor="telefone">Telefone:</label>
-                            <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleChange} className="input-formulario" required />
+                            <input type="text" id="telefone" name="telefone" value={formData.telefone} onChange={handleChange} className="input-formulario" maxLength="15" required />
                         </div>
                         <div className="grupo-formulario">
                             <label htmlFor="senha">Senha:</label>
@@ -133,6 +176,38 @@ function PaginaCadastro() {
                         <div className="grupo-formulario">
                             <label htmlFor="confirmarSenha">Confirmar Senha:</label>
                             <input type="password" id="confirmarSenha" name="confirmarSenha" value={formData.confirmarSenha} onChange={handleChange} className="input-formulario" required />
+                        </div>
+                        <div className="tipo-usuario">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="tipoUsuario"
+                                    value="cliente"
+                                    checked={formData.tipoUsuario === 'cliente'}
+                                    onChange={handleChange}
+                                />
+                                Cliente
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="tipoUsuario"
+                                    value="desenvolvedor"
+                                    checked={formData.tipoUsuario === 'desenvolvedor'}
+                                    onChange={handleChange}
+                                />
+                                Desenvolvedor
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="tipoUsuario"
+                                    value="administrador"
+                                    checked={formData.tipoUsuario === 'administrador'}
+                                    onChange={handleChange}
+                                />
+                                Administrador
+                            </label>
                         </div>
                         <div className="acoes-formulario">
                             <button type="submit" className="botao-formulario">CADASTRE-SE</button>
@@ -157,7 +232,7 @@ function PaginaCadastro() {
                         </div>
                         <div className="redes-sociais">
                             <a href="#"><i className="fab fa-facebook"></i></a>
-                            <a href="#"><i className="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i className="fab fa-instagram"></i></a>
                             <a href="#"><i className="fab fa-linkedin"></i></a>
                         </div>

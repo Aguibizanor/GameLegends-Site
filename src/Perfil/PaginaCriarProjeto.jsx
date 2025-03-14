@@ -10,6 +10,7 @@ const PaginaCriarProjeto = () => {
   const [descricao, setDescricao] = useState("");
   const [dataInicio, setDataInicio] = useState("");
   const [tecnologias, setTecnologias] = useState("");
+  const [genero, setGenero] = useState(""); // Adicionando estado para o gênero do jogo
   const [image, setImage] = useState(""); // Adicionando estado para a imagem
   const [error, setError] = useState("");
 
@@ -19,7 +20,7 @@ const PaginaCriarProjeto = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!nomeProjeto || !descricao || !dataInicio || !tecnologias) {
+    if (!nomeProjeto || !descricao || !dataInicio || !tecnologias || !genero) {
       setError("Por favor, preencha todos os campos.");
     } else {
       setError("");
@@ -27,6 +28,7 @@ const PaginaCriarProjeto = () => {
       console.log("Descrição:", descricao);
       console.log("Data de Início:", dataInicio);
       console.log("Tecnologias:", tecnologias);
+      console.log("Gênero:", genero); // Exibir o gênero no console
       console.log("Imagem:", image); // Exibir a imagem no console
     }
   };
@@ -142,6 +144,26 @@ const PaginaCriarProjeto = () => {
                 className="pagina-criar-projeto-input"
                 placeholder="Ex: Instagram, email"
               />
+            </div>
+            <div className="pagina-criar-projeto-field">
+              <label>Gênero do Jogo:</label>
+              <select
+                value={genero}
+                onChange={(e) => setGenero(e.target.value)}
+                className="pagina-criar-projeto-input"
+              >
+                <option value="">Selecione um gênero</option>
+                <option value="Android">Android</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Cartas">Cartas</option>
+                <option value="Educacional">Educacional</option>
+                <option value="Esporte">Esporte</option>
+                <option value="iOs">iOs</option>
+                <option value="MacOs">MacOs</option>
+                <option value="Sobrevivência">Sobrevivência</option>
+                <option value="Terror">Terror</option>
+                <option value="Windows">Windows</option>
+              </select>
             </div>
             {error && <div className="pagina-criar-projeto-error">{error}</div>}
             <button type="submit" className="pagina-criar-projeto-button">Criar Projeto</button>

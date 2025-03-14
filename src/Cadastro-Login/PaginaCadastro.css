@@ -28,7 +28,7 @@ body {
     padding: 0 20px;
 }
 
-.cabecalho .logo img {
+.logo img {
     width: 120px;
 }
 
@@ -170,6 +170,18 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+}
+
+.tipo-usuario {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.tipo-usuario label {
+    margin-right: 20px; /* Espaçamento entre as opções */
 }
 
 .acoes-formulario {
@@ -330,6 +342,16 @@ body {
         width: 100%;
         justify-content: center;
         margin-top: 10px;
+    }
+
+    .grade-formulario {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .tipo-usuario {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }
 

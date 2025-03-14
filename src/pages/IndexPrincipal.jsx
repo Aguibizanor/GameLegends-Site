@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import left from "../assets/left.png";
 import right from "../assets/right.png";
+import shadowdograu from "../assets/shadowdograu.png"; // Importando a nova imagem
 import { AuthContext } from '../AuthContext.jsx';
-
+ 
 const IndexPrincipal = () => {
   const [data, setData] = useState([]);
   const [menuAberto, setMenuAberto] = useState(false);
@@ -13,50 +14,50 @@ const IndexPrincipal = () => {
   const [focusedIndex, setFocusedIndex] = useState(null); // Estado para o item focado
   const carousel = useRef(null);
   const { user, role } = useContext(AuthContext);
-
+ 
   useEffect(() => {
     fetch('/Carrossel.json')
       .then((response) => response.json())
       .then(setData)
       .catch((error) => console.error('Erro ao carregar os dados:', error));
   }, []);
-
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       handleRightClick();
     }, 60000); // Mover a cada 60 segundos
-
+ 
     return () => clearInterval(interval);
   }, []);
-
+ 
   const handleLeftClick = () => {
     const width = carousel.current.clientWidth;
     carousel.current.scrollLeft -= width;
   };
-
+ 
   const handleRightClick = () => {
     const width = carousel.current.clientWidth;
     carousel.current.scrollLeft += width;
   };
-
+ 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
-
+ 
   const toggleVersion = () => {
     setIsAltered(!isAltered);
   };
-
+ 
   const handleMouseEnter = (index) => {
     setFocusedIndex(index);
   };
-
+ 
   const handleMouseLeave = () => {
     setFocusedIndex(null);
   };
-
+ 
   if (!data || !data.length) return null;
-
+ 
   return (
     <div className="app">
       <header className="cabecalho">
@@ -99,12 +100,19 @@ const IndexPrincipal = () => {
           </div>
         </div>
       </header>
-
+ 
       <main className="principal">
         <section className="intro">
-          <h1>EXPLORE O <br /> MUNDO<br /> DOS JOGOS</h1>
-          <p>Venha conhecer <br /> nossa plataforma <br />onde você poderá <br />encontrar jogos <br /> da nossa comunidade.</p>
-          <Link to={'/'}><button className="cta-button">Conheça <i className="fas fa-arrow-circle-right"></i></button></Link>
+          <div className="intro-content">
+            <div className="intro-text">
+              <h1>EXPLORE O <br /> MUNDO<br /> DOS JOGOS</h1>
+              <p>Venha conhecer <br /> nossa plataforma <br />onde você poderá <br />encontrar jogos <br /> da nossa comunidade.</p>
+              <Link to={'/'}><button className="cta-button">Conheça <i className="fas fa-arrow-circle-right"></i></button></Link>
+            </div>
+            <div className="intro-image">
+              <img src={shadowdograu} alt="Imagem de exemplo" />
+            </div>
+          </div>
         </section>
         <section>
           <div className="carrossel-container">
@@ -136,7 +144,7 @@ const IndexPrincipal = () => {
           </div>
         </section>
       </main>
-
+ 
       <footer className="rodape">
         <div className="conteudo-rodape">
           <div className="secao-rodape sobre">
@@ -167,22 +175,22 @@ const IndexPrincipal = () => {
           </div>
         </div>
         <div className="rodape-inferior">
-          &copy; gamelegends.com | Feito pelo time do Game Legends 
+          &copy; gamelegends.com | Feito pelo time do Game Legends
         </div>
       </footer>
-      
+     
       <div className="button-container">
         {/* Botão para alternar entre versões */}
         <button onClick={toggleVersion} className="toggle-button">
           {isAltered ? "Voltar para versão original" : "Ir para versão alterada"}
         </button>
-
+ 
         {/* Botões adicionais para links */}
         <Link to={'/Perfil'}><button className="link-button"> -Perfil</button></Link>
         <Link to={'/Descricao'}><button className="link-button"> -Descrição</button></Link>
         <Link to={'/Criar'}><button className="link-button"> -Criação projeto</button></Link>
       </div>
-
+ 
       {/* Exibe a versão alterada se isAltered for true */}
       {isAltered && (
         <div className="altered-version">
@@ -193,5 +201,6 @@ const IndexPrincipal = () => {
     </div>
   );
 };
-
+ 
 export default IndexPrincipal;
+ 

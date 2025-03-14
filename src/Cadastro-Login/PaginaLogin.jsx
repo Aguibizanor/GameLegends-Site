@@ -5,7 +5,7 @@ import Logo from "../assets/logo.site.tcc.png";
 import stardew from "../assets/stardew.png";
 import esquerda from "../assets/esquerda.png";
 import axios from "axios";
-
+ 
 function PaginaLogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -13,17 +13,24 @@ function PaginaLogin() {
   const [errorMessage, setErrorMessage] = useState('');
   const [menuAberto, setMenuAberto] = useState(false);
   const navigate = useNavigate();
-
+ 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+ 
+    // Regex para validar o formato do email
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(yahoo|gmail|email)\.com(\.br)?$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage("Formato de email inválido. Use um email válido como yahoo, gmail ou email.");
+      return;
+    }
+ 
     try {
-      const response = await axios.post("http://localhost:8080/login", { 
+      const response = await axios.post("http://localhost:8080/login", {
         email: email,
         senha: senha,
         tipoUsuario: tipoUsuario
       });
-  
+ 
       if (response.status === 200) {
         localStorage.setItem('usuario', JSON.stringify(response.data));
         alert("Login realizado com sucesso!");
@@ -34,11 +41,11 @@ function PaginaLogin() {
       console.error(error);
     }
   };
-
+ 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
-
+ 
   return (
     <div className="app">
       <head>
@@ -75,7 +82,7 @@ function PaginaLogin() {
           </div>
         </div>
       </header>
-
+ 
       <main className="main">
         <div className="login-container">
           <div className="side-image">
@@ -96,7 +103,7 @@ function PaginaLogin() {
                   className="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   type="email"
-                  placeholder="Email"
+                  placeholder="Ex: exemplo@yahoo.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -169,16 +176,13 @@ function PaginaLogin() {
                 </Link>
               </p>
             </div>
-            <Link to={'/Opcoes'}>
-              <img src={esquerda} alt="Seta" className="SetaLog" />
-            </Link>
           </div>
           <div className="side-image">
             <img src={stardew} alt="Pixel art character" className="character-icon" />
           </div>
         </div>
       </main>
-
+ 
       <footer className="rodape">
         <div className="conteudo-rodape">
           <div className="secao-rodape sobre">
@@ -215,5 +219,5 @@ function PaginaLogin() {
     </div>
   );
 }
-
+ 
 export default PaginaLogin;

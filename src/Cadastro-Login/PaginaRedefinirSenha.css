@@ -4,20 +4,20 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
 }
-
+ 
 .pagina-redefinir-senha-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background: linear-gradient(180deg, rgba(144, 1, 127, 1) 0%, rgba(5, 183, 231, 1) 100%);
 }
-
+ 
 .pagina-redefinir-senha-cabecalho {
   background: #90017F;
   color: #fff;
@@ -27,28 +27,28 @@ body {
   top: 0;
   z-index: 1000;
 }
-
+ 
 .pagina-redefinir-senha-conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-
+ 
 .pagina-redefinir-senha-logo {
   margin: 0;
 }
-
+ 
 .pagina-redefinir-senha-logo img {
   width: 120px;
 }
-
+ 
 .pagina-redefinir-senha-navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
+ 
 .pagina-redefinir-senha-nav-item {
   display: flex;
   align-items: center;
@@ -60,15 +60,15 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .pagina-redefinir-senha-nav-item i {
   margin-right: 8px;
 }
-
+ 
 .pagina-redefinir-senha-nav-item:hover {
   background: #A0008D;
 }
-
+ 
 .pagina-redefinir-senha-hamburguer {
   display: none;
   background: none;
@@ -77,12 +77,12 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+ 
 .pagina-redefinir-senha-formulario-pesquisa {
   display: flex;
   align-items: center;
 }
-
+ 
 .pagina-redefinir-senha-input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -92,7 +92,7 @@ body {
   transition: width 0.3s ease;
   color: #000000;
 }
-
+ 
 .pagina-redefinir-senha-botao-pesquisa {
   padding: 5px 10px;
   border: none;
@@ -101,12 +101,12 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
-
+ 
 .pagina-redefinir-senha-painel-usuario {
   display: flex;
   align-items: center;
 }
-
+ 
 .pagina-redefinir-senha-link-usuario {
   color: #fff;
   text-decoration: none;
@@ -116,42 +116,42 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .pagina-redefinir-senha-link-usuario:hover {
   background: #A0008D;
 }
-
+ 
 .pagina-redefinir-senha-main {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+ 
 .pagina-redefinir-senha-oia {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-
+ 
 .pagina-redefinir-senha-aaa1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
-
+ 
 .pagina-redefinir-senha-logo-container2 {
   position: absolute;
   top: 20px;
   left: 20px;
 }
-
+ 
 .pagina-redefinir-senha-logo2 {
   width: 150px;
 }
-
+ 
 .pagina-redefinir-senha-container {
   text-align: center;
   background: #fff;
@@ -162,42 +162,42 @@ body {
   max-width: 90%;
   min-height: 400px; /* Menos altura */
 }
-
+ 
 .pagina-redefinir-senha-h {
   color: #000;
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
-
+ 
 .pagina-redefinir-senha-vivi {
   color: #000;
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
-
+ 
 .pagina-redefinir-senha-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
+ 
 .pagina-redefinir-senha-side-image {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+ 
 .pagina-redefinir-senha-character-icon3 {
   width: 150px;
 }
-
+ 
 .pagina-redefinir-senha-form-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
-
+ 
 .pagina-redefinir-senha-mumu {
   width: 100%;
   padding: 15px;
@@ -205,7 +205,7 @@ body {
   border: 1px solid #6d6a6a;
   margin-bottom: 10px;
 }
-
+ 
 .pagina-redefinir-senha-frufru {
   background: linear-gradient(to left, #90017f, #6a11cb, #2575fc);
   color: white;
@@ -215,21 +215,24 @@ body {
   cursor: pointer;
   font-size: 1.5rem;
 }
-
+ 
 .pagina-redefinir-senha-baba {
   color: #000;
 }
-
+ 
 .pagina-redefinir-senha-baba a {
   color: #2575fc;
 }
-
-.pagina-redefinir-senha-seta-log {
-  position: absolute;
-  left: 1.8%;
-  margin-top: 80px;
+ 
+@media (max-width: 768px) {
+  .pagina-redefinir-senha-seta-log {
+    left: 10px;  /* A seta ficará um pouco mais próxima da borda esquerda */
+  }
 }
-
+ 
+ 
+ 
+ 
 .pagina-redefinir-senha-rodape {
   background: #90017F;
   color: #fff;
@@ -237,7 +240,7 @@ body {
   text-align: center;
   margin-top: auto;
 }
-
+ 
 .pagina-redefinir-senha-conteudo-rodape {
   display: flex;
   justify-content: space-around;
@@ -247,53 +250,53 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
+ 
 .pagina-redefinir-senha-secao-rodape {
   flex: 1;
   padding: 10px;
   min-width: 200px;
 }
-
+ 
 .pagina-redefinir-senha-logo-rodape {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+ 
 .pagina-redefinir-senha-contato-rodape span {
   display: block;
   margin: 10px 0;
 }
-
+ 
 .pagina-redefinir-senha-redes-sociais a {
   margin: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
+ 
 .pagina-redefinir-senha-links ul {
   list-style: none;
   padding: 0;
 }
-
+ 
 .pagina-redefinir-senha-links ul a {
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
   display: block;
 }
-
+ 
 .pagina-redefinir-senha-links ul a:hover {
   color: #A0008D;
 }
-
+ 
 .pagina-redefinir-senha-rodape-inferior {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
-
+ 
 /* Responsividade */
 @media (max-width: 768px) {
   .pagina-redefinir-senha-navegacao {
@@ -306,47 +309,48 @@ body {
     left: 0;
     z-index: 1000;
   }
-
+ 
   .pagina-redefinir-senha-nav-item {
     width: 100%;
     justify-content: center;
     margin: 0;
     border-bottom: 1px solid #A0008D;
   }
-
+ 
   .pagina-redefinir-senha-navegacao.ativo {
     display: flex;
   }
-
+ 
   .pagina-redefinir-senha-hamburguer {
     display: block;
   }
-
+ 
   .pagina-redefinir-senha-principal {
     flex-direction: column;
   }
-
+ 
   .pagina-redefinir-senha-formulario-pesquisa {
     width: 100%;
     margin-top: 10px;
   }
-
+ 
   .pagina-redefinir-senha-input-pesquisa {
     width: 100%;
   }
-
+ 
   .pagina-redefinir-senha-container {
     width: 90%;
     max-width: 100%;
     padding: 20px; /* Ajuste adicional para responsividade */
     min-height: 400px; /* Ajuste de altura para responsividade */
   }
-
+ 
   .pagina-redefinir-senha-content {
     flex-direction: column;
   }
-
+ 
   .pagina-redefinir-senha-side-image {
     display: none;
   }
 }
+ 
