@@ -3,7 +3,6 @@ import "./PaginaLogin.css";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.site.tcc.png";
 import stardew from "../assets/stardew.png";
-import esquerda from "../assets/esquerda.png";
 import axios from "axios";
  
 function PaginaLogin() {
@@ -123,37 +122,10 @@ function PaginaLogin() {
                   required
                 />
               </div>
-              <div className="tipo-usuario">
-                <label>
-                  <input
-                    type="radio"
-                    name="tipoUsuario"
-                    value="cliente"
-                    checked={tipoUsuario === 'cliente'}
-                    onChange={(e) => setTipoUsuario(e.target.value)}
-                  />
-                  Cliente
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="tipoUsuario"
-                    value="desenvolvedor"
-                    checked={tipoUsuario === 'desenvolvedor'}
-                    onChange={(e) => setTipoUsuario(e.target.value)}
-                  />
-                  Desenvolvedor
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="tipoUsuario"
-                    value="administrador"
-                    checked={tipoUsuario === 'administrador'}
-                    onChange={(e) => setTipoUsuario(e.target.value)}
-                  />
-                  Administrador
-                </label>
+              <div className="buttons">
+                <button type="button" onClick={() => setTipoUsuario('cliente')} className='OI'>Sou Cliente</button>
+                <button type="button" onClick={() => setTipoUsuario('desenvolvedor')} className='OI'>Sou Desenvolvedor</button>
+                <button type="button" onClick={() => setTipoUsuario('administrador')} className='OI'>Sou Administrador</button>
               </div>
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <div className="flex items-center justify-between">

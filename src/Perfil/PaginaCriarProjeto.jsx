@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import './PaginaCriarProjeto.css'; // Certifique-se de criar esse arquivo CSS para os estilos
+import React, { useState } from "react";
+import './PaginaCriarProjeto.css'; // Importa o arquivo CSS
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
 
-const PaginaCriarProjeto = () => {
+function PaginaCriarProjeto() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [nomeProjeto, setNomeProjeto] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -169,7 +169,7 @@ const PaginaCriarProjeto = () => {
             <button type="submit" className="pagina-criar-projeto-button">Criar Projeto</button>
           </form>
         </div>
-        <Link to={'/Perfil'}><img src={esquerda} alt="Seta" className="pagina-criar-projeto-seta" /></Link>
+        <Link to={'/Perfil1'}><img src={esquerda} alt="Seta" className="pagina-criar-projeto-seta" /></Link>
       </main>
 
       <footer className="pagina-criar-projeto-rodape">
