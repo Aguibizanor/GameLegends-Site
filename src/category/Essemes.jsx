@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
+import lily from '../assets/lily.png';
+import mirror from '../assets/mirror.png';
+import phenomenom from '../assets/phenomenom.png';
+import wolf from '../assets/wolf.png';
+import oneshot from '../assets/oneshot.png';
+import coracao from '../assets/coracao.png';
 import "../Pages/PaginaInicial.css"
 
 const Essemes = () => {
@@ -82,12 +88,12 @@ const Essemes = () => {
                         </h1>
                         {isOpen.genero && (
                             <>
-                                <Link to={'/Terror'}><a href="#"><i className="fas fa-gamepad"></i>Terror</a></Link>
-                                <Link to={'/Esporte'}><a href="#"><i className="fas fa-gamepad"></i>Esporte</a></Link>
-                                <Link to={'/Aventura'}><a href="#"><i className="fas fa-gamepad"></i>Aventura</a></Link>
-                                <Link to={'/Educacional'}><a href="#"><i className="fas fa-gamepad"></i>Educacional</a></Link>
-                                <Link to={'/Sobrevivencia'}><a href="#"><i className="fas fa-gamepad"></i>Sobrevivência</a></Link>
-                                <Link to={'/Cartas'}><a href="#"><i className="fas fa-gamepad"></i>Jogo de cartas</a></Link>
+                                <Link to={'/Terror'}><i className="fas fa-gamepad"></i>Terror</Link>
+                                <Link to={'/Esporte'}><i className="fas fa-gamepad"></i>Esporte</Link>
+                                <Link to={'/Aventura'}><i className="fas fa-gamepad"></i>Aventura</Link>
+                                <Link to={'/Educacional'}><i className="fas fa-gamepad"></i>Educacional</Link>
+                                <Link to={'/Sobrevivencia'}><i className="fas fa-gamepad"></i>Sobrevivência</Link>
+                                <Link to={'/Cartas'}><i className="fas fa-gamepad"></i>Jogo de cartas</Link>
                             </>
                         )}
                         <h1 onClick={() => toggleList('plataformas')}>
@@ -96,10 +102,10 @@ const Essemes = () => {
                         </h1>
                         {isOpen.plataformas && (
                             <>
-                                <Link to={'/Windows'}><a href="#"><i className="fab fa-windows"></i>Windows</a></Link>
-                                <Link to={'/MacOs'}><a href="#"><i className="fab fa-apple"></i>Mac OS</a></Link>
-                                <Link to={'/Android'}><a href="#"><i className="fab fa-android"></i>Android</a></Link>
-                                <Link to={'/iOS'}><a href="#"><i className="fab fa-apple"></i>iOS</a></Link>
+                                <Link to={'/Windows'}><i className="fab fa-windows"></i>Windows</Link>
+                                <Link to={'/MacOs'}><i className="fab fa-apple"></i>Mac OS</Link>
+                                <Link to={'/Android'}><i className="fab fa-android"></i>Android</Link>
+                                <Link to={'/iOS'}><i className="fab fa-apple"></i>iOS</Link>
                             </>
                         )}
                         <h1 onClick={() => toggleList('postagem')}>
@@ -108,9 +114,9 @@ const Essemes = () => {
                         </h1>
                         {isOpen.postagem && (
                             <>
-                                <Link to={'/Hoje'}><a href="#"><i className="far fa-clock"></i>Hoje</a></Link>
-                                <Link to={'/EssaSemana'}><a href="#"><i className="far fa-clock"></i>Essa semana</a></Link>
-                                <Link to={'/EsseMes'}><a href="#"><i className="far fa-clock"></i>Esse mês</a></Link>
+                                <Link to={'/Hoje'}><i className="far fa-clock"></i>Hoje</Link>
+                                <Link to={'/EssaSemana'}><i className="far fa-clock"></i>Essa semana</Link>
+                                <Link to={'/EsseMes'}><i className="far fa-clock"></i>Esse mês</Link>
                             </>
                         )}
                         <h1 onClick={() => toggleList('status')}>
@@ -119,21 +125,37 @@ const Essemes = () => {
                         </h1>
                         {isOpen.status && (
                             <>
-                                <Link to={'/Desenvolvido'}><a href="#"><i className="fas fa-bolt"></i>Desenvolvido</a></Link>
-                                <Link to={'/Desenvolvendo'}><a href="#"><i className="fas fa-play"></i>Desenvolvendo</a></Link>
+                                <Link to={'/Desenvolvido'}><i className="fas fa-bolt"></i>Desenvolvido</Link>
+                                <Link to={'/Desenvolvendo'}><i className="fas fa-play"></i>Desenvolvendo</Link>
                             </>
                         )}
                     </div>
                 </section>
-                <section className="secao-jogos">
-                    {produtos.map(produto => (
-                        <Link to={`/Descricao/${produto.id}`} key={produto.id}>
-                            <div className="jogo-card">
-                                <img src={produto.imagem} alt={produto.nome} />
-                                <a href="#">{produto.nome}</a>
-                            </div>
-                        </Link>
-                    ))}
+                <section className="games-section">
+                    <div className="game-card">
+                        <img src={lily} alt="Paper Lily" />
+                        <a href="">Paper Lily</a>
+                    </div>
+                    <div className="game-card">
+                        <img src={mirror} alt="Pocket Mirror" />
+                        <a href="">Pocket Mirror</a>
+                    </div>
+                    <div className="game-card">
+                        <img src={phenomenom} alt="Cinderella Phenomenom" />
+                        <a href="">Cinderella Phenomenom</a>
+                    </div>
+                    <div className="game-card">
+                        <img src={wolf} alt="Lonely Wolf Treat" />
+                        <a href="">Lonely Wolf Treat</a>
+                    </div>
+                    <div className="game-card">
+                        <img src={oneshot} alt="OneShot" />
+                        <a href="">OneShot</a>
+                    </div>
+                    <div className="game-card">
+                        <img src={coracao} alt="Com o Coração" />
+                        <a href="">Com o Coração</a>
+                    </div>
                 </section>
             </main>
             <footer className="rodape">

@@ -200,14 +200,16 @@ body {
   transform: rotate(180deg);
 }
 
-.secao-jogos {
+.games-section {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  width: 80%;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f4f4;
 }
 
-.jogo-card {
+.game-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -216,18 +218,30 @@ body {
   text-align: center;
   padding: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.jogo-card img {
+.game-card img {
   width: 100%;
   height: auto;
   margin-bottom: 10px;
 }
 
+.game-card a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.game-card:hover {
+  transform: translateY(-10px);
+}
+
 /* Responsividade */
 @media (max-width: 1024px) {
-  .jogo-card {
-      width: calc(50% - 20px);
+  .game-card {
+    width: calc(50% - 20px);
   }
 }
 
@@ -270,11 +284,11 @@ body {
       left: 250px;
   }
 
-  .secao-jogos {
+  .games-section {
       width: 100%;
   }
 
-  .jogo-card {
+  .game-card {
       width: 100%;
   }
 
