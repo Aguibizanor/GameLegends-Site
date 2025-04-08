@@ -14,14 +14,17 @@ function PaginaCadastro() {
         telefone: '',
         senha: '',
         confirmarSenha: '',
-        tipoUsuario: ''
     });
 
-    const [mensagem, setMensagem] = useState('');
+    const [message, setMessage] = useState('');
     const navigate = useNavigate(); // Hook para navegação
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
 
         // Formatação automática do CPF
         if (name === 'cpf') {
@@ -41,11 +44,6 @@ function PaginaCadastro() {
             setFormData({ ...formData, telefone });
             return;
         }
-
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
     };
 
     const handleSubmit = async (event) => {
@@ -60,20 +58,20 @@ function PaginaCadastro() {
             idade--;
         }
         if (idade < 16) {
-            setMensagem('Você deve ter pelo menos 16 anos para se cadastrar.');
+            setMessage('Você deve ter pelo menos 16 anos para se cadastrar.');
             return;
         }
 
         // Verificação das senhas
         if (formData.senha !== formData.confirmarSenha) {
-            setMensagem('As senhas não correspondem!');
+            setMessage('As senhas não correspondem!');
             return;
         }
 
         // Regex para validar o formato do email
         const emailRegex = /^[a-zA-Z0-9._%+-]+@(yahoo|gmail|email)\.com(\.br)?$/;
         if (!emailRegex.test(formData.email)) {
-            setMensagem("Formato de email inválido. Use um email válido como yahoo, gmail ou email.");
+            setMessage("Formato de email inválido. Use um email válido como yahoo, gmail ou email.");
             return;
         }
 
@@ -91,11 +89,11 @@ function PaginaCadastro() {
                 navigate('/Login'); // Redireciona após sucesso
             } else {
                 const errorResponse = response.data;
-                setMensagem(errorResponse.message || 'Erro no cadastro.');
+                setMessage(errorResponse.message || 'Erro no cadastro.');
             }
         } catch (error) {
             console.error("Erro na requisição:", error);
-            setMensagem('Erro ao se conectar ao servidor. Tente novamente.');
+            setMessage('Erro ao se conectar ao servidor. Tente novamente.');
         }
     };
 
@@ -177,43 +175,11 @@ function PaginaCadastro() {
                             <label htmlFor="confirmarSenha">Confirmar Senha:</label>
                             <input type="password" id="confirmarSenha" name="confirmarSenha" value={formData.confirmarSenha} onChange={handleChange} className="input-formulario" required />
                         </div>
-                        <div className="tipo-usuario">
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="tipoUsuario"
-                                    value="cliente"
-                                    checked={formData.tipoUsuario === 'cliente'}
-                                    onChange={handleChange}
-                                />
-                                Cliente
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="tipoUsuario"
-                                    value="desenvolvedor"
-                                    checked={formData.tipoUsuario === 'desenvolvedor'}
-                                    onChange={handleChange}
-                                />
-                                Desenvolvedor
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="tipoUsuario"
-                                    value="administrador"
-                                    checked={formData.tipoUsuario === 'administrador'}
-                                    onChange={handleChange}
-                                />
-                                Administrador
-                            </label>
-                        </div>
                         <div className="acoes-formulario">
                             <button type="submit" className="botao-formulario">CADASTRE-SE</button>
                         </div>
                     </form>
-                    {mensagem && <div className="mensagem-formulario">{mensagem}</div>}
+                    {message && <div className="mensagem-formulario">{message}</div>}
                     <div className="rodape-formulario">
                         <span>Já tem uma conta? Faça login: <Link to={'/Login'} className="link-formulario">Login</Link></span>
                     </div>

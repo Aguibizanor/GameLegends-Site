@@ -27,16 +27,15 @@ function PaginaLogin() {
       const response = await axios.post("http://localhost:8080/login", {
         email: email,
         senha: senha,
-        tipoUsuario: tipoUsuario
       });
  
       if (response.status === 200) {
         localStorage.setItem('usuario', JSON.stringify(response.data));
         alert("Login realizado com sucesso!");
-        navigate('/1');
+        navigate('/');
       }
     } catch (error) {
-      setErrorMessage("Email, senha ou tipo de usuário incorretos.");
+      setErrorMessage("Email ou senha incorretos.");
       console.error(error);
     }
   };
@@ -121,11 +120,6 @@ function PaginaLogin() {
                   onChange={(e) => setSenha(e.target.value)}
                   required
                 />
-              </div>
-              <div className="buttons">
-                <button type="button" onClick={() => setTipoUsuario('cliente')} className='OI'>Sou Cliente</button>
-                <button type="button" onClick={() => setTipoUsuario('desenvolvedor')} className='OI'>Sou Desenvolvedor</button>
-                <button type="button" onClick={() => setTipoUsuario('administrador')} className='OI'>Sou Administrador</button>
               </div>
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <div className="flex items-center justify-between">

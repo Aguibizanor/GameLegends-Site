@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
-import Imagem1 from '../assets/Imagem1.png';
-import Imagem2 from '../assets/Imagem2.png';
-import Imagem3 from '../assets/Imagem3.png';
-import Imagem4 from '../assets/Imagem4.png';
-import Imagem5 from '../assets/Imagem5.png';
-import Imagem6 from '../assets/Imagem6.png';
+import Imagem1 from '../assets/Img1.png';
+import Imagem2 from '../assets/Img2.png';
+import Imagem3 from '../assets/Img3.png';
+import Imagem4 from '../assets/Img4.png';
+import Imagem5 from '../assets/Img5.png';
+import Imagem6 from '../assets/Img6.png';
 import "../Pages/PaginaInicial.css"
 
 const Sobrevivencia = () => {
