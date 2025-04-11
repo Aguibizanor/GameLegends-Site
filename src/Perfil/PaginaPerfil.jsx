@@ -10,7 +10,8 @@ function PaginaPerfil() {
         cpf: "",
         dataNascimento: null,
         email: "",
-        telefone: ""
+        telefone: "",
+        usuario: ""
     });
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
@@ -25,6 +26,7 @@ function PaginaPerfil() {
                 dataNascimento: usuarioData.datanascimento,
                 email: usuarioData.email,
                 telefone: usuarioData.telefone,
+                usuario: usuarioData.usuario
             });
             setLoading(false);
         } else {
@@ -145,6 +147,7 @@ function PaginaPerfil() {
                         <p><strong>Data de Nascimento:</strong> {formData.dataNascimento}</p>
                         <p><strong>Email:</strong> {formData.email}</p>
                         <p><strong>Telefone:</strong> {formData.telefone}</p>
+                        <p><strong>Tipo</strong> {formData.usuario}</p>
                     </div>
                     <button onClick={handleEdit} className="pagina-perfil-button">Editar Perfil</button>
                     <button onClick={handleDelete} className="pagina-perfil-button pagina-perfil-delete">Excluir Perfil</button>

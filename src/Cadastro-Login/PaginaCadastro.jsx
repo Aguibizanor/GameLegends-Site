@@ -175,6 +175,15 @@ function PaginaCadastro() {
                             <label htmlFor="confirmarSenha">Confirmar Senha:</label>
                             <input type="password" id="confirmarSenha" name="confirmarSenha" value={formData.confirmarSenha} onChange={handleChange} className="input-formulario" required />
                         </div>
+                        <div className="input-single">
+                            <label>Tipo de Usuário:</label>
+                            <select name="usuario" value={formData.usuario} onChange={handleChange} required>
+                                <option value="">Selecione</option>
+                                <option value="ADM">Administrador</option>
+                                <option value="Cliente">Cliente</option>
+                                <option value="Desenvolvedor">Desenvolvedor</option>
+                            </select>
+                        </div>
                         <div className="acoes-formulario">
                             <button type="submit" className="botao-formulario">CADASTRE-SE</button>
                         </div>
