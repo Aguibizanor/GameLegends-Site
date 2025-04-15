@@ -1,67 +1,73 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './IndexPrincipal.css'; // Usar o mesmo CSS para consistência
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import left from "../assets/left.png";
 import right from "../assets/right.png";
 import shadowdograu from "../assets/shadowdograu.png"; // Importando a nova imagem
-import { AuthContext } from '../AuthContext.jsx';
- 
+
 const IndexPrincipal = () => {
   const [data, setData] = useState([]);
   const [menuAberto, setMenuAberto] = useState(false);
   const [isAltered, setIsAltered] = useState(false); // Estado para alternar entre versões
   const [focusedIndex, setFocusedIndex] = useState(null); // Estado para o item focado
+  const [formData, setFormData] = useState({
+    email: "",
+    usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+  });
   const carousel = useRef(null);
-  const { user } = useContext(AuthContext);
- 
+
   useEffect(() => {
+    // Carregar dados do carrossel
     fetch('/Carrossel.json')
       .then((response) => response.json())
       .then(setData)
       .catch((error) => console.error('Erro ao carregar os dados:', error));
   }, []);
- 
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleRightClick();
-    }, 60000); // Mover a cada 60 segundos
- 
-    return () => clearInterval(interval);
+    // Verifica se o usuário está logado/cadastrado ao carregar a página
+    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioData) {
+      setFormData({
+        email: usuarioData.email,
+        usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+      });
+    }
   }, []);
- 
+
   const handleLeftClick = () => {
     const width = carousel.current.clientWidth;
     carousel.current.scrollLeft -= width;
   };
- 
+
   const handleRightClick = () => {
     const width = carousel.current.clientWidth;
     carousel.current.scrollLeft += width;
   };
- 
+
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
- 
+
   const toggleVersion = () => {
     setIsAltered(!isAltered);
   };
- 
+
   const handleMouseEnter = (index) => {
     setFocusedIndex(index);
   };
- 
+
   const handleMouseLeave = () => {
     setFocusedIndex(null);
   };
- 
+
   if (!data || !data.length) return null;
- 
+
   return (
     <div className="app">
       <head>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
       <header className="cabecalho">
         <div className="conteudo-cabecalho">
@@ -89,9 +95,16 @@ const IndexPrincipal = () => {
             </button>
           </form>
           <div className="painel-usuario">
-            {user ? (
-              <Link to={'/Perfil'} className="link-usuario">Perfil</Link>
+            {formData.usuario ? (
+              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
+              <Link
+                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
+                className="link-usuario"
+              >
+                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+              </Link>
             ) : (
+              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
               <>
                 <Link to={'/Login'} className="link-usuario">Login</Link>
                 <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
@@ -100,7 +113,7 @@ const IndexPrincipal = () => {
           </div>
         </div>
       </header>
- 
+
       <main className="principal">
         <section className="intro">
           <div className="intro-content">
@@ -144,7 +157,7 @@ const IndexPrincipal = () => {
           </div>
         </section>
       </main>
- 
+
       <footer className="rodape">
         <div className="conteudo-rodape">
           <div className="secao-rodape sobre">
@@ -158,5 +171,5 @@ const IndexPrincipal = () => {
     </div>
   );
 };
- 
+
 export default IndexPrincipal;

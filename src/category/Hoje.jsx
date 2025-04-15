@@ -18,12 +18,24 @@ const Hoje = () => {
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
     const [produtos, setProdutos] = useState([]);
+    const [formData, setFormData] = useState({
+        email: "",
+        usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+      });
 
     useEffect(() => {
         fetch('/api/produtos?data=hoje')
             .then(response => response.json())
             .then(data => setProdutos(data));
-    }, []);
+    // Verifica se o usuário está logado/cadastrado ao carregar a página
+    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioData) {
+        setFormData({
+            email: usuarioData.email,
+            usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+          });
+        }
+      }, []);
 
     const toggleList = (section) => {
         setIsOpen({ ...isOpen, [section]: !isOpen[section] });
@@ -68,8 +80,21 @@ const Hoje = () => {
                         </button>
                     </form>
                     <div className="painel-usuario">
-                        <a className="link-usuario" href="/Login">Login</a>
-                        <a className="link-usuario" href="/Cadastro">Registre-se</a>
+                    {formData.usuario ? (
+              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
+              <Link
+                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
+                className="link-usuario"
+              >
+                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+              </Link>
+            ) : (
+              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
+              <>
+                <Link to={'/Login'} className="link-usuario">Login</Link>
+                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+              </>
+            )}
                     </div>
                 </div>
             </header>

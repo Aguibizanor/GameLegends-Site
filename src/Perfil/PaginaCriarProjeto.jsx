@@ -169,7 +169,7 @@ function PaginaCriarProjeto() {
             <button type="submit" className="pagina-criar-projeto-button">Criar Projeto</button>
           </form>
         </div>
-        <Link to={'/Perfil1'}><img src={esquerda} alt="Seta" className="pagina-criar-projeto-seta" /></Link>
+        <Link to={'/Perfil'}><img src={esquerda} alt="Seta" className="pagina-criar-projeto-seta" /></Link>
       </main>
 
       <footer className="pagina-criar-projeto-rodape">

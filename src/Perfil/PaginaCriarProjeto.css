@@ -295,78 +295,51 @@ body {
   margin-top: 10px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .pagina-criar-projeto-cabecalho {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+/* Mensagens de Sucesso e Erro */
+.pagina-criar-projeto-mensagem {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  text-align: center;
+}
 
-  .pagina-criar-projeto-conteudo-cabecalho {
-    flex-direction: column;
-    align-items: center;
-  }
+.pagina-criar-projeto-mensagem.sucesso {
+  background-color: #4caf50; /* Verde para mensagens de sucesso */
+  color: white;
+}
 
-  .pagina-criar-projeto-logo {
-    align-self: flex-start;
-    margin-left: 20px;
-    margin-bottom: 10px;
-  }
+.pagina-criar-projeto-mensagem.erro {
+  background-color: #f44336; /* Vermelho para mensagens de erro */
+  color: white;
+}
 
-  .pagina-criar-projeto-hamburguer {
-    display: block;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
+/* Ocultar a mensagem após um tempo */
+.pagina-criar-projeto-mensagem.fade-out {
+  animation: fadeOut 3s forwards;
+}
 
-  .pagina-criar-projeto-formulario-pesquisa {
-    width: calc(100% - 40px);
-    margin: 10px 20px;
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
   }
-
-  .pagina-criar-projeto-input-pesquisa {
-    width: calc(100% - 40px);
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
   }
+}
 
-  .pagina-criar-projeto-painel-usuario {
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .pagina-criar-projeto-navegacao {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: #90017F;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    z-index: 1000;
-  }
-
-  .pagina-criar-projeto-nav-item {
-    width: 100%;
-    justify-content: center;
-    margin: 0;
-    border-bottom: 1px solid #A0008D;
-  }
-
-  .pagina-criar-projeto-navegacao.ativo {
-    display: flex;
-  }
-
-  .pagina-criar-projeto-container {
-    width: 90%;
-  }
-
-  .pagina-criar-projeto-image-preview {
-    height: 150px;
-  }
-
-  .pagina-criar-projeto-seta {
-    width: 40px;
+/* Adaptação geral para responsividade */
+@media (max-width: 480px) {
+  .pagina-criar-projeto-mensagem {
+    font-size: 1rem;
+    padding: 10px 15px;
   }
 }
