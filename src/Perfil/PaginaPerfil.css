@@ -4,21 +4,21 @@
   padding: 0;
   box-sizing: border-box;
 }
- 
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
 }
- 
+
 .pagina-perfil-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden;
 }
- 
-.pagina-perfil-cabecalho {
+
+.cabecalho {
   background: #90017F;
   color: #fff;
   padding: 10px 0;
@@ -27,29 +27,29 @@ body {
   top: 0;
   z-index: 1000;
 }
- 
-.pagina-perfil-conteudo-cabecalho {
+
+.conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
- 
-.pagina-perfil-logo {
+
+.logo {
   margin: 0;
 }
- 
-.pagina-perfil-logo img {
+
+.logo img {
   width: 120px;
 }
- 
-.pagina-perfil-navegacao {
+
+.navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
- 
-.pagina-perfil-nav-item {
+
+.nav-item {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -60,16 +60,16 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
- 
-.pagina-perfil-nav-item i {
+
+.nav-item i {
   margin-right: 8px;
 }
- 
-.pagina-perfil-nav-item:hover {
+
+.nav-item:hover {
   background: #A0008D;
 }
- 
-.pagina-perfil-hamburguer {
+
+.hamburguer {
   display: none;
   background: none;
   border: none;
@@ -77,13 +77,13 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
- 
-.pagina-perfil-formulario-pesquisa {
+
+.formulario-pesquisa {
   display: flex;
   align-items: center;
 }
- 
-.pagina-perfil-input-pesquisa {
+
+.input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
   border: none;
@@ -92,8 +92,8 @@ body {
   transition: width 0.3s ease;
   color: #000;
 }
- 
-.pagina-perfil-botao-pesquisa {
+
+.botao-pesquisa {
   padding: 5px 10px;
   border: none;
   background: #780069;
@@ -101,13 +101,13 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
- 
-.pagina-perfil-painel-usuario {
+
+.painel-usuario {
   display: flex;
   align-items: center;
 }
- 
-.pagina-perfil-link-usuario {
+
+.link-usuario {
   color: #fff;
   text-decoration: none;
   margin: 0 10px;
@@ -116,20 +116,19 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
- 
-.pagina-perfil-link-usuario:hover {
+
+.link-usuario:hover {
   background: #A0008D;
 }
- 
+
 .pagina-perfil-main {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  position: relative;
 }
- 
+
 .pagina-perfil-container {
   display: flex;
   flex-direction: column;
@@ -143,7 +142,7 @@ body {
   margin: 40px auto;
   gap: 20px;
 }
- 
+
 .pagina-perfil-avatar {
   width: 120px;
   height: 120px;
@@ -154,7 +153,7 @@ body {
   background-size: cover;
   background-position: center;
 }
- 
+
 .pagina-perfil-info {
   width: 100%;
   display: flex;
@@ -162,7 +161,7 @@ body {
   align-items: center;
   gap: 12px;
 }
- 
+
 .pagina-perfil-info p {
   font-size: 1.1rem;
   color: #333;
@@ -173,7 +172,7 @@ body {
   width: 100%;
   text-align: center;
 }
- 
+
 .pagina-perfil-info button,
 .pagina-perfil-info a {
   padding: 10px 15px;
@@ -185,60 +184,34 @@ body {
   transition: background-color 0.3s ease;
   width: fit-content;
 }
- 
+
 .pagina-perfil-info button {
   background-color: #6b47dc;
   color: white;
 }
- 
+
 .pagina-perfil-info button:hover {
   background-color: #5a39bc;
 }
- 
+
 .pagina-perfil-delete {
   background: #f44336;
   color: white;
 }
- 
+
 .pagina-perfil-delete:hover {
   background-color: #d32f2f;
 }
- 
+
 .pagina-perfil-info a {
   background-color: #00c853;
   color: white;
 }
- 
+
 .pagina-perfil-info a:hover {
   background-color: #00a344;
 }
- 
-.pagina-perfil-info-container {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  margin: 20px 0;
-}
- 
-.pagina-perfil-button {
-  padding: 10px;
-  background: #6b47dc;
-  color: #fff;
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  margin: 10px;
-}
- 
-.pagina-perfil-title {
-  text-align: center;
-  color: #fff;
-  height: 100px;
-  font-size: 1.4rem;
-}
- 
-/* Estilos do Modal */
+
 .pagina-perfil-modal {
   position: fixed;
   top: 0;
@@ -251,7 +224,7 @@ body {
   align-items: center;
   z-index: 1000;
 }
- 
+
 .pagina-perfil-modal-content {
   background-color: #fff;
   border-radius: 10px;
@@ -260,17 +233,17 @@ body {
   width: 90%;
   max-width: 500px;
 }
- 
+
 .pagina-perfil-modal-content h2 {
   margin-bottom: 20px;
   color: #6b47dc;
 }
- 
+
 .pagina-perfil-modal-content label {
   display: block;
   margin-bottom: 10px;
 }
- 
+
 .pagina-perfil-modal-content input {
   width: 100%;
   padding: 10px;
@@ -278,7 +251,7 @@ body {
   border: 1px solid #ccc;
   margin-bottom: 15px;
 }
- 
+
 .pagina-perfil-modal-content button {
   padding: 10px;
   background: #6b47dc;
@@ -288,20 +261,20 @@ body {
   cursor: pointer;
   transition: background 0.3s;
 }
- 
+
 .pagina-perfil-modal-content button:hover {
   background: #5a39bc;
 }
- 
-.pagina-perfil-rodape {
+
+.rodape {
   background: #90017F;
   color: #fff;
   padding: 20px 0;
   text-align: center;
   margin-top: auto;
 }
- 
-.pagina-perfil-conteudo-rodape {
+
+.conteudo-rodape {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
@@ -310,56 +283,56 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
- 
-.pagina-perfil-secao-rodape {
+
+.secao-rodape {
   flex: 1;
   padding: 10px;
   min-width: 200px;
 }
- 
-.pagina-perfil-logo-rodape {
+
+.logo-rodape {
   font-size: 1.5rem;
   font-weight: bold;
 }
- 
-.pagina-perfil-contato-rodape span {
+
+.contato-rodape span {
   display: block;
   margin: 10px 0;
 }
- 
-.pagina-perfil-redes-sociais a {
+
+.redes-sociais a {
   margin: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
 }
- 
-.pagina-perfil-links ul {
+
+.links ul {
   list-style: none;
   padding: 0;
 }
- 
-.pagina-perfil-links ul a {
+
+.links ul a {
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
   display: block;
 }
- 
-.pagina-perfil-links ul a:hover {
+
+.links ul a:hover {
   color: #A0008D;
 }
- 
-.pagina-perfil-rodape-inferior {
+
+.rodape-inferior {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
- 
+
 /* Responsividade */
 @media (max-width: 768px) {
-  .pagina-perfil-navegacao {
+  .navegacao {
     display: none;
     flex-direction: column;
     width: 100%;
@@ -369,38 +342,242 @@ body {
     left: 0;
     z-index: 1000;
   }
- 
-  .pagina-perfil-nav-item {
+
+  .nav-item {
     width: 100%;
     justify-content: center;
     margin: 0;
     border-bottom: 1px solid #A0008D;
   }
- 
-  .pagina-perfil-navegacao.ativo {
+
+  .navegacao.ativo {
     display: flex;
   }
- 
-  .pagina-perfil-hamburguer {
+
+  .hamburguer {
     display: block;
   }
- 
-  .pagina-perfil-formulario-pesquisa {
+
+  .formulario-pesquisa {
     width: 100%;
     margin-top: 10px;
   }
- 
-  .pagina-perfil-input-pesquisa {
+
+  .input-pesquisa {
     width: 100%;
   }
- 
-  .pagina-perfil-info-container {
-    width: 90%;
-  }
- 
-  .pagina-perfil-modal-content {
-    width: 95%;
+}
+.carrossel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1050;
+}
+
+.carrossel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 1200px;
+  height: calc(100vh - 300px);
+}
+
+.carrossel::-webkit-scrollbar {
+  display: none;
+}
+
+.carrossel .item {
+  background-color: #fff;
+  margin: 10px;
+  padding: 10px;
+  min-width: 250px;
+  max-width: 350px;
+  flex: none;
+  border: solid 1px #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.carrossel .item.focused {
+  transform: scale(1.2);
+  z-index: 10;
+  opacity: 1;
+}
+
+.carrossel .item .imag {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrossel .item .imag img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.carrossel .item .info {
+  padding: 10px;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrossel .item .info span {
+  display: block;
+  text-align: center;
+  color: #1e1e1e;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.carrossel .item .info .name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.carrossel .item .info .texto {
+  font-size: 1rem;
+  flex-grow: 1;
+}
+
+.carrossel .item .info .butao {
+  font-size: 1.2rem;
+  background-color: #8e24aa;
+  border-radius: 22px;
+  color: #fff;
+  margin-top: 8px;
+  padding: 5px 10px;
+}
+
+.carrossel-container .left, .carrossel-container .right {
+  background-color: #8e24aa;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+}
+
+.carrossel-container .left:hover, .carrossel-container .right:hover {
+  opacity: 1;
+}
+
+.carrossel-container .left {
+  left: -30px;
+}
+
+.carrossel-container .right {
+  right: -30px;
+}
+
+.carrossel-container .left img, .carrossel-container .right img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .carrossel {
+    height: calc(100vh - 200px);
   }
 }
- 
- 
+
+@media (max-width: 768px) {
+  .carrossel-container {
+    display: none;
+  }
+
+  .shadowdograu {
+    display: none;
+  }
+
+  .intro {
+    margin-right: -60%;
+  }
+
+  .rodape {
+    background: #90017F;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  .conteudo-rodape {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .secao-rodape {
+    flex: 1;
+    padding: 10px;
+    min-width: 200px;
+  }
+
+  .logo-rodape {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .contato-rodape span {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .redes-sociais a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
+  .links ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .links ul a {
+    color: #fff;
+    text-decoration: none;
+    margin: 5px 0;
+    display: block;
+  }
+
+  .links ul a:hover {
+    color: #A0008D;
+  }
+
+  .rodape-inferior {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #A0008D;
+    margin-top: 10px;
+  }
+}
