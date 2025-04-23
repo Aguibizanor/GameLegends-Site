@@ -22,7 +22,7 @@ body {
 }
 
 /* Navbar CSS */
-.pagina-criar-projeto-cabecalho {
+.cabecalho {
   background: #90017F;
   color: #fff;
   padding: 10px 0;
@@ -32,28 +32,28 @@ body {
   z-index: 1000;
 }
 
-.pagina-criar-projeto-conteudo-cabecalho {
+.conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
 
-.pagina-criar-projeto-logo {
+.logo {
   margin: 0;
 }
 
-.pagina-criar-projeto-logo img {
+.logo img {
   width: 120px;
 }
 
-.pagina-criar-projeto-navegacao {
+.navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.pagina-criar-projeto-nav-item {
+.nav-item {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -65,32 +65,29 @@ body {
   transition: background 0.3s ease;
 }
 
-.pagina-criar-projeto-nav-item i {
+.nav-item i {
   margin-right: 8px;
 }
 
-.pagina-criar-projeto-nav-item:hover {
+.nav-item:hover {
   background: #A0008D;
 }
 
-.pagina-criar-projeto-hamburguer {
+.hamburguer {
   display: none;
   background: none;
   border: none;
   color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 20px;
 }
 
-.pagina-criar-projeto-formulario-pesquisa {
+.formulario-pesquisa {
   display: flex;
   align-items: center;
 }
 
-.pagina-criar-projeto-input-pesquisa {
+.input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
   border: none;
@@ -99,7 +96,7 @@ body {
   transition: width 0.3s ease;
 }
 
-.pagina-criar-projeto-botao-pesquisa {
+.botao-pesquisa {
   padding: 5px 10px;
   border: none;
   background: #780069;
@@ -108,12 +105,12 @@ body {
   border-radius: 0 5px 5px 0;
 }
 
-.pagina-criar-projeto-painel-usuario {
+.painel-usuario {
   display: flex;
   align-items: center;
 }
 
-.pagina-criar-projeto-link-usuario {
+.link-usuario {
   color: #fff;
   text-decoration: none;
   margin: 0 10px;
@@ -123,11 +120,11 @@ body {
   transition: background 0.3s ease;
 }
 
-.pagina-criar-projeto-link-usuario:hover {
+.link-usuario:hover {
   background: #A0008D;
 }
 
-/* Rest of the CSS */
+/* Main Section */
 .pagina-criar-projeto-main {
   flex: 1;
   display: flex;
@@ -231,6 +228,7 @@ body {
   cursor: pointer;
 }
 
+/* Footer Section */
 .pagina-criar-projeto-rodape {
   background: #90017F;
   color: #fff;

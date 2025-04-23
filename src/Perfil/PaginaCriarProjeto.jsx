@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './PaginaCriarProjeto.css'; // Importa o arquivo CSS
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
@@ -6,6 +6,11 @@ import esquerda from "../assets/esquerda.png";
 
 function PaginaCriarProjeto() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+  });
+
   const [nomeProjeto, setNomeProjeto] = useState("");
   const [descricao, setDescricao] = useState("");
   const [dataInicio, setDataInicio] = useState("");
@@ -13,6 +18,17 @@ function PaginaCriarProjeto() {
   const [genero, setGenero] = useState(""); // Adicionando estado para o gênero do jogo
   const [image, setImage] = useState(""); // Adicionando estado para a imagem
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    // Carregar dados do usuário ao carregar a página
+    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioData) {
+      setFormData({
+        email: usuarioData.email,
+        usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+      });
+    }
+  }, []);
 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
@@ -53,34 +69,47 @@ function PaginaCriarProjeto() {
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
-      <header className="pagina-criar-projeto-cabecalho">
-        <div className="pagina-criar-projeto-conteudo-cabecalho">
-          <h1 className="pagina-criar-projeto-logo">
-            <Link to="/" title="Game Legends">
+      <header className="cabecalho">
+        <div className="conteudo-cabecalho">
+          <h1 className="logo">
+            <a href="/" title="Game Legends">
               <img src={Logo} alt="Logo do Game Legends" />
-            </Link>
+            </a>
           </h1>
-          <nav className={`pagina-criar-projeto-navegacao ${menuAberto ? 'ativo' : ''}`}>
-            <Link to={'/Index'} className="pagina-criar-projeto-nav-item"><i className="fas fa-home"></i><span className="pagina-criar-projeto-nav-label">Início</span></Link>
-            <Link to={'/'} className="pagina-criar-projeto-nav-item"><i className="fas fa-gamepad"></i><span className="pagina-criar-projeto-nav-label">Games</span></Link>
-            <Link to={'/Que'} className="pagina-criar-projeto-nav-item"><i className="fas fa-question-circle"></i><span className="pagina-criar-projeto-nav-label">Sobre</span></Link>
-            <Link to={'/Suporte'} className="pagina-criar-projeto-nav-item"><i className="fas fa-headset"></i><span className="pagina-criar-projeto-nav-label">Suporte</span></Link>
+          <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
+            <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
+            <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
+            <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
+            <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
           </nav>
-          <button className="pagina-criar-projeto-hamburguer" onClick={toggleMenu}>
+          <button className="hamburguer" onClick={toggleMenu}>
             <i className="fas fa-bars"></i>
           </button>
-          <form className="pagina-criar-projeto-formulario-pesquisa" action="/search">
-            <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="pagina-criar-projeto-input-pesquisa" type="text"/>
-            <button className="pagina-criar-projeto-botao-pesquisa" aria-label="Search">
-              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="pagina-criar-projeto-icone-pesquisa" stroke="currentColor">
+          <form className="formulario-pesquisa" action="/search">
+            <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
+            <button className="botao-pesquisa" aria-label="Search">
+              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </button>
           </form>
-          <div className="pagina-criar-projeto-painel-usuario">
-            <Link className="pagina-criar-projeto-link-usuario" to="/login">Login</Link>
-            <Link className="pagina-criar-projeto-link-usuario" to="/register">Registre-se</Link>
+          <div className="painel-usuario">
+            {formData.usuario ? (
+              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
+              <Link
+                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
+                className="link-usuario"
+              >
+                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+              </Link>
+            ) : (
+              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
+              <>
+                <Link to={'/Login'} className="link-usuario">Login</Link>
+                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+              </>
+            )}
           </div>
         </div>
       </header>
