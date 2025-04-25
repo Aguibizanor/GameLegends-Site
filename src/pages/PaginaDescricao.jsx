@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PaginaDescricao.css'; // Certifique-se de criar esse arquivo CSS para os estilos
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
@@ -20,14 +20,10 @@ const PaginaDescricao = () => {
   const imagens = [gato1, gato2, gato1];
 
   useEffect(() => {
-    // Simulação de busca de dados do banco de dados
-    fetch('/api/produtos?plataforma=windows')
-        .then(response => response.json())
-        .then(data => setProdutos(data));
-// Verifica se o usuário está logado/cadastrado ao carregar a página
-const usuarioData = JSON.parse(localStorage.getItem('usuario'));
-if (usuarioData) {
-    setFormData({
+    // Verifica se o usuário está logado/cadastrado ao carregar a página
+    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioData) {
+      setFormData({
         email: usuarioData.email,
         usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
       });
@@ -91,21 +87,21 @@ if (usuarioData) {
               </button>
             </form>
             <div className="painel-usuario">
-            {formData.usuario ? (
-              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
-              <Link
-                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
-                className="link-usuario"
-              >
-                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
-              </Link>
-            ) : (
-              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
-              <>
-                <Link to={'/Login'} className="link-usuario">Login</Link>
-                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
-              </>
-            )}
+              {formData.usuario ? (
+                // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
+                <Link
+                  to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
+                  className="link-usuario"
+                >
+                  <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                </Link>
+              ) : (
+                // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
+                <>
+                  <Link to={'/Login'} className="link-usuario">Login</Link>
+                  <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+                </>
+              )}
             </div>
           </div>
         </header>
@@ -172,13 +168,13 @@ if (usuarioData) {
           <div className="modal-download-content">
             <span className="fechar" onClick={fecharModalDownload}>&times;</span>
             <h2>Agradecemos pela escolha de download!</h2>
-            <p>Se considerar doar para o projeto e avaliar, use o aplicativo mobile! Baixe em uma das três opções abaixo:</p>
+            <p>Se considerar doar para o projeto e avaliar, use o aplicativo mobile! Baixe em uma das quatro opções abaixo:</p>
             <div className="download-options">
-              <button className="download-option">Opção 1</button>
-              <button className="download-option">Opção 2</button>
-              <button className="download-option">Opção 3</button>
+              <button className="download-option">Windows</button>
+              <button className="download-option">Linux</button>
+              <button className="download-option">Android</button>
+              <button className="download-option">iOs</button>
             </div>
-            <p>Link para o aplicativo Mobile: <a href="https://example.com">Exemplo Link</a></p>
           </div>
         </div>
       )}

@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from "react";
-import './PaginaCriarProjeto.css'; // Importa o arquivo CSS
-import { Link } from 'react-router-dom';
+import './PaginaCriarProjeto.css';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import Logo from "../assets/logo.site.tcc.png";
-import esquerda from "../assets/esquerda.png";
 
 function PaginaCriarProjeto() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+    usuario: ""
   });
 
   const [nomeProjeto, setNomeProjeto] = useState("");
   const [descricao, setDescricao] = useState("");
   const [dataInicio, setDataInicio] = useState("");
   const [tecnologias, setTecnologias] = useState("");
-  const [genero, setGenero] = useState(""); // Adicionando estado para o gênero do jogo
-  const [image, setImage] = useState(""); // Adicionando estado para a imagem
+  const [genero, setGenero] = useState("");
+  const [image, setImage] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  
+  const navigate = useNavigate(); // Hook para navegação
 
   useEffect(() => {
-    // Carregar dados do usuário ao carregar a página
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
     if (usuarioData) {
       setFormData({
         email: usuarioData.email,
-        usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+        usuario: usuarioData.usuario
       });
     }
   }, []);
@@ -34,18 +36,60 @@ function PaginaCriarProjeto() {
     setMenuAberto(!menuAberto);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (!nomeProjeto || !descricao || !dataInicio || !tecnologias || !genero) {
       setError("Por favor, preencha todos os campos.");
-    } else {
-      setError("");
-      console.log("Nome do Projeto:", nomeProjeto);
-      console.log("Descrição:", descricao);
-      console.log("Data de Início:", dataInicio);
-      console.log("Tecnologias:", tecnologias);
-      console.log("Gênero:", genero); // Exibir o gênero no console
-      console.log("Imagem:", image); // Exibir a imagem no console
+      return;
+    }
+
+    setError("");
+    const projetoData = {
+      nomeProjeto,
+      descricao,
+      dataInicio,
+      tecnologias,
+      genero,
+      image: image.split(",")[1] // Remove o prefixo "data:image/png;base64," para enviar apenas o Base64
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8080/projetos', projetoData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 201) { // Verifica se o cadastro foi bem-sucedido
+        alert("Projeto criado com sucesso!");
+        setSuccessMessage("Projeto criado com sucesso!");
+        setNomeProjeto("");
+        setDescricao("");
+        setDataInicio("");
+        setTecnologias("");
+        setGenero("");
+        setImage("");
+        navigate('/Perfil'); // Redireciona para a página de perfil
+      } else {
+        const errorResponse = response.data;
+        setError(errorResponse.message || 'Erro ao criar projeto.');
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      if (error.response) {
+        // Erro vindo do servidor
+        console.error("Resposta do servidor:", error.response);
+        setError(error.response.data.message || 'Erro no servidor. Tente novamente.');
+      } else if (error.request) {
+        // Erro na conexão com o servidor
+        console.error("Nenhuma resposta recebida do servidor:", error.request);
+        setError('Erro ao se conectar ao servidor. Verifique sua conexão.');
+      } else {
+        // Outro tipo de erro
+        console.error("Erro desconhecido:", error.message);
+        setError('Erro desconhecido. Tente novamente mais tarde.');
+      }
     }
   };
 
@@ -54,7 +98,7 @@ function PaginaCriarProjeto() {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setImage(e.target.result); // Atualiza o estado da imagem
+        setImage(e.target.result);
       };
       reader.readAsDataURL(file);
     }
@@ -96,15 +140,10 @@ function PaginaCriarProjeto() {
           </form>
           <div className="painel-usuario">
             {formData.usuario ? (
-              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
-              <Link
-                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
-                className="link-usuario"
-              >
+              <Link to={`/Perfil?tipo=${formData.usuario}`} className="link-usuario">
                 <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
               </Link>
             ) : (
-              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
               <>
                 <Link to={'/Login'} className="link-usuario">Login</Link>
                 <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
@@ -120,6 +159,7 @@ function PaginaCriarProjeto() {
             <h1>Criar Meu Projeto</h1>
           </div>
           <form onSubmit={handleSubmit} className="pagina-criar-projeto-form">
+            {/* Campos do formulário */}
             <div className="pagina-criar-projeto-field">
               <label>Selecionar Imagem:</label>
               <div className="pagina-criar-projeto-image-upload-wrapper">
@@ -195,45 +235,11 @@ function PaginaCriarProjeto() {
               </select>
             </div>
             {error && <div className="pagina-criar-projeto-error">{error}</div>}
+            {successMessage && <div className="pagina-criar-projeto-mensagem sucesso">{successMessage}</div>}
             <button type="submit" className="pagina-criar-projeto-button">Criar Projeto</button>
           </form>
         </div>
-        <Link to={'/Perfil'}><img src={esquerda} alt="Seta" className="pagina-criar-projeto-seta" /></Link>
       </main>
-
-      <footer className="pagina-criar-projeto-rodape">
-        <div className="pagina-criar-projeto-conteudo-rodape">
-          <div className="pagina-criar-projeto-secao-rodape sobre">
-            <h1 className="pagina-criar-projeto-logo-rodape"><span>Game</span>Legends</h1>
-            <p>
-              Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
-            </p>
-            <div className="pagina-criar-projeto-contato-rodape">
-              <span><i className="fas fa-phone"></i> &nbsp; (99) 99999-9999</span>
-              <span><i className="fas fa-envelope"></i> &nbsp; info@gamelegends.com</span>
-            </div>
-            <div className="pagina-criar-projeto-redes-sociais">
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-linkedin"></i></a>
-            </div>
-          </div>
-          <div className="pagina-criar-projeto-secao-rodape links">
-            <h2>Links Rápidos</h2>
-            <ul>
-              <a href="#"><li>Eventos</li></a>
-              <a href="#"><li>Equipe</li></a>
-              <a href="#"><li>Missão</li></a>
-              <a href="#"><li>Serviços</li></a>
-              <a href="#"><li>Afiliados</li></a>
-            </ul>
-          </div>
-        </div>
-        <div className="pagina-criar-projeto-rodape-inferior">
-          &copy; gamelegends.com | Feito pelo time do Game Legends 
-        </div>
-      </footer>
     </div>
   );
 }

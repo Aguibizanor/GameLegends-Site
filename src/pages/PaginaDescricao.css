@@ -9,15 +9,18 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-.app7 {
+.GIT {
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
+/* Header */
 .cabecalho {
   background: #90017F;
   color: #fff;
@@ -35,18 +38,14 @@ body {
   padding: 0 20px;
 }
 
-.logo {
-  margin: 0;
-}
-
 .logo img {
   width: 120px;
 }
 
 .navegacao {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
 }
 
 .nav-item {
@@ -90,7 +89,7 @@ body {
   outline: none;
   width: 200px;
   transition: width 0.3s ease;
-  color: #000000;
+  color: #000;
 }
 
 .botao-pesquisa {
@@ -121,20 +120,18 @@ body {
   background: #A0008D;
 }
 
+/* Game Profile Container */
 .game-profile-container {
   max-width: 1200px;
-  margin: 20px auto; /* Ajusta a posição da caixa branca para mais perto do Navbar */
-  padding: 0; /* Remove o padding para aproximar mais do navbar */
+  margin: 20px auto;
+  padding: 20px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  flex: 1;
 }
 
-/* Conteúdo principal */
 .game-profile-content {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
 }
@@ -142,7 +139,6 @@ body {
 .main-content {
   width: 100%;
   max-width: 800px;
-  margin-top: 10px;
 }
 
 .main-game-img {
@@ -151,27 +147,46 @@ body {
   margin-bottom: 20px;
 }
 
+.extra-images {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.extra-images img {
+  flex: 0 0 150px;
+  height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 .description {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .description h1 {
-  font-size: 30px;
+  font-size: 24px;
+  color: #4b0082;
 }
 
 .description p {
-  font-size: 20px;
+  font-size: 18px;
+  color: #333;
 }
 
 .credits {
   margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-.credits-info {
-  flex: 1;
+.credits h3 {
+  font-size: 18px;
+  color: #4b0082;
+}
+
+.credits p {
+  font-size: 16px;
+  color: #333;
 }
 
 .credits a {
@@ -184,9 +199,9 @@ body {
 }
 
 .download-btn {
-  margin-left: 20px; /* Espaçamento à esquerda do botão */
+  margin-top: 10px;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 16px;
   color: white;
   background-color: #6b47dc;
   border: none;
@@ -197,28 +212,6 @@ body {
 
 .download-btn:hover {
   background-color: #5a39bc;
-}
-
-/* Imagens extras de descrição */
-.extra-images {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 10px 0;
-}
-
-.extra-images img {
-  flex: 0 0 200px; /* Define a largura fixa das imagens extras */
-  height: 150px; /* Define a altura fixa das imagens extras */
-  border-radius: 10px;
-  cursor: pointer; /* Adiciona um cursor de ponteiro para indicar que é clicável */
-}
-
-/* Rodapé com os botões */
-.game-profile-footer {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 /* Modal de Imagem */
@@ -341,7 +334,7 @@ body {
 
 .download-option {
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 16px;
   color: white;
   background-color: #6b47dc;
   border: none;
@@ -392,7 +385,7 @@ body {
   }
 
   .game-profile-content {
-    padding: 0 10px; /* Adiciona padding nas laterais para versão mobile */
+    padding: 0 10px;
   }
 
   .extra-images {
@@ -401,12 +394,8 @@ body {
   }
 
   .extra-images img {
-    width: 100%; /* Faz com que as imagens extras preencham a largura disponível */
-    height: auto; /* Mantém a proporção das imagens */
-  }
-
-  .description {
     width: 100%;
+    height: auto;
   }
 
   .description h1 {
@@ -430,13 +419,13 @@ body {
   }
 }
 
-/* Estilo do rodapé */
+/* Rodapé */
 .rodape {
   background: #90017F;
   color: #fff;
   padding: 20px 0;
   text-align: center;
-  margin-top: auto; /* Faz o rodapé ficar no final da página */
+  margin-top: auto;
 }
 
 .conteudo-rodape {

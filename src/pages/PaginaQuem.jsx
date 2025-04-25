@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PaginaQuem.css';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
@@ -6,6 +6,21 @@ import Pessoas from "../assets/Pessoas.png";
 
 const PaginaQuem = () => {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+  });
+
+  useEffect(() => {
+    // Carregar dados do usuário ao carregar a página
+    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioData) {
+      setFormData({
+        email: usuarioData.email,
+        usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+      });
+    }
+  }, []);
 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
@@ -40,15 +55,28 @@ const PaginaQuem = () => {
           <form className="formulario-pesquisa" action="/search">
             <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
             <button className="botao-pesquisa" aria-label="Search">
-              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </button>
           </form>
           <div className="painel-usuario">
-            <Link className="link-usuario" to="/Login">Login</Link>
-            <Link className="link-usuario" to="/Cadastro">Registre-se</Link>
+            {formData.usuario ? (
+              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
+              <Link
+                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
+                className="link-usuario"
+              >
+                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+              </Link>
+            ) : (
+              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
+              <>
+                <Link to={'/Login'} className="link-usuario">Login</Link>
+                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -86,7 +114,7 @@ const PaginaQuem = () => {
             <div className="redes-sociais">
               <a href="#"><i className="fab fa-facebook"></i></a>
               <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i className="fab fa-instagram"></i></a>
               <a href="#"><i className="fab fa-linkedin"></i></a>
             </div>
           </div>
