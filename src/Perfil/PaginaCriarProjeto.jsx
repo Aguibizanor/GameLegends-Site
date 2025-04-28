@@ -19,8 +19,8 @@ function PaginaCriarProjeto() {
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  
-  const navigate = useNavigate(); // Hook para navegação
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
@@ -36,11 +36,49 @@ function PaginaCriarProjeto() {
     setMenuAberto(!menuAberto);
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.match('image.*')) {
+        setError("Por favor, selecione um arquivo de imagem válido (JPEG, PNG, etc).");
+        return;
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        setError("A imagem deve ter no máximo 2MB.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (typeof e.target.result === 'string' && e.target.result.startsWith('data:')) {
+          setImage(e.target.result);
+          setError("");
+        } else {
+          setError("Formato de imagem não suportado.");
+        }
+      };
+      reader.onerror = () => {
+        setError("Erro ao ler o arquivo de imagem. Tente novamente.");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleButtonClick = () => {
+    document.getElementById('fileInput').click();
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!nomeProjeto || !descricao || !dataInicio || !tecnologias || !genero) {
-      setError("Por favor, preencha todos os campos.");
+      setError("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
+
+    if (!formData.usuario || !formData.email) {
+      setError("Você precisa estar logado para criar um projeto. Faça login e tente novamente.");
       return;
     }
 
@@ -51,61 +89,63 @@ function PaginaCriarProjeto() {
       dataInicio,
       tecnologias,
       genero,
-      image: image.split(",")[1] // Remove o prefixo "data:image/png;base64," para enviar apenas o Base64
+      usuario: formData.usuario,
+      email: formData.email,
+      image: image && image.includes(',') ? image.split(",")[1] : null
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/projetos', projetoData, {
+      const response = await axios.post('http://localhost:8080/Projetos', projetoData, {
         headers: {
           'Content-Type': 'application/json',
         },
+        timeout: 10000
       });
 
-      if (response.status === 201) { // Verifica se o cadastro foi bem-sucedido
-        alert("Projeto criado com sucesso!");
-        setSuccessMessage("Projeto criado com sucesso!");
+      if (response.status === 201) {
+        setSuccessMessage("Projeto criado com sucesso! Criação do projeto concluída.");
         setNomeProjeto("");
         setDescricao("");
         setDataInicio("");
         setTecnologias("");
         setGenero("");
         setImage("");
-        navigate('/Perfil'); // Redireciona para a página de perfil
+        
+        setTimeout(() => {
+          navigate('/Perfil');
+        }, 2000);
       } else {
-        const errorResponse = response.data;
-        setError(errorResponse.message || 'Erro ao criar projeto.');
+        setError(`Resposta inesperada do servidor: ${response.status}`);
       }
     } catch (error) {
-      console.error("Erro na requisição:", error);
-      if (error.response) {
-        // Erro vindo do servidor
-        console.error("Resposta do servidor:", error.response);
-        setError(error.response.data.message || 'Erro no servidor. Tente novamente.');
+      console.error("Erro completo:", {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        config: error.config
+      });
+      
+      if (error.code === 'ECONNABORTED') {
+        setError("Tempo de conexão esgotado. O servidor demorou muito para responder.");
+      } else if (error.response) {
+        const serverError = error.response.data;
+        setError(
+          serverError.message || 
+          serverError.error || 
+          `Erro ${error.response.status}: ${error.response.statusText}` ||
+          "Erro no servidor. Tente novamente mais tarde."
+        );
       } else if (error.request) {
-        // Erro na conexão com o servidor
-        console.error("Nenhuma resposta recebida do servidor:", error.request);
-        setError('Erro ao se conectar ao servidor. Verifique sua conexão.');
+        setError(`
+          Não foi possível conectar ao servidor. Verifique:
+          1. Se o servidor está rodando (http://localhost:8080)
+          2. Sua conexão com a internet
+          3. Se há problemas de CORS (verifique o console)
+        `);
       } else {
-        // Outro tipo de erro
-        console.error("Erro desconhecido:", error.message);
-        setError('Erro desconhecido. Tente novamente mais tarde.');
+        setError(`Erro ao configurar a requisição: ${error.message}`);
       }
     }
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleButtonClick = () => {
-    document.getElementById('fileInput').click();
   };
 
   return (
@@ -159,11 +199,16 @@ function PaginaCriarProjeto() {
             <h1>Criar Meu Projeto</h1>
           </div>
           <form onSubmit={handleSubmit} className="pagina-criar-projeto-form">
-            {/* Campos do formulário */}
             <div className="pagina-criar-projeto-field">
-              <label>Selecionar Imagem:</label>
+              <label>Selecionar Imagem: <span className="pagina-criar-projeto-optional">(Opcional)</span></label>
               <div className="pagina-criar-projeto-image-upload-wrapper">
-                <button type="button" onClick={handleButtonClick} className="pagina-criar-projeto-button">Selecionar Imagem</button>
+                <button 
+                  type="button" 
+                  onClick={handleButtonClick} 
+                  className="pagina-criar-projeto-button"
+                >
+                  {image ? "Alterar Imagem" : "Selecionar Imagem"}
+                </button>
                 <input
                   type="file"
                   id="fileInput"
@@ -174,29 +219,50 @@ function PaginaCriarProjeto() {
                 {image && (
                   <div className="pagina-criar-projeto-image-preview">
                     <img src={image} alt="Preview" />
+                    <button 
+                      type="button" 
+                      className="pagina-criar-projeto-remove-image"
+                      onClick={() => setImage("")}
+                    >
+                       × Remover
+                    </button>
                   </div>
                 )}
               </div>
+              <div className="pagina-criar-projeto-file-hint">
+                Formatos aceitos: JPEG, PNG (Máx. 2MB)
+              </div>
             </div>
+
             <div className="pagina-criar-projeto-field">
-              <label>Nome do Projeto:</label>
+              <label>Nome do Projeto: <span className="pagina-criar-projeto-required">*</span></label>
               <input
                 type="text"
                 value={nomeProjeto}
                 onChange={(e) => setNomeProjeto(e.target.value)}
                 className="pagina-criar-projeto-input"
+                placeholder="Digite o nome do seu projeto"
+                maxLength={100}
               />
             </div>
+
             <div className="pagina-criar-projeto-field">
-              <label>Descrição:</label>
+              <label>Descrição: <span className="pagina-criar-projeto-required">*</span></label>
               <textarea
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
                 className="pagina-criar-projeto-input"
+                placeholder="Descreva seu projeto em detalhes"
+                rows={5}
+                maxLength={500}
               />
+              <div className="pagina-criar-projeto-char-count">
+                {descricao.length}/500 caracteres
+              </div>
             </div>
+
             <div className="pagina-criar-projeto-field">
-              <label>Data de Início:</label>
+              <label>Data de Início: <span className="pagina-criar-projeto-required">*</span></label>
               <input
                 type="date"
                 value={dataInicio}
@@ -204,18 +270,20 @@ function PaginaCriarProjeto() {
                 className="pagina-criar-projeto-input"
               />
             </div>
+
             <div className="pagina-criar-projeto-field">
-              <label>Contato:</label>
+              <label>Contato: <span className="pagina-criar-projeto-required">*</span></label>
               <input
                 type="text"
                 value={tecnologias}
                 onChange={(e) => setTecnologias(e.target.value)}
                 className="pagina-criar-projeto-input"
-                placeholder="Ex: Instagram, email"
+                placeholder="Ex: Instagram @seuuser, email@exemplo.com"
               />
             </div>
+
             <div className="pagina-criar-projeto-field">
-              <label>Gênero do Jogo:</label>
+              <label>Gênero do Jogo: <span className="pagina-criar-projeto-required">*</span></label>
               <select
                 value={genero}
                 onChange={(e) => setGenero(e.target.value)}
@@ -234,9 +302,40 @@ function PaginaCriarProjeto() {
                 <option value="Windows">Windows</option>
               </select>
             </div>
-            {error && <div className="pagina-criar-projeto-error">{error}</div>}
-            {successMessage && <div className="pagina-criar-projeto-mensagem sucesso">{successMessage}</div>}
-            <button type="submit" className="pagina-criar-projeto-button">Criar Projeto</button>
+
+            {error && (
+              <div className="pagina-criar-projeto-error">
+                <i className="fas fa-exclamation-circle"></i> {error}
+              </div>
+            )}
+
+            {successMessage && (
+              <div className="pagina-criar-projeto-mensagem sucesso">
+                <i className="fas fa-check-circle"></i> {successMessage}
+              </div>
+            )}
+
+            <div className="pagina-criar-projeto-actions">
+              <button 
+                type="submit" 
+                className="pagina-criar-projeto-button primary"
+                disabled={!!successMessage}
+              >
+                {successMessage ? (
+                  <><i className="fas fa-spinner fa-spin"></i> Processando...</>
+                ) : (
+                  <><i className="fas fa-plus"></i> Criar Projeto</>
+                )}
+              </button>
+              
+              <button 
+                type="button" 
+                className="pagina-criar-projeto-button secondary"
+                onClick={() => navigate('/Perfil')}
+              >
+                <i className="fas fa-times"></i> Cancelar
+              </button>
+            </div>
           </form>
         </div>
       </main>
