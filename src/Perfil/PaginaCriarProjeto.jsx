@@ -44,11 +44,6 @@ function PaginaCriarProjeto() {
         return;
       }
 
-      if (file.size > 2 * 1024 * 1024) {
-        setError("A imagem deve ter no máximo 2MB.");
-        return;
-      }
-
       const reader = new FileReader();
       reader.onload = (e) => {
         if (typeof e.target.result === 'string' && e.target.result.startsWith('data:')) {
@@ -95,11 +90,10 @@ function PaginaCriarProjeto() {
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/Projetos', projetoData, {
+      const response = await axios.post('http://localhost:8080/projetos', projetoData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        timeout: 10000
       });
 
       if (response.status === 201) {
@@ -111,9 +105,6 @@ function PaginaCriarProjeto() {
         setGenero("");
         setImage("");
         
-        setTimeout(() => {
-          navigate('/Perfil');
-        }, 2000);
       } else {
         setError(`Resposta inesperada do servidor: ${response.status}`);
       }
