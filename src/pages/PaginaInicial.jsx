@@ -11,34 +11,35 @@ const PaginaInicial = () => {
         status: true,
     });
 
-    const [nomeProjeto, setNomeProjeto] = useState("");
-    const [descricao, setDescricao] = useState("");
-    const [dataInicio, setDataInicio] = useState("");
-    const [tecnologias, setTecnologias] = useState("");
-    const [genero, setGenero] = useState(""); // Adicionando estado para o gênero do jogo
-    const [image, setImage] = useState(""); // Adicionando estado para a imagem  
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
-    const [produtos, setProdutos] = useState([]);
+    const [projetos, setProjetos] = useState([]);
     const [formData, setFormData] = useState({
         email: "",
         usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
-      });
+    });
 
     useEffect(() => {
-        // Simulação de busca de dados do banco de dados
-        fetch('/api/produtos?plataforma=windows')
-            .then(response => response.json())
-            .then(data => setProdutos(data));
-    // Verifica se o usuário está logado/cadastrado ao carregar a página
-    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
-    if (usuarioData) {
-        setFormData({
-            email: usuarioData.email,
-            usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
-          });
+        // Fetch projects from API
+        fetch('http://localhost:8080/projetos')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar projetos: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => setProjetos(data))
+            .catch(error => console.error("Erro ao carregar projetos:", error));
+
+        // Verifica se o usuário está logado/cadastrado ao carregar a página
+        const usuarioData = JSON.parse(localStorage.getItem('usuario'));
+        if (usuarioData) {
+            setFormData({
+                email: usuarioData.email,
+                usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+            });
         }
-      }, []);
+    }, []);
 
     const toggleList = (section) => {
         setIsOpen({ ...isOpen, [section]: !isOpen[section] });
@@ -74,34 +75,35 @@ const PaginaInicial = () => {
                         <i className="fas fa-bars"></i>
                     </button>
                     <form className="formulario-pesquisa" action="/search">
-                        <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
+                        <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text" />
                         <button className="botao-pesquisa" aria-label="Search">
-                            <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                            <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
                         </button>
                     </form>
                     <div className="painel-usuario">
-                    {formData.usuario ? (
-              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
-              <Link
-                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
-                className="link-usuario"
-              >
-                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
-              </Link>
-            ) : (
-              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
-              <>
-                <Link to={'/Login'} className="link-usuario">Login</Link>
-                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
-              </>
-            )}
+                        {formData.usuario ? (
+                            <Link
+                                to={`/Perfil?tipo=${formData.usuario}`}
+                                className="link-usuario"
+                            >
+                                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                            </Link>
+                        ) : (
+                            <>
+                                <Link to={'/Login'} className="link-usuario">Login</Link>
+                                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </header>
             <main className="principal">
+                <button className={`hamburguer-principal ${isMobileOpen ? 'aberto' : ''}`} onClick={toggleMobileMenu}>
+                    <i className={`fas ${isMobileOpen ? 'fa-chevron-left' : 'fa-chevron-right'}`}></i>
+                </button>
                 <section className={`barra-lateral ${isMobileOpen ? 'aberta' : ''}`}>
                     <div>
                         <h1 onClick={() => toggleList('genero')}>
@@ -110,12 +112,12 @@ const PaginaInicial = () => {
                         </h1>
                         {isOpen.genero && (
                             <>
-                                <Link to={'/Terror'}><a href="#"><i className="fas fa-gamepad"></i>Terror</a></Link>
-                                <Link to={'/Esporte'}><a href="#"><i className="fas fa-gamepad"></i>Esporte</a></Link>
-                                <Link to={'/Aventura'}><a href="#"><i className="fas fa-gamepad"></i>Aventura</a></Link>
-                                <Link to={'/Educacional'}><a href="#"><i className="fas fa-gamepad"></i>Educacional</a></Link>
-                                <Link to={'/Sobrevivencia'}><a href="#"><i className="fas fa-gamepad"></i>Sobrevivência</a></Link>
-                                <Link to={'/Cartas'}><a href="#"><i className="fas fa-gamepad"></i>Jogo de cartas</a></Link>
+                                <Link to={'/Terror'}><i className="fas fa-gamepad"></i> Terror</Link>
+                                <Link to={'/Esporte'}><i className="fas fa-gamepad"></i> Esporte</Link>
+                                <Link to={'/Aventura'}><i className="fas fa-gamepad"></i> Aventura</Link>
+                                <Link to={'/Educacional'}><i className="fas fa-gamepad"></i> Educacional</Link>
+                                <Link to={'/Sobrevivencia'}><i className="fas fa-gamepad"></i> Sobrevivência</Link>
+                                <Link to={'/Cartas'}><i className="fas fa-gamepad"></i> Jogo de cartas</Link>
                             </>
                         )}
                         <h1 onClick={() => toggleList('plataformas')}>
@@ -124,10 +126,10 @@ const PaginaInicial = () => {
                         </h1>
                         {isOpen.plataformas && (
                             <>
-                                <Link to={'/Windows'}><a href="#"><i className="fab fa-windows"></i>Windows</a></Link>
-                                <Link to={'/MacOs'}><a href="#"><i className="fab fa-apple"></i>Mac OS</a></Link>
-                                <Link to={'/Android'}><a href="#"><i className="fab fa-android"></i>Android</a></Link>
-                                <Link to={'/iOS'}><a href="#"><i className="fab fa-apple"></i>iOS</a></Link>
+                                <Link to={'/Windows'}><i className="fab fa-windows"></i> Windows</Link>
+                                <Link to={'/MacOs'}><i className="fab fa-apple"></i> Mac OS</Link>
+                                <Link to={'/Android'}><i className="fab fa-android"></i> Android</Link>
+                                <Link to={'/iOS'}><i className="fab fa-apple"></i> iOS</Link>
                             </>
                         )}
                         <h1 onClick={() => toggleList('postagem')}>
@@ -136,9 +138,9 @@ const PaginaInicial = () => {
                         </h1>
                         {isOpen.postagem && (
                             <>
-                                <Link to={'/Hoje'}><a href="#"><i className="far fa-clock"></i>Hoje</a></Link>
-                                <Link to={'/EssaSemana'}><a href="#"><i className="far fa-clock"></i>Essa semana</a></Link>
-                                <Link to={'/EsseMes'}><a href="#"><i className="far fa-clock"></i>Esse mês</a></Link>
+                                <Link to={'/Hoje'}><i className="far fa-clock"></i> Hoje</Link>
+                                <Link to={'/EssaSemana'}><i className="far fa-clock"></i> Essa semana</Link>
+                                <Link to={'/EsseMes'}><i className="far fa-clock"></i> Esse mês</Link>
                             </>
                         )}
                         <h1 onClick={() => toggleList('status')}>
@@ -147,20 +149,22 @@ const PaginaInicial = () => {
                         </h1>
                         {isOpen.status && (
                             <>
-                                <Link to={'/Desenvolvido'}><a href="#"><i className="fas fa-bolt"></i>Desenvolvido</a></Link>
-                                <Link to={'/Desenvolvendo'}><a href="#"><i className="fas fa-play"></i>Desenvolvendo</a></Link>
+                                <Link to={'/Desenvolvido'}><i className="fas fa-bolt"></i> Desenvolvido</Link>
+                                <Link to={'/Desenvolvendo'}><i className="fas fa-play"></i> Desenvolvendo</Link>
                             </>
                         )}
                     </div>
                 </section>
-                <section className="secao-jogos">
-                    {produtos.map(produto => (
-                        <Link to={`/Descricao/${produto.id}`} key={produto.id}>
-                            <div className="jogo-card">
-                                <img src={produto.imagem} alt={produto.nome} />
-                                <a href="#">{produto.nome}</a>
-                            </div>
-                        </Link>
+                <section className="games-section">
+                    {projetos.map(projeto => (
+                        <div key={projeto.id} className="game-card">
+                            {projeto.imagem ? (
+                                <img src={projeto.imagem} alt={projeto.nomeProjeto} />
+                            ) : (
+                                <div className="no-image">sem imagem</div>
+                            )}
+                            <Link to={`/Descricao/${projeto.id}`}>{projeto.nomeProjeto}</Link>
+                        </div>
                     ))}
                 </section>
             </main>
@@ -178,7 +182,7 @@ const PaginaInicial = () => {
                         <div className="redes-sociais">
                             <a href="#"><i className="fab fa-facebook"></i></a>
                             <a href="#"><i className="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i className="fab fa-instagram"></i></a>
                             <a href="#"><i className="fab fa-linkedin"></i></a>
                         </div>
                     </div>

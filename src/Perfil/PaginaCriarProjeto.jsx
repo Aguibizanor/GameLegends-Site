@@ -86,7 +86,7 @@ function PaginaCriarProjeto() {
       genero,
       usuario: formData.usuario,
       email: formData.email,
-      image: image && image.includes(',') ? image.split(",")[1] : null
+      /*image: image && image.includes(',') ? image.split(",")[1] : null */
     };
 
     try {
@@ -191,35 +191,10 @@ function PaginaCriarProjeto() {
           </div>
           <form onSubmit={handleSubmit} className="pagina-criar-projeto-form">
             <div className="pagina-criar-projeto-field">
-              <label>Selecionar Imagem: <span className="pagina-criar-projeto-optional">(Opcional)</span></label>
+               <label>Selecionar Imagem: <span className="pagina-criar-projeto-optional">(Opcional)</span></label>
               <div className="pagina-criar-projeto-image-upload-wrapper">
-                <button 
-                  type="button" 
-                  onClick={handleButtonClick} 
-                  className="pagina-criar-projeto-button"
-                >
-                  {image ? "Alterar Imagem" : "Selecionar Imagem"}
-                </button>
-                <input
-                  type="file"
-                  id="fileInput"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  style={{ display: 'none' }}
-                />
-                {image && (
-                  <div className="pagina-criar-projeto-image-preview">
-                    <img src={image} alt="Preview" />
-                    <button 
-                      type="button" 
-                      className="pagina-criar-projeto-remove-image"
-                      onClick={() => setImage("")}
-                    >
-                       × Remover
-                    </button>
-                  </div>
-                )}
-              </div>
+               
+              </div> 
               <div className="pagina-criar-projeto-file-hint">
                 Formatos aceitos: JPEG, PNG (Máx. 2MB)
               </div>
@@ -335,3 +310,30 @@ function PaginaCriarProjeto() {
 }
 
 export default PaginaCriarProjeto;
+
+/* <button 
+                  type="button" 
+                  onClick={handleButtonClick} 
+                  className="pagina-criar-projeto-button"
+                > 
+                  {image ? "Alterar Imagem" : "Selecionar Imagem"}
+                </button>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  style={{ display: 'none' }}
+                /> 
+                {image && (
+                  <div className="pagina-criar-projeto-image-preview">
+                    <img src={image} alt="Preview" />
+                    <button 
+                      type="button" 
+                      className="pagina-criar-projeto-remove-image"
+                      onClick={() => setImage("")}
+                    >
+                       × Remover
+                    </button>
+                  </div> 
+                )}   */
