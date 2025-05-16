@@ -11,13 +11,15 @@ function PaginaCriarProjeto() {
     usuario: ""
   });
 
+  // Alinhamento com o banco:
+  // nomeProjeto, descricao, dataInicio, tecnologias, genero, foto (byte[])
   const [nomeProjeto, setNomeProjeto] = useState("");
   const [descricao, setDescricao] = useState("");
   const [dataInicio, setDataInicio] = useState("");
   const [tecnologias, setTecnologias] = useState("");
   const [genero, setGenero] = useState("");
-  const [image, setImage] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [fotoPreview, setFotoPreview] = useState(""); // Para preview no front
+  const [fotoFile, setFotoFile] = useState(null);      // Para envio ao backend
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -44,12 +46,12 @@ function PaginaCriarProjeto() {
         setError("Por favor, selecione um arquivo de imagem válido (JPEG, PNG, etc).");
         return;
       }
-      setImageFile(file);
+      setFotoFile(file);
 
       const reader = new FileReader();
       reader.onload = (e) => {
         if (typeof e.target.result === 'string' && e.target.result.startsWith('data:')) {
-          setImage(e.target.result);
+          setFotoPreview(e.target.result);
           setError("");
         } else {
           setError("Formato de imagem não suportado.");
@@ -82,18 +84,15 @@ function PaginaCriarProjeto() {
     setError("");
     setSuccessMessage("");
 
-    // Monta o FormData para envio multipart
+    // Alinhamento dos campos com o banco:
     const form = new FormData();
-    form.append("nomeProjeto", nomeProjeto);
-    form.append("descricao", descricao);
-    form.append("dataInicio", dataInicio);
-    form.append("tecnologias", tecnologias);
-    form.append("genero", genero);
-    // Adicione outros campos se necessário, por exemplo:
-    // form.append("usuario", formData.usuario);
-    // form.append("email", formData.email);
-    if (imageFile) {
-      form.append("file", imageFile);
+    form.append("nomeProjeto", nomeProjeto); // String
+    form.append("descricao", descricao);     // String
+    form.append("dataInicio", dataInicio);   // String
+    form.append("tecnologias", tecnologias); // String
+    form.append("genero", genero);           // String
+    if (fotoFile) {
+      form.append("foto", fotoFile);         // byte[] no backend
     }
 
     try {
@@ -110,8 +109,8 @@ function PaginaCriarProjeto() {
         setDataInicio("");
         setTecnologias("");
         setGenero("");
-        setImage("");
-        setImageFile(null);
+        setFotoPreview("");
+        setFotoFile(null);
       } else {
         setError(`Resposta inesperada do servidor: ${response.status}`);
       }
@@ -205,7 +204,7 @@ function PaginaCriarProjeto() {
                   onClick={handleButtonClick} 
                   className="pagina-criar-projeto-button"
                 > 
-                  {image ? "Alterar Imagem" : "Selecionar Imagem"}
+                  {fotoPreview ? "Alterar Imagem" : "Selecionar Imagem"}
                 </button>
                 <input
                   type="file"
@@ -214,13 +213,13 @@ function PaginaCriarProjeto() {
                   onChange={handleFileChange}
                   style={{ display: 'none' }}
                 /> 
-                {image && (
+                {fotoPreview && (
                   <div className="pagina-criar-projeto-image-preview">
-                    <img src={image} alt="Preview" />
+                    <img src={fotoPreview} alt="Preview" />
                     <button 
                       type="button" 
                       className="pagina-criar-projeto-remove-image"
-                      onClick={() => { setImage(""); setImageFile(null); }}
+                      onClick={() => { setFotoPreview(""); setFotoFile(null); }}
                     >
                       × Remover
                     </button>

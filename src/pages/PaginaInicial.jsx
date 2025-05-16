@@ -53,18 +53,10 @@ const PaginaInicial = () => {
         setIsMobileOpen(!isMobileOpen);
     };
 
-    // Função utilitária para obter a URL da imagem do projeto
+    // Função utilitária para obter a URL da imagem do projeto (retorna endpoint de bytes)
     const getProjetoImagem = (projeto) => {
-        // O campo pode ser 'imagemUrl' ou 'imagem' dependendo do backend,
-        // ajuste conforme a sua entidade e API!
-        if (projeto.imagemUrl) {
-            // Caminho relativo salvo no banco, ex: 'uploads/imagens-projetos/uuid_nome.jpg'
-            return `http://localhost:8080/${projeto.imagemUrl.replace(/\\/g, '/')}`;
-        } else if (projeto.imagem) {
-            // Caso retorne um campo 'imagem' (ex: base64, URL externa, etc)
-            return projeto.imagem;
-        }
-        return null;
+        // Sempre retorna o endpoint que serve o byte[] convertido em imagem
+        return `http://localhost:8080/projetos/${projeto.id}/foto`;
     };
 
     return (
