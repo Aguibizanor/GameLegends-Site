@@ -17,6 +17,7 @@ function PaginaCriarProjeto() {
   const [tecnologias, setTecnologias] = useState("");
   const [genero, setGenero] = useState("");
   const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -43,6 +44,7 @@ function PaginaCriarProjeto() {
         setError("Por favor, selecione um arquivo de imagem válido (JPEG, PNG, etc).");
         return;
       }
+      setImageFile(file);
 
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -78,25 +80,30 @@ function PaginaCriarProjeto() {
     }
 
     setError("");
-    const projetoData = {
-      nomeProjeto,
-      descricao,
-      dataInicio,
-      tecnologias,
-      genero,
-      usuario: formData.usuario,
-      email: formData.email,
-      /*image: image && image.includes(',') ? image.split(",")[1] : null */
-    };
+    setSuccessMessage("");
+
+    // Monta o FormData para envio multipart
+    const form = new FormData();
+    form.append("nomeProjeto", nomeProjeto);
+    form.append("descricao", descricao);
+    form.append("dataInicio", dataInicio);
+    form.append("tecnologias", tecnologias);
+    form.append("genero", genero);
+    // Adicione outros campos se necessário, por exemplo:
+    // form.append("usuario", formData.usuario);
+    // form.append("email", formData.email);
+    if (imageFile) {
+      form.append("file", imageFile);
+    }
 
     try {
-      const response = await axios.post('http://localhost:8080/projetos', projetoData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:8080/projetos/createComFoto",
+        form,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         setSuccessMessage("Projeto criado com sucesso! Criação do projeto concluída.");
         setNomeProjeto("");
         setDescricao("");
@@ -104,7 +111,7 @@ function PaginaCriarProjeto() {
         setTecnologias("");
         setGenero("");
         setImage("");
-        
+        setImageFile(null);
       } else {
         setError(`Resposta inesperada do servidor: ${response.status}`);
       }
@@ -115,14 +122,14 @@ function PaginaCriarProjeto() {
         status: error.response?.status,
         config: error.config
       });
-      
+
       if (error.code === 'ECONNABORTED') {
         setError("Tempo de conexão esgotado. O servidor demorou muito para responder.");
       } else if (error.response) {
         const serverError = error.response.data;
         setError(
-          serverError.message || 
-          serverError.error || 
+          serverError.message ||
+          serverError.error ||
           `Erro ${error.response.status}: ${error.response.statusText}` ||
           "Erro no servidor. Tente novamente mais tarde."
         );
@@ -191,10 +198,35 @@ function PaginaCriarProjeto() {
           </div>
           <form onSubmit={handleSubmit} className="pagina-criar-projeto-form">
             <div className="pagina-criar-projeto-field">
-               <label>Selecionar Imagem: <span className="pagina-criar-projeto-optional">(Opcional)</span></label>
+              <label>Selecionar Imagem: <span className="pagina-criar-projeto-optional">(Opcional)</span></label>
               <div className="pagina-criar-projeto-image-upload-wrapper">
-               
-              </div> 
+                <button 
+                  type="button" 
+                  onClick={handleButtonClick} 
+                  className="pagina-criar-projeto-button"
+                > 
+                  {image ? "Alterar Imagem" : "Selecionar Imagem"}
+                </button>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  style={{ display: 'none' }}
+                /> 
+                {image && (
+                  <div className="pagina-criar-projeto-image-preview">
+                    <img src={image} alt="Preview" />
+                    <button 
+                      type="button" 
+                      className="pagina-criar-projeto-remove-image"
+                      onClick={() => { setImage(""); setImageFile(null); }}
+                    >
+                      × Remover
+                    </button>
+                  </div>
+                )}
+              </div>
               <div className="pagina-criar-projeto-file-hint">
                 Formatos aceitos: JPEG, PNG (Máx. 2MB)
               </div>
@@ -310,30 +342,3 @@ function PaginaCriarProjeto() {
 }
 
 export default PaginaCriarProjeto;
-
-/* <button 
-                  type="button" 
-                  onClick={handleButtonClick} 
-                  className="pagina-criar-projeto-button"
-                > 
-                  {image ? "Alterar Imagem" : "Selecionar Imagem"}
-                </button>
-                <input
-                  type="file"
-                  id="fileInput"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  style={{ display: 'none' }}
-                /> 
-                {image && (
-                  <div className="pagina-criar-projeto-image-preview">
-                    <img src={image} alt="Preview" />
-                    <button 
-                      type="button" 
-                      className="pagina-criar-projeto-remove-image"
-                      onClick={() => setImage("")}
-                    >
-                       × Remover
-                    </button>
-                  </div> 
-                )}   */
