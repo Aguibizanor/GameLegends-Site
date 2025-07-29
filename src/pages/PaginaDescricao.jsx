@@ -1,34 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import './PaginaDescricao.css'; // Certifique-se de criar esse arquivo CSS para os estilos
-import { Link } from 'react-router-dom';
+import './PaginaDescricao.css';
+import { Link, useParams } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
-import gato1 from "../assets/gato1.png";
-import gato2 from "../assets/gato2.png";
-import gato3 from "../assets/gato3.png";
 import esquerda from "../assets/esquerda.png";
 
 const PaginaDescricao = () => {
+  const { id } = useParams();
   const [menuAberto, setMenuAberto] = useState(false);
   const [modalImagemAberto, setModalImagemAberto] = useState(false);
   const [imagemAtual, setImagemAtual] = useState(0);
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
+  const [projeto, setProjeto] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
-    usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+    usuario: ""
   });
 
-  const imagens = [gato1, gato2, gato1];
+  const imagens = projeto ? [`http://localhost:8080/projetos/${projeto.id}/foto`] : [];
 
   useEffect(() => {
-    // Verifica se o usuário está logado/cadastrado ao carregar a página
+    // Busca dados do projeto específico
+    if (id) {
+      fetch(`http://localhost:8080/projetos/${id}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Projeto não encontrado');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setProjeto(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Erro ao carregar projeto:', error);
+          setLoading(false);
+        });
+    }
+
+    // Verifica se o usuário está logado
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
     if (usuarioData) {
       setFormData({
         email: usuarioData.email,
-        usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+        usuario: usuarioData.usuario
       });
     }
-  }, []);
+  }, [id]);
 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
@@ -58,6 +77,14 @@ const PaginaDescricao = () => {
   const fecharModalDownload = () => {
     setModalDownloadAberto(false);
   };
+
+  if (loading) {
+    return <div className="loading">Carregando...</div>;
+  }
+
+  if (!projeto) {
+    return <div className="error">Projeto não encontrado</div>;
+  }
 
   return (
     <div className="GIT">
@@ -109,46 +136,28 @@ const PaginaDescricao = () => {
       <div className="game-profile-container">
         <div className="game-profile-content">
           <div className="main-content">
-            <img src={gato3} alt="Happy Cat Tavern" className="main-game-img" />
+            <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt={projeto.nomeProjeto} className="main-game-img" />
             <div className="extra-images">
               {imagens.map((imagem, index) => (
                 <img
                   key={index}
                   src={imagem}
-                  alt={`Descrição ${index + 1}`}
+                  alt={`${projeto.nomeProjeto} ${index + 1}`}
                   className="extra-img"
                   onClick={() => abrirModalImagem(index)}
                 />
               ))}
             </div>
             <div className="description">
-              <h1>Happy Cat Tavern: Typing Challenge</h1>
-              <p>
-                Batou quer beber o máximo de milkshakes que puder enquanto os
-                clientes da taverna o animam. Cada palavra é um milkshake para
-                Batou beber. Digite com rapidez e precisão para ganhar pontos e
-                desbloquear conquistas!
-              </p>
+              <h1>{projeto.nomeProjeto}</h1>
+              <p>{projeto.descricao}</p>
+              <div className="project-info">
+                <p><strong>Gênero:</strong> {projeto.genero}</p>
+                <p><strong>Tecnologias:</strong> {projeto.tecnologias}</p>
+                <p><strong>Data de Início:</strong> {projeto.dataInicio}</p>
+                {projeto.statusProjeto && <p><strong>Status:</strong> {projeto.statusProjeto}</p>}
+              </div>
               <div className="credits">
-                <div>
-                  <h3>Créditos:</h3>
-                  <p>
-                    <strong>Artista:</strong> Miyaualit (
-                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
-                      Twitter
-                    </a>{' '}
-                    /{' '}
-                    <a href="https://etsy.com" target="_blank" rel="noreferrer">
-                      Etsy
-                    </a>
-                    )<br />
-                    <strong>Programador:</strong> OnyxHeart (
-                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
-                      Twitter
-                    </a>
-                    )
-                  </p>
-                </div>
                 <button className="download-btn" onClick={abrirModalDownload}>Download</button>
               </div>
             </div>
@@ -167,8 +176,8 @@ const PaginaDescricao = () => {
         <div className="modal-download">
           <div className="modal-download-content">
             <span className="fechar" onClick={fecharModalDownload}>&times;</span>
-            <h2>Agradecemos pela escolha de download!</h2>
-            <p>Se considerar doar para o projeto e avaliar, use o aplicativo mobile! Baixe em uma das quatro opções abaixo:</p>
+            <h2>Download - {projeto.nomeProjeto}</h2>
+            <p>Baixe o jogo em uma das opções disponíveis:</p>
             <div className="download-options">
               <button className="download-option">Windows</button>
               <button className="download-option">Linux</button>

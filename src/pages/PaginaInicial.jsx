@@ -163,14 +163,17 @@ const PaginaInicial = () => {
                 </section>
                 <section className="games-section">
                     {projetos.map(projeto => (
-                        <div key={projeto.id} className="game-card">
-                            {getProjetoImagem(projeto) ? (
-                                <img src={getProjetoImagem(projeto)} alt={projeto.nomeProjeto} />
-                            ) : (
-                                <div className="no-image">sem imagem</div>
-                            )}
-                            <Link to={`/Descricao/${projeto.id}`}>{projeto.nomeProjeto}</Link>
-                        </div>
+                        <Link key={projeto.id} to={`/Descricao/${projeto.id}`} className="game-card-link">
+                            <div className="game-card">
+                                {getProjetoImagem(projeto) ? (
+                                    <img src={getProjetoImagem(projeto)} alt={projeto.nomeProjeto} />
+                                ) : (
+                                    <div className="no-image">sem imagem</div>
+                                )}
+                                <h3>{projeto.nomeProjeto}</h3>
+                                <p className="game-description">{projeto.descricao}</p>
+                            </div>
+                        </Link>
                     ))}
                 </section>
             </main>

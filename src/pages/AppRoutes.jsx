@@ -56,7 +56,7 @@ const AppRoutes = () => {
       <Route path="/RedefinirSenha" element={<PaginaRedefinirSenha />} />
       <Route path="/Perfil" element={<PaginaPerfil />} />
       <Route path="/Criar" element={<PaginaCriarProjeto />} />
-      <Route path="/Descricao" element={<PaginaDescricao />} />
+      <Route path="/Descricao/:id" element={<PaginaDescricao />} />
       <Route path="/Que" element={<PaginaQuem />} />
     </Routes>
   );

@@ -173,6 +173,29 @@ body {
 .description p {
   font-size: 18px;
   color: #333;
+  margin-bottom: 15px;
+}
+
+.project-info {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #6b47dc;
+}
+
+.project-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 18px;
+  color: #666;
 }
 
 .credits {
