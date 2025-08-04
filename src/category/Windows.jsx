@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
@@ -8,7 +9,7 @@ import goiaba from '../assets/goiaba.png';
 import diaba from '../assets/diaba.png';
 import marquin from '../assets/marquin.png';
 import "../Pages/PaginaInicial.css"
-
+ 
 const Windows = () => {
     const [isOpen, setIsOpen] = useState({
         genero: true,
@@ -16,7 +17,7 @@ const Windows = () => {
         postagem: true,
         status: true,
     });
-
+ 
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
     const [produtos, setProdutos] = useState([]);
@@ -24,7 +25,7 @@ const Windows = () => {
         email: "",
         usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
       });
-
+ 
     useEffect(() => {
         // Simulação de busca de dados do banco de dados
         fetch('/api/produtos?plataforma=windows')
@@ -39,19 +40,19 @@ const Windows = () => {
           });
         }
       }, []);
-
+ 
     const toggleList = (section) => {
         setIsOpen({ ...isOpen, [section]: !isOpen[section] });
     };
-
+ 
     const toggleMenu = () => {
         setMenuAberto(!menuAberto);
     };
-
+ 
     const toggleMobileMenu = () => {
         setIsMobileOpen(!isMobileOpen);
     };
-
+ 
     return (
         <div className="app">
             <head>
@@ -183,41 +184,95 @@ const Windows = () => {
                     </div>
                 </section>
             </main>
-            <footer className="rodape">
-                <div className="conteudo-rodape">
-                    <div className="secao-rodape sobre">
-                        <h1 className="logo-rodape"><span>Game</span>Legends</h1>
-                        <p>
-                            Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
-                        </p>
-                        <div className="contato-rodape">
-                            <span><i className="fas fa-phone"></i> &nbsp; (99) 99999-9999</span>
-                            <span><i className="fas fa-envelope"></i> &nbsp; info@gamelegends.com</span>
-                        </div>
-                        <div className="redes-sociais">
-                            <a href="#"><i className="fab fa-facebook"></i></a>
-                            <a href="#"><i className="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i className="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div className="secao-rodape links">
-                        <h2>Links Rápidos</h2>
-                        <ul>
-                            <a href="#"><li>Eventos</li></a>
-                            <a href="#"><li>Equipe</li></a>
-                            <a href="#"><li>Missão</li></a>
-                            <a href="#"><li>Serviços</li></a>
-                            <a href="#"><li>Afiliados</li></a>
-                        </ul>
-                    </div>
-                </div>
-                <div className="rodape-inferior">
-                    &copy; gamelegends.com | Feito pelo time do Game Legends 
-                </div>
-            </footer>
+            <footer style={{ backgroundColor: '#90017F', padding: '30px 0', marginTop: '50px' }}>
+        <div style={{ textAlign: 'center', color: 'white' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <h2 style={{ fontSize: '24px', margin: '0 0 15px 0' }}>
+              <span style={{ fontWeight: 'bold' }}>Game</span>Legends
+            </h2>
+            <p style={{ fontSize: '14px', margin: '0 0 20px 0', color: '#ffffff90' }}>
+              Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
+            </p>
+          </div>
+         
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '30px',
+            marginBottom: '20px',
+            flexWrap: 'wrap',
+            fontSize: '14px'
+          }}>
+            <span style={{ color: '#ffffff70' }}>
+              <i className="fas fa-phone" style={{ marginRight: '5px' }}></i>
+              (99) 99999-9999
+            </span>
+            <span style={{ color: '#ffffff70' }}>
+              <i className="fas fa-envelope" style={{ marginRight: '5px' }}></i>
+              info@gamelegends.com
+            </span>
+            <Link to="/Privacidade" style={{ color: '#ffffff70', textDecoration: 'underline' }}>
+              Política de Privacidade
+            </Link>
+          </div>
+         
+          <div style={{ marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '16px', marginBottom: '15px', color: 'white' }}>Links Rápidos</h3>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '25px',
+              flexWrap: 'wrap',
+              fontSize: '14px'
+            }}>
+              <Link to="/" style={{ color: '#ffffff70', textDecoration: 'none' }}>Games</Link>
+              <Link to="/Que" style={{ color: '#ffffff70', textDecoration: 'none' }}>Sobre</Link>
+              <Link to="/Suporte" style={{ color: '#ffffff70', textDecoration: 'none' }}>Suporte</Link>
+              <Link to="/Cadastro" style={{ color: '#ffffff70', textDecoration: 'none' }}>Registre-se</Link>
+              <Link to="/Login" style={{ color: '#ffffff70', textDecoration: 'none' }}>Login</Link>
+            </div>
+          </div>
+         
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '20px',
+            marginBottom: '20px'
+          }}>
+            <a href="https://www.facebook.com/profile.php?id=61578797307500"
+               target="_blank"
+               rel="noopener noreferrer"
+               style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/game._legends/"
+               target="_blank"
+               rel="noopener noreferrer"
+               style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="#" style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="#" style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-linkedin"></i>
+            </a>
+          </div>
+         
+          <div style={{
+            borderTop: '1px solid rgba(255,255,255,0.2)',
+            paddingTop: '15px',
+            fontSize: '13px',
+            color: '#ffffff70'
+          }}>
+            © 2024 gamelegends.com | Feito pelo time do Game Legends
+          </div>
+        </div>
+      </footer>
         </div>
     );
 };
-
+ 
 export default Windows;
+ 
