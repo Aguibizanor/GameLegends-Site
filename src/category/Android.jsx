@@ -156,30 +156,93 @@ const Android = () => {
                         )}
                     </div>
                 </section>
-                <section className="games-section">
-                    <div className="game-card">
-                        <img src={carambola} alt="Digital Logic Sim" />
-                        <a href="">Digital Logic Sim</a>
+                <section className="games-section" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '50px',
+                    padding: '80px',
+                    justifyItems: 'center',
+                    alignItems: 'center',
+                    maxWidth: '1400px',
+                    margin: '0 auto'
+                }}>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={carambola} alt="Digital Logic Sim" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Digital Logic Sim</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={amora} alt="Crescent Loom" />
-                        <a href="">Crescent Loom</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={amora} alt="Crescent Loom" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Crescent Loom</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={ameixa} alt="Fallacy Quiz" />
-                        <a href="">Fallacy Quiz</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={ameixa} alt="Fallacy Quiz" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Fallacy Quiz</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={maca} alt="20 words, 20 seconds" />
-                        <a href="">20 words, 20 seconds</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={maca} alt="20 words, 20 seconds" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">20 words, 20 seconds</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={banana} alt="Prose e Codes" />
-                        <a href="">Prose e Codes</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={banana} alt="Prose e Codes" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Prose e Codes</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={foto} alt="After Party Chemistry" />
-                        <a href="">After Party Chemistry</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={foto} alt="After Party Chemistry" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">After Party Chemistry</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
                 </section>
             </main>

@@ -156,30 +156,93 @@ const Essasemana = () => {
                         )}
                     </div>
                 </section>
-                <section className="games-section">
-                    <div className="game-card">
-                        <img src={comet} alt="Comet's" />
-                        <a href="">Comet's</a>
+                <section className="games-section" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '50px',
+                    padding: '80px',
+                    justifyItems: 'center',
+                    alignItems: 'center',
+                    maxWidth: '1400px',
+                    margin: '0 auto'
+                }}>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={comet} alt="Comet's" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Comet's</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={step} alt="Step by little step" />
-                        <a href="">Step by little step</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={step} alt="Step by little step" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Step by little step</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={cinderela} alt="Cinderella Phenomenom" />
-                        <a href="">Cinderella Phenomenom</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={cinderela} alt="Cinderella Phenomenom" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Cinderella Phenomenom</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={ebon} alt="Ebon light" />
-                        <a href="">Ebon light</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={ebon} alt="Ebon light" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Ebon light</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={celeste} alt="Celeste" />
-                        <a href="">Celeste</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={celeste} alt="Celeste" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Celeste</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={below} alt="What lives below" />
-                        <a href="">What lives below</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={below} alt="What lives below" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">What lives below</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
                 </section>
             </main>

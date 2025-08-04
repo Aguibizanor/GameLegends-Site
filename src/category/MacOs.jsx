@@ -156,30 +156,93 @@ const MacOs = () => {
                         )}
                     </div>
                 </section>
-                <section className="games-section">
-                    <div className="game-card">
-                        <img src={ourlife} alt="Our Life" />
-                        <a href="">Our Life</a>
+                <section className="games-section" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '50px',
+                    padding: '80px',
+                    justifyItems: 'center',
+                    alignItems: 'center',
+                    maxWidth: '1400px',
+                    margin: '0 auto'
+                }}>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={ourlife} alt="Our Life" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Our Life</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={futebol} alt="Football Drama" />
-                        <a href="">Football Drama</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={futebol} alt="Football Drama" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Football Drama</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={banana} alt="Prose e Codes" />
-                        <a href="">Prose e Codes</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={banana} alt="Prose e Codes" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Prose e Codes</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={manga} alt="Skate Bird" />
-                        <a href="">Skate Bird</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={manga} alt="Skate Bird" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Skate Bird</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={img2} alt="Lumiterra" />
-                        <a href="">Lumiterra</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={img2} alt="Lumiterra" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Lumiterra</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={img6} alt="Lil tribals" />
-                        <a href="">Lil tribals</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={img6} alt="Lil tribals" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Lil tribals</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
                 </section>
             </main>

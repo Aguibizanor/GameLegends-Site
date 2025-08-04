@@ -156,30 +156,93 @@ const Essemes = () => {
                         )}
                     </div>
                 </section>
-                <section className="games-section">
-                    <div className="game-card">
-                        <img src={lily} alt="Paper Lily" />
-                        <a href="">Paper Lily</a>
+                <section className="games-section" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '50px',
+                    padding: '80px',
+                    justifyItems: 'center',
+                    alignItems: 'center',
+                    maxWidth: '1400px',
+                    margin: '0 auto'
+                }}>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={lily} alt="Paper Lily" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Paper Lily</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={mirror} alt="Pocket Mirror" />
-                        <a href="">Pocket Mirror</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={mirror} alt="Pocket Mirror" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Pocket Mirror</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={phenomenom} alt="Cinderella Phenomenom" />
-                        <a href="">Cinderella Phenomenom</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={phenomenom} alt="Cinderella Phenomenom" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Cinderella Phenomenom</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={wolf} alt="Lonely Wolf Treat" />
-                        <a href="">Lonely Wolf Treat</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={wolf} alt="Lonely Wolf Treat" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Lonely Wolf Treat</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={oneshot} alt="OneShot" />
-                        <a href="">OneShot</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={oneshot} alt="OneShot" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">OneShot</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={coracao} alt="Com o Coração" />
-                        <a href="">Com o Coração</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={coracao} alt="Com o Coração" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Com o Coração</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
                 </section>
             </main>

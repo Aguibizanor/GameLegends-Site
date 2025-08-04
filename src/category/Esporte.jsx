@@ -156,30 +156,93 @@ const Esporte = () => {
                         )}
                     </div>
                 </section>
-                <section className="games-section">
-                    <div className="game-card">
-                        <img src={siriguela} alt="Wheelchair Basktball" />
-                        <a href="">Wheelchair Basktball</a>
+                <section className="games-section" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '50px',
+                    padding: '80px',
+                    justifyItems: 'center',
+                    alignItems: 'center',
+                    maxWidth: '1400px',
+                    margin: '0 auto'
+                }}>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={siriguela} alt="Wheelchair Basktball" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Wheelchair Basktball</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={roma} alt="Cage fight" />
-                        <a href="">Cage fight</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={roma} alt="Cage fight" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Cage fight</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={pera} alt="College Slam" />
-                        <a href="">College Slam</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={pera} alt="College Slam" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">College Slam</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={mamao} alt="Football Drama" />
-                        <a href="">Football Drama</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={mamao} alt="Football Drama" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Football Drama</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={manga} alt="Skatebird" />
-                        <a href="">Skatebird</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={manga} alt="Skatebird" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Skatebird</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
-                    <div className="game-card">
-                        <img src={morango} alt="Super video Golf" />
-                        <a href="">Super video Golf</a>
+                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img src={morango} alt="Super video Golf" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Super video Golf</a></div>
+                        <button style={{
+                            backgroundColor: '#90017F',
+                            color: 'white',
+                            border: 'none',
+                            padding: '12px 30px',
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer'
+                        }}>Veja Mais</button>
                     </div>
                 </section>
             </main>

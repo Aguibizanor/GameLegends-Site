@@ -27,6 +27,7 @@ import PaginaPerfil from "../Perfil/PaginaPerfil";
 import PaginaCriarProjeto from "../Perfil/PaginaCriarProjeto";
 import PaginaDescricao from "./PaginaDescricao";
 import PaginaQuem from "./PaginaQuem";
+import PaginaPrivacidade from "./PaginaPrivacidade";
 
 const AppRoutes = () => {
   return (
@@ -58,6 +59,7 @@ const AppRoutes = () => {
       <Route path="/Criar" element={<PaginaCriarProjeto />} />
       <Route path="/Descricao/:id" element={<PaginaDescricao />} />
       <Route path="/Que" element={<PaginaQuem />} />
+      <Route path="/Privacidade" element={<PaginaPrivacidade />} />
     </Routes>
   );
 };
