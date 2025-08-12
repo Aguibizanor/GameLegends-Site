@@ -28,8 +28,14 @@ const PaginaInicial = () => {
                 }
                 return response.json();
             })
-            .then(data => setProjetos(data))
-            .catch(error => console.error("Erro ao carregar projetos:", error));
+            .then(data => {
+                console.log('Projetos carregados:', data);
+                setProjetos(data || []);
+            })
+            .catch(error => {
+                console.error("Erro ao carregar projetos:", error);
+                setProjetos([]);
+            });
 
         // Verifica se o usuário está logado/cadastrado ao carregar a página
         const usuarioData = JSON.parse(localStorage.getItem('usuario'));

@@ -5,7 +5,7 @@ import Logo from "../assets/logo.site.tcc.png";
 import left from "../assets/left.png";
 import right from "../assets/right.png";
 import shadowdograu from "../assets/shadowdograu.png"; // Importando a nova imagem
- 
+
 const IndexPrincipal = () => {
   const [data, setData] = useState([]);
   const [menuAberto, setMenuAberto] = useState(false);
@@ -16,7 +16,7 @@ const IndexPrincipal = () => {
     usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
   });
   const carousel = useRef(null);
- 
+
   useEffect(() => {
     // Carregar dados do carrossel
     fetch('/Carrossel.json')
@@ -24,7 +24,7 @@ const IndexPrincipal = () => {
       .then(setData)
       .catch((error) => console.error('Erro ao carregar os dados:', error));
   }, []);
- 
+
   useEffect(() => {
     // Verifica se o usuário está logado/cadastrado ao carregar a página
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
@@ -35,37 +35,37 @@ const IndexPrincipal = () => {
       });
     }
   }, []);
- 
+
   const handleLeftClick = () => {
     const width = carousel.current.clientWidth;
     carousel.current.scrollLeft -= width;
   };
- 
+
   const handleRightClick = () => {
     const width = carousel.current.clientWidth;
     carousel.current.scrollLeft += width;
   };
- 
+
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
- 
+
   const toggleVersion = () => {
     setIsAltered(!isAltered);
   };
- 
+
   const handleMouseEnter = (index) => {
     setFocusedIndex(index);
   };
- 
+
   const handleMouseLeave = () => {
     setFocusedIndex(null);
   };
- 
+
   if (!data || !data.length) return null;
- 
+
   return (
-    <div className="app" style={{backgroundColor: 'white'}}>
+    <div className="app">
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
@@ -113,8 +113,8 @@ const IndexPrincipal = () => {
           </div>
         </div>
       </header>
- 
-      <main className="principal" style={{backgroundColor: 'white'}}>
+
+      <main className="principal">
         <section className="intro">
           <div className="intro-content">
             <div className="intro-text">
@@ -140,7 +140,6 @@ const IndexPrincipal = () => {
                     key={id}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
-                    style={{backgroundColor: '#e6d7ff'}}
                   >
                     <div className="imag">
                       <img src={imagem} alt={name} />
@@ -158,96 +157,19 @@ const IndexPrincipal = () => {
           </div>
         </section>
       </main>
- 
-      <footer style={{ backgroundColor: '#90017F', padding: '30px 0', marginTop: '50px' }}>
-                <div style={{ textAlign: 'center', color: 'white' }}>
-                    <div style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '24px', margin: '0 0 15px 0' }}>
-                            <span style={{ fontWeight: 'bold' }}>Game</span>Legends
-                        </h2>
-                        <p style={{ fontSize: '14px', margin: '0 0 20px 0', color: '#ffffff90' }}>
-                            Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
-                        </p>
-                    </div>
-                   
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        gap: '30px',
-                        marginBottom: '20px',
-                        flexWrap: 'wrap',
-                        fontSize: '14px'
-                    }}>
-                        <span style={{ color: '#ffffff70' }}>
-                            <i className="fas fa-phone" style={{ marginRight: '5px' }}></i>
-                            (99) 99999-9999
-                        </span>
-                        <span style={{ color: '#ffffff70' }}>
-                            <i className="fas fa-envelope" style={{ marginRight: '5px' }}></i>
-                            info@gamelegends.com
-                        </span>
-                        <Link to="/Privacidade" style={{ color: '#ffffff70', textDecoration: 'underline' }}>
-                            Política de Privacidade
-                        </Link>
-                    </div>
-                   
-                    <div style={{ marginBottom: '20px' }}>
-                        <h3 style={{ fontSize: '16px', marginBottom: '15px', color: 'white' }}>Links Rápidos</h3>
-                        <div style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            gap: '25px',
-                            flexWrap: 'wrap',
-                            fontSize: '14px'
-                        }}>
-                            <Link to="/" style={{ color: '#ffffff70', textDecoration: 'none' }}>Games</Link>
-                            <Link to="/Que" style={{ color: '#ffffff70', textDecoration: 'none' }}>Sobre</Link>
-                            <Link to="/Suporte" style={{ color: '#ffffff70', textDecoration: 'none' }}>Suporte</Link>
-                            <Link to="/Cadastro" style={{ color: '#ffffff70', textDecoration: 'none' }}>Registre-se</Link>
-                            <Link to="/Login" style={{ color: '#ffffff70', textDecoration: 'none' }}>Login</Link>
-                        </div>
-                    </div>
-                   
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        gap: '20px',
-                        marginBottom: '20px'
-                    }}>
-                        <a href="https://www.facebook.com/profile.php?id=61578797307500"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           style={{ color: 'white', fontSize: '20px' }}>
-                            <i className="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://www.instagram.com/game._legends/"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           style={{ color: 'white', fontSize: '20px' }}>
-                            <i className="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" style={{ color: 'white', fontSize: '20px' }}>
-                            <i className="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" style={{ color: 'white', fontSize: '20px' }}>
-                            <i className="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                   
-                    <div style={{
-                        borderTop: '1px solid rgba(255,255,255,0.2)',
-                        paddingTop: '15px',
-                        fontSize: '13px',
-                        color: '#ffffff70'
-                    }}>
-                        © 2024 gamelegends.com | Feito pelo time do Game Legends
-                    </div>
-                </div>
-            </footer>
+
+      <footer className="rodape">
+        <div className="conteudo-rodape">
+          <div className="secao-rodape sobre">
+            <h1 className="logo-rodape"><span>Game</span>Legends</h1>
+            <p>
+              Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
- 
+
 export default IndexPrincipal;
- 

@@ -58,6 +58,7 @@ const AppRoutes = () => {
       <Route path="/Perfil" element={<PaginaPerfil />} />
       <Route path="/Criar" element={<PaginaCriarProjeto />} />
       <Route path="/Descricao/:id" element={<PaginaDescricao />} />
+      <Route path="*" element={<PaginaInicial />} />
       <Route path="/Que" element={<PaginaQuem />} />
       <Route path="/Privacidade" element={<PaginaPrivacidade />} />
     </Routes>
