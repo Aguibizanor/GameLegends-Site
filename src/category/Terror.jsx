@@ -20,6 +20,9 @@ const Terror = () => {
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
     const [produtos, setProdutos] = useState([]);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
@@ -38,6 +41,14 @@ const Terror = () => {
             usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
           });
         }
+        
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+            setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+        };
+        
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
       }, []);
  
     const toggleList = (section) => {
@@ -53,7 +64,18 @@ const Terror = () => {
     };
  
     return (
-        <div className="app">
+        <div className="app" style={{ backgroundColor: 'transparent' }}>
+            {isSearchFocused && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                    zIndex: 999
+                }} onClick={() => setIsSearchFocused(false)} />
+            )}
             <head>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
             </head>
@@ -64,7 +86,31 @@ const Terror = () => {
                             <img src={Logo} alt="Logo do Game Legends" />
                         </a>
                     </h1>
-                    <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
+                    <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`} style={{
+                        zIndex: menuAberto ? 1001 : 'auto'
+                    }}>
+                        {menuAberto && (
+                            <form className="formulario-pesquisa" action="/search" style={{
+                                width: '100%',
+                                margin: '10px 0',
+                                padding: '0 20px'
+                            }}>
+                                <input 
+                                    required="required" 
+                                    name="q" 
+                                    placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                                    className="input-pesquisa" 
+                                    type="text"
+                                    style={{ width: '100%' }}
+                                />
+                                <button className="botao-pesquisa" aria-label="Search">
+                                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                            </form>
+                        )}
                         <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
                         <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
@@ -73,8 +119,22 @@ const Terror = () => {
                     <button className="hamburguer" onClick={toggleMenu}>
                         <i className="fas fa-bars"></i>
                     </button>
-                    <form className="formulario-pesquisa" action="/search">
-                        <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
+                    <form className="formulario-pesquisa" action="/search" style={{
+                        position: isSearchFocused ? 'relative' : 'static',
+                        zIndex: isSearchFocused ? 1000 : 'auto',
+                        boxShadow: isSearchFocused ? '0 4px 20px rgba(0,0,0,0.15)' : 'none',
+                        borderRadius: isSearchFocused ? '8px' : 'initial',
+                        backgroundColor: isSearchFocused ? 'white' : 'transparent'
+                    }}>
+                        <input 
+                            required="required" 
+                            name="q" 
+                            placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                            className="input-pesquisa" 
+                            type="text"
+                            onFocus={() => setIsSearchFocused(true)}
+                            onBlur={() => setIsSearchFocused(false)}
+                        />
                         <button className="botao-pesquisa" aria-label="Search">
                             <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                                 <circle cx="11" cy="11" r="8"></circle>
@@ -105,8 +165,52 @@ const Terror = () => {
                 <button className={`hamburguer-principal ${isMobileOpen ? 'aberto' : ''}`} onClick={toggleMobileMenu}>
                     <i className={`fas ${isMobileOpen ? 'fa-chevron-left' : 'fa-chevron-right'}`}></i>
                 </button>
-                <section className={`barra-lateral ${isMobileOpen ? 'aberta' : ''}`}>
+                <section className={`barra-lateral ${isMobileOpen ? 'aberta' : ''}`} style={{backgroundColor: 'white'}}>
                     <div>
+                        {isTablet && (
+                            <form className="formulario-pesquisa-tablet" action="/search" style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                margin: '10px 0 20px 0',
+                                padding: '0 10px',
+                                position: 'relative',
+                                zIndex: isSearchFocused ? 1000 : 'auto',
+                                boxShadow: isSearchFocused ? '0 4px 20px rgba(0,0,0,0.15)' : 'none',
+                                borderRadius: isSearchFocused ? '8px' : 'initial',
+                                backgroundColor: isSearchFocused ? 'white' : 'transparent'
+                            }}>
+                                <input 
+                                    required="required" 
+                                    name="q" 
+                                    placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                                    className="input-pesquisa" 
+                                    type="text"
+                                    onFocus={() => setIsSearchFocused(true)}
+                                    onBlur={() => setIsSearchFocused(false)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '8px',
+                                        borderRadius: '5px 0 0 5px',
+                                        border: 'none',
+                                        outline: 'none',
+                                        color: '#000000'
+                                    }}
+                                />
+                                <button className="botao-pesquisa" aria-label="Search" style={{
+                                    padding: '8px 12px',
+                                    border: 'none',
+                                    background: '#780069',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    borderRadius: '0 5px 5px 0'
+                                }}>
+                                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                            </form>
+                        )}
                         <h1 onClick={() => toggleList('genero')}>
                             <span className={`triangulo ${isOpen.genero ? 'aberta' : ''}`}></span>
                             Gênero
@@ -158,17 +262,38 @@ const Terror = () => {
                 </section>
                 <section className="games-section" style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '50px',
-                    padding: '80px',
+                    gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+                    gap: '40px',
+                    padding: '50px',
                     justifyItems: 'center',
                     alignItems: 'center',
-                    maxWidth: '1400px',
-                    margin: '0 auto'
+                    maxWidth: '1200px',
+                    margin: '50px auto',
+                    backgroundColor: 'transparent',
+                    borderRadius: '20px'
                 }}>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={tomate} alt="Elevator Hitch" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Elevator Hitch</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={tomate} alt="Elevator Hitch" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Elevator Hitch</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -179,9 +304,28 @@ const Terror = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={melancia} alt="Elevated Dread" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Elevated Dread</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={melancia} alt="Elevated Dread" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Elevated Dread</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -192,9 +336,28 @@ const Terror = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={uva} alt="Pumpkin Panic" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Pumpkin Panic</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={uva} alt="Pumpkin Panic" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Pumpkin Panic</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -205,9 +368,28 @@ const Terror = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={salada} alt="They are here" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">They are here</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={salada} alt="They are here" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>They are here</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -218,9 +400,28 @@ const Terror = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={tangerina} alt="The Vale" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">The Vale</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={tangerina} alt="The Vale" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>The Vale</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -231,9 +432,28 @@ const Terror = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={tamara} alt="Clap Clap" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Clap Clap</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={tamara} alt="Clap Clap" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Clap Clap</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -337,4 +557,3 @@ const Terror = () => {
 };
  
 export default Terror;
- 
