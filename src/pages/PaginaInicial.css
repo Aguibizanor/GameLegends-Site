@@ -83,6 +83,12 @@ body {
   margin-left: 20px;
 }
 
+@media (max-width: 768px) {
+  .conteudo-cabecalho .formulario-pesquisa {
+    display: flex;
+  }
+}
+
 .input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -289,10 +295,12 @@ body {
       flex-direction: column;
       width: 100%;
       background: #90017F;
-      position: absolute;
-      top: 60px;
+      position: fixed;
+      top: 0;
       left: 0;
-      z-index: 1000;
+      z-index: 99999;
+      padding: 0;
+      margin: 0;
   }
 
   .nav-item {
@@ -308,6 +316,32 @@ body {
 
   .hamburguer {
       display: block;
+  }
+
+  .formulario-pesquisa {
+      display: none;
+      margin: 0 20px;
+      order: -1;
+  }
+
+  .navegacao.ativo .formulario-pesquisa {
+      display: flex;
+  }
+
+  .input-pesquisa {
+      width: 200px;
+  }
+
+  .painel-usuario {
+      display: none;
+  }
+
+  .navegacao.ativo {
+      display: flex;
+  }
+
+  .logo.escondida {
+      display: none;
   }
 
   .principal {

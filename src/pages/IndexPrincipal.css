@@ -376,10 +376,46 @@ body {
 }
  
 .intro {
-  margin: 10px;
-  padding: 10px;
+  margin: 5px 50px 5px 5px;
+  padding: 15px 20px 15px 15px;
   height: auto;
-  min-height: 200px;
+  min-height: 150px;
+  text-align: left;
+}
+
+.intro-content {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.intro-text {
+  max-width: 100%;
+}
+
+.intro h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.intro p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.cta-button {
+  padding: 8px 16px;
+  font-size: 1rem;
+}
+
+.shadowdograu {
+  display: block;
+  max-width: 100%;
+  margin-top: 15px;
+}
+
+.shadowdograu img {
+  width: 150px;
+  height: auto;
 }
  
 .rodape {
