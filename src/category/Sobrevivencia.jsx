@@ -20,10 +20,21 @@ const Sobrevivencia = () => {
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
     const [produtos, setProdutos] = useState([]);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
     const [formData, setFormData] = useState({
         email: "",
         usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
       });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+            setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
  
     useEffect(() => {
         // Simulação de busca de dados do banco de dados
@@ -158,17 +169,38 @@ const Sobrevivencia = () => {
                 </section>
                 <section className="games-section" style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '50px',
-                    padding: '80px',
+                    gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+                    gap: '40px',
+                    padding: '50px',
                     justifyItems: 'center',
                     alignItems: 'center',
-                    maxWidth: '1400px',
-                    margin: '0 auto'
+                    maxWidth: '1200px',
+                    margin: '50px auto',
+                    backgroundColor: 'transparent',
+                    borderRadius: '20px'
                 }}>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={Imagem1} alt="Pumpkin Panic" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Pumpkin Panic</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={Imagem1} alt="Pumpkin Panic" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Pumpkin Panic</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -179,9 +211,28 @@ const Sobrevivencia = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={Imagem2} alt="Lumiterra" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Lumiterra</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={Imagem2} alt="Lumiterra" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Lumiterra</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -192,9 +243,28 @@ const Sobrevivencia = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={Imagem3} alt="Madison" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Madison</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={Imagem3} alt="Madison" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Madison</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -205,9 +275,28 @@ const Sobrevivencia = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={Imagem4} alt="Shadow over normath" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Shadow over normath</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={Imagem4} alt="Shadow over normath" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Shadow over normath</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -218,9 +307,28 @@ const Sobrevivencia = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={Imagem5} alt="My rusty submarine" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">My rusty submarine</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={Imagem5} alt="My rusty submarine" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>My rusty submarine</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',
@@ -231,9 +339,28 @@ const Sobrevivencia = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={Imagem6} alt="Lil tribals" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
-                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Lil tribals</a></div>
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={Imagem6} alt="Lil tribals" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Lil tribals</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
                             color: 'white',

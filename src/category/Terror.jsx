@@ -81,7 +81,7 @@ const Terror = () => {
             </head>
             <header className="cabecalho">
                 <div className="conteudo-cabecalho">
-                    <h1 className="logo">
+                    <h1 className={`logo ${menuAberto && isMobile ? 'escondida' : ''}`}>
                         <a href="/" title="Game Legends">
                             <img src={Logo} alt="Logo do Game Legends" />
                         </a>

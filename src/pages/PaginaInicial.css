@@ -34,6 +34,8 @@ body {
   padding: 0 20px;
 }
 
+
+
 .logo {
   margin: 0;
 }
@@ -310,12 +312,23 @@ body {
       border-bottom: 1px solid #A0008D;
   }
 
+  .navegacao.ativo .nav-item[href='/Index'] {
+      margin-top: -60px;
+  }
+
   .navegacao.ativo {
       display: flex;
   }
 
   .hamburguer {
       display: block;
+  }
+
+  .navegacao.ativo ~ .hamburguer {
+      position: fixed;
+      top: 195px;
+      right: 20px;
+      z-index: 100000;
   }
 
   .formulario-pesquisa {
