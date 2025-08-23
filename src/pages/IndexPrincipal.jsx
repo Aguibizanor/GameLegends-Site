@@ -11,6 +11,9 @@ const IndexPrincipal = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const [isAltered, setIsAltered] = useState(false); // Estado para alternar entre versões
   const [focusedIndex, setFocusedIndex] = useState(null); // Estado para o item focado
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
   const [formData, setFormData] = useState({
     email: "",
     usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
@@ -34,6 +37,14 @@ const IndexPrincipal = () => {
         usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
       });
     }
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleLeftClick = () => {
@@ -66,6 +77,17 @@ const IndexPrincipal = () => {
 
   return (
     <div className="app">
+      {isSearchFocused && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          zIndex: 999
+        }} onClick={() => setIsSearchFocused(false)} />
+      )}
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
@@ -77,16 +99,57 @@ const IndexPrincipal = () => {
             </a>
           </h1>
           <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
+            {menuAberto && (
+              <form className="formulario-pesquisa" action="/search" style={{
+                width: '100%',
+                margin: '10px 0',
+                padding: '0 20px'
+              }}>
+                <input 
+                  required="required" 
+                  name="q" 
+                  placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                  className="input-pesquisa" 
+                  type="text"
+                  style={{ width: '100%' }}
+                />
+                <button className="botao-pesquisa" aria-label="Search">
+                  <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </button>
+              </form>
+            )}
             <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
             <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
             <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
             <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
           </nav>
-          <button className="hamburguer" onClick={toggleMenu}>
+          <button className="hamburguer" onClick={toggleMenu} style={{
+            position: menuAberto ? 'fixed' : 'static',
+            top: menuAberto ? '195px' : 'auto',
+            right: menuAberto ? '20px' : 'auto',
+            zIndex: menuAberto ? 100000 : 'auto'
+          }}>
             <i className="fas fa-bars"></i>
           </button>
-          <form className="formulario-pesquisa" action="/search">
-            <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text" />
+          <form className="formulario-pesquisa" action="/search" style={{
+            position: isSearchFocused ? 'relative' : 'static',
+            zIndex: isSearchFocused ? 1000 : 'auto',
+            boxShadow: isSearchFocused ? '0 4px 20px rgba(0,0,0,0.15)' : 'none',
+            borderRadius: isSearchFocused ? '8px' : 'initial',
+            backgroundColor: isSearchFocused ? 'white' : 'transparent'
+          }}>
+            <input 
+              required="required" 
+              name="q" 
+              placeholder="Pesquisar Jogos, Tags ou Criadores" 
+              className="input-pesquisa" 
+              type="text"
+              onFocus={() => setIsSearchFocused(true)}
+              onBlur={() => setIsSearchFocused(false)}
+            />
             <button className="botao-pesquisa" aria-label="Search">
               <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"></circle>

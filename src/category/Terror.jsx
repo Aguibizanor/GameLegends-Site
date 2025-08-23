@@ -81,14 +81,12 @@ const Terror = () => {
             </head>
             <header className="cabecalho">
                 <div className="conteudo-cabecalho">
-                    <h1 className={`logo ${menuAberto && isMobile ? 'escondida' : ''}`}>
+                    <h1 className="logo">
                         <a href="/" title="Game Legends">
                             <img src={Logo} alt="Logo do Game Legends" />
                         </a>
                     </h1>
-                    <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`} style={{
-                        zIndex: menuAberto ? 1001 : 'auto'
-                    }}>
+                    <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
                         {menuAberto && (
                             <form className="formulario-pesquisa" action="/search" style={{
                                 width: '100%',
@@ -116,7 +114,12 @@ const Terror = () => {
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
                         <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
                     </nav>
-                    <button className="hamburguer" onClick={toggleMenu}>
+                    <button className="hamburguer" onClick={toggleMenu} style={{
+                        position: menuAberto ? 'fixed' : 'static',
+                        top: menuAberto ? '195px' : 'auto',
+                        right: menuAberto ? '20px' : 'auto',
+                        zIndex: menuAberto ? 100000 : 'auto'
+                    }}>
                         <i className="fas fa-bars"></i>
                     </button>
                     <form className="formulario-pesquisa" action="/search" style={{

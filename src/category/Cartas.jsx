@@ -76,12 +76,39 @@ const Cartas = () => {
                         </a>
                     </h1>
                     <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
+                        {menuAberto && (
+                            <form className="formulario-pesquisa" action="/search" style={{
+                                width: '100%',
+                                margin: '10px 0',
+                                padding: '0 20px'
+                            }}>
+                                <input 
+                                    required="required" 
+                                    name="q" 
+                                    placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                                    className="input-pesquisa" 
+                                    type="text"
+                                    style={{ width: '100%' }}
+                                />
+                                <button className="botao-pesquisa" aria-label="Search">
+                                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                            </form>
+                        )}
                         <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
                         <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
                         <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
                     </nav>
-                    <button className="hamburguer" onClick={toggleMenu}>
+                    <button className="hamburguer" onClick={toggleMenu} style={{
+                        position: menuAberto ? 'fixed' : 'static',
+                        top: menuAberto ? '195px' : 'auto',
+                        right: menuAberto ? '20px' : 'auto',
+                        zIndex: menuAberto ? 100000 : 'auto'
+                    }}>
                         <i className="fas fa-bars"></i>
                     </button>
                     <form className="formulario-pesquisa" action="/search">

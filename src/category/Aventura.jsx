@@ -22,6 +22,7 @@ const Aventura = () => {
     const [produtos, setProdutos] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
@@ -65,6 +66,17 @@ const Aventura = () => {
  
     return (
         <div className="app">
+            {isSearchFocused && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                    zIndex: 999
+                }} onClick={() => setIsSearchFocused(false)} />
+            )}
             <head>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
             </head>
@@ -103,11 +115,30 @@ const Aventura = () => {
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
                         <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
                     </nav>
-                    <button className="hamburguer" onClick={toggleMenu}>
+                    <button className="hamburguer" onClick={toggleMenu} style={{
+                        position: menuAberto ? 'fixed' : 'static',
+                        top: menuAberto ? '195px' : 'auto',
+                        right: menuAberto ? '20px' : 'auto',
+                        zIndex: menuAberto ? 100000 : 'auto'
+                    }}>
                         <i className="fas fa-bars"></i>
                     </button>
-                    <form className="formulario-pesquisa" action="/search">
-                        <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
+                    <form className="formulario-pesquisa" action="/search" style={{
+                        position: isSearchFocused ? 'relative' : 'static',
+                        zIndex: isSearchFocused ? 1000 : 'auto',
+                        boxShadow: isSearchFocused ? '0 4px 20px rgba(0,0,0,0.15)' : 'none',
+                        borderRadius: isSearchFocused ? '8px' : 'initial',
+                        backgroundColor: isSearchFocused ? 'white' : 'transparent'
+                    }}>
+                        <input 
+                            required="required" 
+                            name="q" 
+                            placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                            className="input-pesquisa" 
+                            type="text"
+                            onFocus={() => setIsSearchFocused(true)}
+                            onBlur={() => setIsSearchFocused(false)}
+                        />
                         <button className="botao-pesquisa" aria-label="Search">
                             <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                                 <circle cx="11" cy="11" r="8"></circle>

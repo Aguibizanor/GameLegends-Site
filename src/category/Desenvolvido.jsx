@@ -20,11 +20,22 @@ const Desenvolvido = () => {
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
     const [produtos, setProdutos] = useState([]);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
     const [formData, setFormData] = useState({
         email: "",
         usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
       });
  
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+            setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     useEffect(() => {
         // Simulação de busca de dados do banco de dados
         fetch('/api/produtos?status=desenvolvido')
@@ -168,16 +179,37 @@ const Desenvolvido = () => {
                 </section>
                 <section className="games-section" style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '50px',
-                    padding: '80px',
+                    gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+                    gap: '40px',
+                    padding: '50px',
                     justifyItems: 'center',
                     alignItems: 'center',
-                    maxWidth: '1400px',
-                    margin: '0 auto'
+                    maxWidth: '1200px',
+                    margin: '50px auto',
+                    backgroundColor: 'transparent',
+                    borderRadius: '20px'
                 }}>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={galho} alt="Inmost" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={galho} alt="Inmost" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Inmost</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -189,8 +221,27 @@ const Desenvolvido = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={gladiator} alt="Gladiator" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={gladiator} alt="Gladiator" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Gladiator</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -202,8 +253,27 @@ const Desenvolvido = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={pombo} alt="Subida de Pomba" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={pombo} alt="Subida de Pomba" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Subida de Pomba</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -215,8 +285,27 @@ const Desenvolvido = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={img06} alt="Face Down" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={img06} alt="Face Down" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Face Down</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -228,8 +317,27 @@ const Desenvolvido = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={salada} alt="They Are Here" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={salada} alt="They Are Here" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">They Are Here</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -241,8 +349,27 @@ const Desenvolvido = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={mirror} alt="Pocket Mirror" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={mirror} alt="Pocket Mirror" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Pocket Mirror</a></div>
                         <button style={{
                             backgroundColor: '#90017F',

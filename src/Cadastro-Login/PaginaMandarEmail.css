@@ -155,11 +155,11 @@ body {
 .container {
   text-align: center;
   background: #fff;
-  padding: 40px;
+  padding: 30px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 800px;
-  max-width: 90%;
+  width: 600px;
+  max-width: 85%;
 }
 
 .W {

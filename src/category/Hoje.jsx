@@ -73,12 +73,39 @@ const Hoje = () => {
                         </a>
                     </h1>
                     <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
+                        {menuAberto && (
+                            <form className="formulario-pesquisa" action="/search" style={{
+                                width: '100%',
+                                margin: '10px 0',
+                                padding: '0 20px'
+                            }}>
+                                <input 
+                                    required="required" 
+                                    name="q" 
+                                    placeholder="Pesquisar Jogos, Tags ou Criadores" 
+                                    className="input-pesquisa" 
+                                    type="text"
+                                    style={{ width: '100%' }}
+                                />
+                                <button className="botao-pesquisa" aria-label="Search">
+                                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                            </form>
+                        )}
                         <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
                         <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
                         <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
                     </nav>
-                    <button className="hamburguer" onClick={toggleMenu}>
+                    <button className="hamburguer" onClick={toggleMenu} style={{
+                        position: menuAberto ? 'fixed' : 'static',
+                        top: menuAberto ? '195px' : 'auto',
+                        right: menuAberto ? '20px' : 'auto',
+                        zIndex: menuAberto ? 100000 : 'auto'
+                    }}>
                         <i className="fas fa-bars"></i>
                     </button>
                     <form className="formulario-pesquisa" action="/search">
@@ -176,8 +203,27 @@ const Hoje = () => {
                     backgroundColor: 'transparent',
                     borderRadius: '20px'
                 }}>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={gold} alt="Gold of skils" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={gold} alt="Gold of skils" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Gold of skils</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -189,8 +235,27 @@ const Hoje = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={self} alt="Self Redemption of mental" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={self} alt="Self Redemption of mental" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Self Redemption of mental</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -202,8 +267,27 @@ const Hoje = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={kiddo} alt="Kiddo" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={kiddo} alt="Kiddo" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Kiddo</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -215,8 +299,27 @@ const Hoje = () => {
                             cursor: 'pointer'
                         }}>Veja Mais</button>
                     </div>
-                    <div className="game-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <img src={kama} alt="Kamaeru" style={{ width: '280px', height: '280px', objectFit: 'cover', borderRadius: '15px' }} />
+                    <div className="game-card" style={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#e6d7ff',
+                        padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
+                        borderRadius: '15px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-10px)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                    }}>
+                        <img src={kama} alt="Kamaeru" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="">Kamaeru</a></div>
                         <button style={{
                             backgroundColor: '#90017F',

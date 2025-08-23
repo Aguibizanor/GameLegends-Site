@@ -322,11 +322,8 @@ body {
 
   .hamburguer {
       display: block;
-  }
-
-  .navegacao.ativo ~ .hamburguer {
       position: fixed;
-      top: 195px;
+      top: 20px;
       right: 20px;
       z-index: 100000;
   }
