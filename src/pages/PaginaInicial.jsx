@@ -92,12 +92,7 @@ const PaginaInicial = () => {
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
                         <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
                     </nav>
-                    <button className="hamburguer" onClick={toggleMenu} style={{
-            position: menuAberto ? 'fixed' : 'static',
-            top: menuAberto ? '195px' : 'auto',
-            right: menuAberto ? '20px' : 'auto',
-            zIndex: menuAberto ? 100000 : 'auto'
-          }}>
+                    <button className="hamburguer" onClick={toggleMenu}>
                         <i className="fas fa-bars"></i>
                     </button>
                     <form className="formulario-pesquisa" action="/search">

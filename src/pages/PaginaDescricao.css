@@ -1,10 +1,11 @@
+descrição css
 /* Reset CSS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -13,13 +14,18 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
+ 
+.gradient-bg {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #90017f 0%, #4b0082 40%, #3a73c7 100%);
+}
+ 
 .GIT {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-
+ 
 /* Header */
 .cabecalho {
   background: #90017F;
@@ -30,24 +36,24 @@ body {
   top: 0;
   z-index: 1000;
 }
-
+ 
 .conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-
+ 
 .logo img {
   width: 120px;
 }
-
+ 
 .navegacao {
   display: flex;
   align-items: center;
   flex-direction: row;
 }
-
+ 
 .nav-item {
   display: flex;
   align-items: center;
@@ -59,15 +65,15 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .nav-item i {
   margin-right: 8px;
 }
-
+ 
 .nav-item:hover {
   background: #A0008D;
 }
-
+ 
 .hamburguer {
   display: none;
   background: none;
@@ -76,12 +82,12 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+ 
 .formulario-pesquisa {
   display: flex;
   align-items: center;
 }
-
+ 
 .input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -91,7 +97,7 @@ body {
   transition: width 0.3s ease;
   color: #000;
 }
-
+ 
 .botao-pesquisa {
   padding: 5px 10px;
   border: none;
@@ -100,12 +106,12 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
-
+ 
 .painel-usuario {
   display: flex;
   align-items: center;
 }
-
+ 
 .link-usuario {
   color: #fff;
   text-decoration: none;
@@ -115,11 +121,11 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .link-usuario:hover {
   background: #A0008D;
 }
-
+ 
 /* Game Profile Container */
 .game-profile-container {
   max-width: 1200px;
@@ -129,53 +135,53 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
-
+ 
 .game-profile-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+ 
 .main-content {
   width: 100%;
   max-width: 800px;
 }
-
+ 
 .main-game-img {
   width: 100%;
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
+ 
 .extra-images {
   display: flex;
   gap: 10px;
   overflow-x: auto;
   padding: 10px 0;
 }
-
+ 
 .extra-images img {
   flex: 0 0 150px;
   height: 100px;
   border-radius: 10px;
   cursor: pointer;
 }
-
+ 
 .description {
   margin-top: 20px;
 }
-
+ 
 .description h1 {
   font-size: 24px;
   color: #4b0082;
 }
-
+ 
 .description p {
   font-size: 18px;
   color: #333;
   margin-bottom: 15px;
 }
-
+ 
 .project-info {
   margin: 20px 0;
   padding: 15px;
@@ -183,12 +189,12 @@ body {
   border-radius: 8px;
   border-left: 4px solid #6b47dc;
 }
-
+ 
 .project-info p {
   margin: 8px 0;
   font-size: 16px;
 }
-
+ 
 .loading, .error {
   display: flex;
   justify-content: center;
@@ -197,30 +203,30 @@ body {
   font-size: 18px;
   color: #666;
 }
-
+ 
 .credits {
   margin-top: 20px;
 }
-
+ 
 .credits h3 {
   font-size: 18px;
   color: #4b0082;
 }
-
+ 
 .credits p {
   font-size: 16px;
   color: #333;
 }
-
+ 
 .credits a {
   color: #6b47dc;
   text-decoration: none;
 }
-
+ 
 .credits a:hover {
   text-decoration: underline;
 }
-
+ 
 .download-btn {
   margin-top: 10px;
   padding: 10px 20px;
@@ -232,11 +238,11 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
+ 
 .download-btn:hover {
   background-color: #5a39bc;
 }
-
+ 
 /* Modal de Imagem */
 .modal-imagem {
   display: flex;
@@ -251,14 +257,14 @@ body {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.9);
 }
-
+ 
 .modal-conteudo {
   margin: auto;
   display: block;
   width: 80%;
   max-width: 700px;
 }
-
+ 
 .fechar {
   position: absolute;
   top: 15px;
@@ -268,7 +274,7 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
-
+ 
 .anterior,
 .proxima {
   cursor: pointer;
@@ -284,20 +290,20 @@ body {
   border-radius: 3px;
   user-select: none;
 }
-
+ 
 .anterior {
   left: 0;
 }
-
+ 
 .proxima {
   right: 0;
 }
-
+ 
 .anterior:hover,
 .proxima:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
-
+ 
 /* Modal de Download */
 .modal-download {
   display: flex;
@@ -312,7 +318,7 @@ body {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.9);
 }
-
+ 
 .modal-download-content {
   background-color: #f4f4f4;
   margin: auto;
@@ -323,7 +329,7 @@ body {
   border-radius: 10px;
   text-align: center;
 }
-
+ 
 .modal-download-content .fechar {
   position: absolute;
   top: 10px;
@@ -332,29 +338,29 @@ body {
   font-size: 35px;
   font-weight: bold;
 }
-
+ 
 .modal-download-content .fechar:hover,
 .modal-download-content .fechar:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-
+ 
 .modal-download-content h2 {
   margin-bottom: 20px;
 }
-
+ 
 .modal-download-content p {
   margin-bottom: 20px;
 }
-
+ 
 .download-options {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
 }
-
+ 
 .download-option {
   padding: 10px 20px;
   font-size: 16px;
@@ -365,11 +371,11 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
+ 
 .download-option:hover {
   background-color: #5a39bc;
 }
-
+ 
 /* Responsividade */
 @media (max-width: 768px) {
   .navegacao {
@@ -382,66 +388,66 @@ body {
     left: 0;
     z-index: 1000;
   }
-
+ 
   .nav-item {
     width: 100%;
     justify-content: center;
     margin: 0;
     border-bottom: 1px solid #A0008D;
   }
-
+ 
   .navegacao.ativo {
     display: flex;
   }
-
+ 
   .hamburguer {
     display: block;
   }
-
+ 
   .formulario-pesquisa {
     width: 100%;
     margin-top: 10px;
   }
-
+ 
   .input-pesquisa {
     width: 100%;
   }
-
+ 
   .game-profile-content {
     padding: 0 10px;
   }
-
+ 
   .extra-images {
     flex-direction: column;
     align-items: center;
   }
-
+ 
   .extra-images img {
     width: 100%;
     height: auto;
   }
-
+ 
   .description h1 {
     margin-top: 10px;
   }
-
+ 
   .seta {
     position: static;
     margin-top: 20px;
     width: 50px;
   }
-
+ 
   .credits {
     flex-direction: column;
     align-items: flex-start;
   }
-
+ 
   .download-btn {
     margin-left: 0;
     margin-top: 10px;
   }
 }
-
+ 
 /* Rodapé */
 .rodape {
   background: #90017F;
@@ -450,7 +456,7 @@ body {
   text-align: center;
   margin-top: auto;
 }
-
+ 
 .conteudo-rodape {
   display: flex;
   justify-content: space-around;
@@ -460,49 +466,68 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
+ 
 .secao-rodape {
   flex: 1;
   padding: 10px;
   min-width: 200px;
 }
-
+ 
 .logo-rodape {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+ 
 .contato-rodape span {
   display: block;
   margin: 10px 0;
 }
-
+ 
 .redes-sociais a {
   margin: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
+ 
 .links ul {
   list-style: none;
   padding: 0;
 }
-
+ 
 .links ul a {
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
   display: block;
 }
-
+ 
 .links ul a:hover {
   color: #A0008D;
 }
-
+ 
 .rodape-inferior {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
+.credits-section {
+  margin-top: 20px;
+}
+ 
+.credits-section p {
+  font-size: 16px;
+  color: #333;
+  margin: 8px 0;
+}
+ 
+.credits-section a {
+  color: #6b47dc;
+  text-decoration: none;
+}
+ 
+.credits-section a:hover {
+  text-decoration: underline;
+}
+ 

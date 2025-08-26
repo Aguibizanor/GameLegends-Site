@@ -1,44 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import './PaginaDescricao.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
-
+ 
+// Imagens do projeto Happy Cat Tavern
+import happy from '../assets/happy.png';
+ 
 const PaginaDescricao = () => {
-  const { id } = useParams();
   const [menuAberto, setMenuAberto] = useState(false);
   const [modalImagemAberto, setModalImagemAberto] = useState(false);
   const [imagemAtual, setImagemAtual] = useState(0);
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
-  const [projeto, setProjeto] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     usuario: ""
   });
-
-  const imagens = projeto ? [`http://localhost:8080/projetos/${projeto.id}/foto`] : [];
-
+ 
+  // Imagens do carrossel
+  const imagens = [happy, happy, happy, happy];
+ 
+  // Dados do projeto fixos para o exemplo
+  const projeto = {
+    nomeProjeto: "Happy Cat Tavern: Typing Challenge",
+    descricao: "Batou quer beber o máximo de milkshakes que puder enquanto os clientes da taverna o animam. Cada palavra é um milkshake para Batou beber. Digite com rapidez e precisão para ganhar pontos e desbloquear conquistas!",
+    objetivo: "O jogador deve digitar palavras que aparecem na tela com rapidez e precisão. Cada palavra digitada corretamente conta como um 'milixinale' que Balsou bebe. O objetivo é acumular pontos bebendo o máximo possível.",
+    progressao: "O jogo inclui um sistema de pontuação e conquistas (achievements) para serem desbloqueadas, incentivando a rejogabilidade e a melhoria das habilidades de digitação.",
+    genero: "Typing Challenge / Casual",
+    tecnologias: "Unity",
+    dataInicio: "2024",
+    statusProjeto: "Concluído",
+    estetica: "Temática de fantasia casual com estética animada e fofinha (devido ao nome 'Happy Cat' e à arte de Miyasuki)"
+  };
+ 
   useEffect(() => {
-    // Busca dados do projeto específico
-    if (id) {
-      fetch(`http://localhost:8080/projetos/${id}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Projeto não encontrado');
-          }
-          return response.json();
-        })
-        .then(data => {
-          setProjeto(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error('Erro ao carregar projeto:', error);
-          setLoading(false);
-        });
-    }
-
     // Verifica se o usuário está logado
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
     if (usuarioData) {
@@ -47,67 +42,69 @@ const PaginaDescricao = () => {
         usuario: usuarioData.usuario
       });
     }
-  }, [id]);
-
-  const toggleMenu = () => {
-    setMenuAberto(!menuAberto);
-  };
-
-  const abrirModalImagem = (index) => {
-    setImagemAtual(index);
-    setModalImagemAberto(true);
-  };
-
-  const fecharModalImagem = () => {
-    setModalImagemAberto(false);
-  };
-
-  const imagemAnterior = () => {
-    setImagemAtual((imagemAtual - 1 + imagens.length) % imagens.length);
-  };
-
-  const proximaImagem = () => {
-    setImagemAtual((imagemAtual + 1) % imagens.length);
-  };
-
-  const abrirModalDownload = () => {
-    setModalDownloadAberto(true);
-  };
-
-  const fecharModalDownload = () => {
-    setModalDownloadAberto(false);
-  };
-
-  if (loading) {
-    return <div className="loading">Carregando...</div>;
-  }
-
-  if (!projeto) {
-    return <div className="error">Projeto não encontrado</div>;
-  }
-
+  }, []);
+ 
+  const toggleMenu = () => setMenuAberto(!menuAberto);
+  const abrirModalImagem = (index) => { setImagemAtual(index); setModalImagemAberto(true); };
+  const fecharModalImagem = () => setModalImagemAberto(false);
+  const imagemAnterior = () => setImagemAtual((imagemAtual - 1 + imagens.length) % imagens.length);
+  const proximaImagem = () => setImagemAtual((imagemAtual + 1) % imagens.length);
+  const abrirModalDownload = () => setModalDownloadAberto(true);
+  const fecharModalDownload = () => setModalDownloadAberto(false);
+ 
   return (
-    <div className="GIT">
+    <div className="GIT gradient-bg">
+      <head>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+      </head>
       <div className="app7">
-        <head>
-          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-        </head>
         <header className="cabecalho">
           <div className="conteudo-cabecalho">
-            <div className="logo"><img src={Logo} alt="Logo" /></div>
+            <h1 className="logo">
+              <a href="/" title="Game Legends">
+                <img src={Logo} alt="Logo do Game Legends" />
+              </a>
+            </h1>
             <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-              <Link to={'/Index'} className="nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
-              <Link to={'/'} className="nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
-              <Link to={'/Que'} className="nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
-              <Link to={'/Suporte'} className="nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
+              {menuAberto && (
+                <form className="formulario-pesquisa" action="/search" style={{
+                  width: '100%',
+                  margin: '10px 0',
+                  padding: '0 20px'
+                }}>
+                  <input
+                    required="required"
+                    name="q"
+                    placeholder="Pesquisar Jogos, Tags ou Criadores"
+                    className="input-pesquisa"
+                    type="text"
+                    style={{ width: '100%' }}
+                  />
+                  <button className="botao-pesquisa" aria-label="Search">
+                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                  </button>
+                </form>
+              )}
+              <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
+              <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
+              <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
+              <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
             </nav>
-            <button className="hamburguer" onClick={toggleMenu}>
+            <button className="hamburguer" onClick={toggleMenu} style={{
+              position: menuAberto ? 'fixed' : 'static',
+              top: menuAberto ? '195px' : 'auto',
+              right: menuAberto ? '20px' : 'auto',
+              zIndex: menuAberto ? 100000 : 'auto'
+            }}>
               <i className="fas fa-bars"></i>
             </button>
-            <form className="formulario-pesquisa">
+            <form className="formulario-pesquisa" action="/search">
               <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
-              <button className="botao-pesquisa" aria-label="Pesquisar">
-                <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+              <button className="botao-pesquisa" aria-label="Search">
+                <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
@@ -115,15 +112,13 @@ const PaginaDescricao = () => {
             </form>
             <div className="painel-usuario">
               {formData.usuario ? (
-                // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
                 <Link
-                  to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
+                  to={`/Perfil?tipo=${formData.usuario}`}
                   className="link-usuario"
                 >
                   <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
                 </Link>
               ) : (
-                // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
                 <>
                   <Link to={'/Login'} className="link-usuario">Login</Link>
                   <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
@@ -136,28 +131,19 @@ const PaginaDescricao = () => {
       <div className="game-profile-container">
         <div className="game-profile-content">
           <div className="main-content">
-            <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt={projeto.nomeProjeto} className="main-game-img" />
+            <img src={happy} alt={projeto.nomeProjeto} className="main-game-img" />
             <div className="extra-images">
-              {imagens.map((imagem, index) => (
-                <img
-                  key={index}
-                  src={imagem}
-                  alt={`${projeto.nomeProjeto} ${index + 1}`}
-                  className="extra-img"
-                  onClick={() => abrirModalImagem(index)}
-                />
-              ))}
+              <img src={happy} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
+              <img src={happy} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
+              <img src={happy} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
             </div>
             <div className="description">
               <h1>{projeto.nomeProjeto}</h1>
               <p>{projeto.descricao}</p>
-              <div className="project-info">
-                <p><strong>Gênero:</strong> {projeto.genero}</p>
-                <p><strong>Tecnologias:</strong> {projeto.tecnologias}</p>
-                <p><strong>Data de Início:</strong> {projeto.dataInicio}</p>
-                {projeto.statusProjeto && <p><strong>Status:</strong> {projeto.statusProjeto}</p>}
-              </div>
-              <div className="credits">
+              <div className="credits-section">
+                <p><strong>Créditos:</strong></p>
+                <p><strong>Artista:</strong> Miyasuki (Twitter / Etsy)</p>
+                <p><strong>Programador:</strong> OnyxHeart (Twitter)</p>
                 <button className="download-btn" onClick={abrirModalDownload}>Download</button>
               </div>
             </div>
@@ -182,47 +168,101 @@ const PaginaDescricao = () => {
               <button className="download-option">Windows</button>
               <button className="download-option">Linux</button>
               <button className="download-option">Android</button>
-              <button className="download-option">iOs</button>
+              <button className="download-option">iOS</button>
             </div>
           </div>
         </div>
       )}
       <Link to={'/'}><img src={esquerda} alt="Seta" className="seta" /></Link>
-      <footer className="rodape">
-        <div className="conteudo-rodape">
-          <div className="secao-rodape sobre">
-            <h1 className="logo-rodape"><span>Game</span>Legends</h1>
-            <p>
+      <footer style={{ backgroundColor: '#90017F', padding: '30px 0', marginTop: '50px' }}>
+        <div style={{ textAlign: 'center', color: 'white' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <h2 style={{ fontSize: '24px', margin: '0 0 15px 0' }}>
+              <span style={{ fontWeight: 'bold' }}>Game</span>Legends
+            </h2>
+            <p style={{ fontSize: '14px', margin: '0 0 20px 0', color: '#ffffff90' }}>
               Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
             </p>
-            <div className="contato-rodape">
-              <span><i className="fas fa-phone"></i> &nbsp; (99) 99999-9999</span>
-              <span><i className="fas fa-envelope"></i> &nbsp; info@gamelegends.com</span>
-            </div>
-            <div className="redes-sociais">
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+         
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '30px',
+            marginBottom: '20px',
+            flexWrap: 'wrap',
+            fontSize: '14px'
+          }}>
+            <span style={{ color: '#ffffff70' }}>
+              <i className="fas fa-phone" style={{ marginRight: '5px' }}></i>
+              (99) 99999-9999
+            </span>
+            <span style={{ color: '#ffffff70' }}>
+              <i className="fas fa-envelope" style={{ marginRight: '5px' }}></i>
+              info@gamelegends.com
+            </span>
+            <Link to="/Privacidade" style={{ color: '#ffffff70', textDecoration: 'underline' }}>
+              Política de Privacidade
+            </Link>
+          </div>
+         
+          <div style={{ marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '16px', marginBottom: '15px', color: 'white' }}>Links Rápidos</h3>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '25px',
+              flexWrap: 'wrap',
+              fontSize: '14px'
+            }}>
+              <Link to="/" style={{ color: '#ffffff70', textDecoration: 'none' }}>Games</Link>
+              <Link to="/Que" style={{ color: '#ffffff70', textDecoration: 'none' }}>Sobre</Link>
+              <Link to="/Suporte" style={{ color: '#ffffff70', textDecoration: 'none' }}>Suporte</Link>
+              <Link to="/Cadastro" style={{ color: '#ffffff70', textDecoration: 'none' }}>Registre-se</Link>
+              <Link to="/Login" style={{ color: '#ffffff70', textDecoration: 'none' }}>Login</Link>
             </div>
           </div>
-          <div className="secao-rodape links">
-            <h2>Links Rápidos</h2>
-            <ul>
-              <a href="#"><li>Eventos</li></a>
-              <a href="#"><li>Equipe</li></a>
-              <a href="#"><li>Missão</li></a>
-              <a href="#"><li>Serviços</li></a>
-              <a href="#"><li>Afiliados</li></a>
-            </ul>
+         
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '20px',
+            marginBottom: '20px'
+          }}>
+            <a href="https://www.facebook.com/profile.php?id=61578797307500"
+               target="_blank"
+               rel="noopener noreferrer"
+               style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/game._legends/"
+               target="_blank"
+               rel="noopener noreferrer"
+               style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="#" style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="#" style={{ color: 'white', fontSize: '20px' }}>
+              <i className="fab fa-linkedin"></i>
+            </a>
           </div>
-        </div>
-        <div className="rodape-inferior">
-          &copy; gamelegends.com | Feito pelo time do Game Legends 
+         
+          <div style={{
+            borderTop: '1px solid rgba(255,255,255,0.2)',
+            paddingTop: '15px',
+            fontSize: '13px',
+            color: '#ffffff70'
+          }}>
+            © 2024 gamelegends.com | Feito pelo time do Game Legends
+          </div>
         </div>
       </footer>
     </div>
   );
 };
-
+ 
 export default PaginaDescricao;
+ 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./PaginaSuporte.css";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.site.tcc.png";
-
+ 
 // Componente para cada pergunta
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ const FAQItem = ({ question, answer }) => {
     </div>
   );
 };
-
+ 
 // Componente principal da página
 const PaginaSuporte = () => {
   const [menuAberto, setMenuAberto] = useState(false);
@@ -24,7 +24,7 @@ const PaginaSuporte = () => {
     email: "",
     usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
   });
-
+ 
   const faqData = [
     {
       question: "Como posso visualizar ou alterar minhas configurações de conta?",
@@ -47,7 +47,7 @@ const PaginaSuporte = () => {
       answer: "Na página de cada jogo, você encontrará uma seção de avaliações onde poderá escrever sua opinião."
     },
   ];
-
+ 
   useEffect(() => {
     // Carregar dados do usuário ao carregar a página
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
@@ -58,11 +58,11 @@ const PaginaSuporte = () => {
       });
     }
   }, []);
-
+ 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
-
+ 
   return (
     <div className="app">
       <head>
@@ -213,5 +213,6 @@ const PaginaSuporte = () => {
     </div>
   );
 };
-
+ 
 export default PaginaSuporte;
+ 

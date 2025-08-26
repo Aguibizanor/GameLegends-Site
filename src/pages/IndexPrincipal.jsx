@@ -128,8 +128,8 @@ const IndexPrincipal = () => {
           </nav>
           <button className="hamburguer" onClick={toggleMenu} style={{
             position: menuAberto ? 'fixed' : 'static',
-            top: menuAberto ? '195px' : 'auto',
-            right: menuAberto ? '20px' : 'auto',
+            top: menuAberto ? '10px' : 'auto',
+            right: menuAberto ? '280px' : 'auto',
             zIndex: menuAberto ? 100000 : 'auto'
           }}>
             <i className="fas fa-bars"></i>
