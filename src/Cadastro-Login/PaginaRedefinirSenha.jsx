@@ -7,9 +7,28 @@ import esquerda from "../assets/esquerda.png";
  
 const PaginaRedefinirSenha = () => {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
  
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!senha.trim() || !confirmarSenha.trim()) {
+      alert('Por favor, preencha todos os campos de senha.');
+      return;
+    }
+    if (senha !== confirmarSenha) {
+      alert('As senhas não coincidem. Tente novamente.');
+      return;
+    }
+    if (senha.length < 6) {
+      alert('A senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
+    window.location.href = '/Login';
   };
  
   return (
@@ -60,12 +79,26 @@ const PaginaRedefinirSenha = () => {
                   <img src={mario} alt="Pixel art character" className="pagina-redefinir-senha-character-icon3" />
                 </div>
                 <div className="pagina-redefinir-senha-form-content">
-                  <form className="pagina-redefinir-senha-kaka">
+                  <form className="pagina-redefinir-senha-kaka" onSubmit={handleSubmit}>
                     <label>Senha:</label>
-                    <input type="password" required className="pagina-redefinir-senha-mumu" />
+                    <input
+                      type="password"
+                      required
+                      className="pagina-redefinir-senha-mumu"
+                      value={senha}
+                      onChange={(e) => setSenha(e.target.value)}
+                      placeholder="Digite sua nova senha"
+                    />
                     <label>Confirme senha:</label>
-                    <input type="password" required className="pagina-redefinir-senha-mumu" />
-                    <Link to={'/Login'}><button type="submit" className="pagina-redefinir-senha-frufru">CONFIRMAR</button></Link>
+                    <input
+                      type="password"
+                      required
+                      className="pagina-redefinir-senha-mumu"
+                      value={confirmarSenha}
+                      onChange={(e) => setConfirmarSenha(e.target.value)}
+                      placeholder="Confirme sua nova senha"
+                    />
+                    <button type="submit" className="pagina-redefinir-senha-frufru">CONFIRMAR</button>
                   </form>
                   <p className="pagina-redefinir-senha-baba">
                     Lembrou a senha? <Link to={'/Login'}><span className="text-blue-500">Faça login</span></Link>

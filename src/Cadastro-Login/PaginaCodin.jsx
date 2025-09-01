@@ -7,9 +7,83 @@ import esquerda from "../assets/esquerda.png";
  
 const PaginaCodin = () => {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [codigo, setCodigo] = useState(['', '', '', '', '', '']);
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+ 
+  React.useEffect(() => {
+    // Recuperar email do localStorage
+    const savedEmail = localStorage.getItem('resetEmail');
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, []);
  
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const codigoCompleto = codigo.join('');
+    if (codigoCompleto.length !== 6) {
+      alert('Por favor, insira o código completo de 6 dígitos.');
+      return;
+    }
+   
+    if (!novaSenha || novaSenha.length < 6) {
+      alert('A nova senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
+   
+    if (novaSenha !== confirmarSenha) {
+      alert('As senhas não coincidem.');
+      return;
+    }
+   
+    setLoading(true);
+    setMessage('');
+   
+    try {
+      const response = await fetch('http://localhost:8080/login/redefinir-senha/confirmar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          codigo: codigoCompleto,
+          novaSenha: novaSenha
+        })
+      });
+     
+      const result = await response.text();
+     
+      if (response.ok) {
+        setMessage('✅ Senha alterada com sucesso!');
+        localStorage.removeItem('resetEmail');
+        setTimeout(() => {
+          window.location.href = '/Login';
+        }, 2000);
+      } else {
+        setMessage('❌ ' + result);
+      }
+    } catch (error) {
+      setMessage('❌ Erro de conexão com o servidor');
+    } finally {
+      setLoading(false);
+    }
+  };
+ 
+  const handleInputChange = (index, value) => {
+    if (value.length <= 1) {
+      const newCodigo = [...codigo];
+      newCodigo[index] = value;
+      setCodigo(newCodigo);
+    }
   };
  
   return (
@@ -60,16 +134,62 @@ const PaginaCodin = () => {
                   <img src={sonic} alt="Pixel art character" className="character-icon1" />
                 </div>
                 <div className="form-content">
-                  <form className="Form">
+                  <form className="Form" onSubmit={handleSubmit}>
                     <div className="code-inputs">
-                      <input type="text" maxLength="1" required />
-                      <input type="text" maxLength="1" required />
-                      <input type="text" maxLength="1" required />
-                      <input type="text" maxLength="1" required />
-                      <input type="text" maxLength="1" required />
-                      <input type="text" maxLength="1" required />
+                      {codigo.map((digit, index) => (
+                        <input
+                          key={index}
+                          type="text"
+                          maxLength="1"
+                          required
+                          value={digit}
+                          onChange={(e) => handleInputChange(index, e.target.value)}
+                        />
+                      ))}
                     </div>
-                    <Link to={'/RedefinirSenha'}><button type="submit" className="botãoconfirmar">CONFIRMAR</button></Link>
+                    <input
+                      type="password"
+                      placeholder="Nova senha (mínimo 6 caracteres)"
+                      value={novaSenha}
+                      onChange={(e) => setNovaSenha(e.target.value)}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        margin: '10px 0',
+                        border: '1px solid #ddd',
+                        borderRadius: '5px'
+                      }}
+                    />
+                    <input
+                      type="password"
+                      placeholder="Confirmar nova senha"
+                      value={confirmarSenha}
+                      onChange={(e) => setConfirmarSenha(e.target.value)}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        margin: '10px 0',
+                        border: '1px solid #ddd',
+                        borderRadius: '5px'
+                      }}
+                    />
+                    <button type="submit" className="botãoconfirmar" disabled={loading}>
+                      {loading ? 'PROCESSANDO...' : 'CONFIRMAR'}
+                    </button>
+                    {message && (
+                      <div style={{
+                        marginTop: '15px',
+                        padding: '10px',
+                        borderRadius: '5px',
+                        backgroundColor: message.includes('✅') ? '#d4edda' : '#f8d7da',
+                        color: message.includes('✅') ? '#155724' : '#721c24',
+                        border: message.includes('✅') ? '1px solid #c3e6cb' : '1px solid #f5c6cb'
+                      }}>
+                        {message}
+                      </div>
+                    )}
                   </form>
                   <p className="Pe">
                     Lembrou a senha? <Link to={'/Login'}><span className="text-blue-500">Faça login</span></Link>

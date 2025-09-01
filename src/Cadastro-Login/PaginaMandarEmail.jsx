@@ -6,9 +6,51 @@ import viva from "../assets/viva.png";
  
 const PaginaMandarEmail = () => {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
  
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      alert('Por favor, insira seu email para redefinir a senha.');
+      return;
+    }
+   
+    setLoading(true);
+    setMessage('');
+   
+    try {
+      const response = await fetch('http://localhost:8080/login/redefinir-senha/solicitar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email })
+      });
+     
+      const result = await response.text();
+     
+      if (response.ok) {
+        setMessage('✅ Código enviado para seu email!');
+        // Salvar email no localStorage para usar na próxima página
+        localStorage.setItem('resetEmail', email);
+        // Redirecionar após 2 segundos
+        setTimeout(() => {
+          window.location.href = '/MandarCodin';
+        }, 2000);
+      } else {
+        setMessage('❌ ' + result);
+      }
+    } catch (error) {
+      setMessage('❌ Erro de conexão com o servidor');
+    } finally {
+      setLoading(false);
+    }
   };
  
   return (
@@ -59,9 +101,30 @@ const PaginaMandarEmail = () => {
                   <img src={viva} alt="Pixel art character" className="character-icon2" />
                 </div>
                 <div className="form-content">
-                  <form className="For">
-                    <input type="email" required className="LOLO" />
-                    <Link to={'/MandarCodin'}><button type="submit" className="mandar_email">MANDE EMAIL</button></Link>
+                  <form className="For" onSubmit={handleSubmit}>
+                    <input
+                      type="email"
+                      required
+                      className="LOLO"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Digite seu email"
+                    />
+                    <button type="submit" className="mandar_email" disabled={loading}>
+                      {loading ? 'ENVIANDO...' : 'ENVIAR CÓDIGO'}
+                    </button>
+                    {message && (
+                      <div style={{
+                        marginTop: '15px',
+                        padding: '10px',
+                        borderRadius: '5px',
+                        backgroundColor: message.includes('✅') ? '#d4edda' : '#f8d7da',
+                        color: message.includes('✅') ? '#155724' : '#721c24',
+                        border: message.includes('✅') ? '1px solid #c3e6cb' : '1px solid #f5c6cb'
+                      }}>
+                        {message}
+                      </div>
+                    )}
                   </form>
                   <p className="KI">
                     Lembrou a senha? <Link to={'/Login'}><span className="text-blue-500">Faça login</span></Link>
