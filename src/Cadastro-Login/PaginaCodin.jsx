@@ -48,7 +48,7 @@ const PaginaCodin = () => {
     setMessage('');
    
     try {
-      const response = await fetch('http://localhost:8080/login/redefinir-senha/confirmar', {
+      const response = await fetch('http://localhost:8080/redefinir-senha/nova-senha', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -280,19 +280,19 @@ const IndexPrincipal = () => {
             <a href="https://www.facebook.com/profile.php?id=61578797307500"
                target="_blank"
                rel="noopener noreferrer"
-               style={{ color: 'white', fontSize: '20px' }}>
+               style={{ color: '#1877F2', fontSize: '20px' }}>
               <i className="fab fa-facebook"></i>
             </a>
             <a href="https://www.instagram.com/game._legends/"
                target="_blank"
                rel="noopener noreferrer"
-               style={{ color: 'white', fontSize: '20px' }}>
+               style={{ color: '#E4405F', fontSize: '20px' }}>
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" style={{ color: 'white', fontSize: '20px' }}>
+            <a href="#" style={{ color: '#1DA1F2', fontSize: '20px' }}>
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" style={{ color: 'white', fontSize: '20px' }}>
+            <a href="#" style={{ color: '#0A66C2', fontSize: '20px' }}>
               <i className="fab fa-linkedin"></i>
             </a>
           </div>

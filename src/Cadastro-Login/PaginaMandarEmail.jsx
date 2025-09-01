@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import './PaginaMandarEmail.css';
 import { Link } from "react-router-dom";
@@ -25,7 +26,7 @@ const PaginaMandarEmail = () => {
     setMessage('');
    
     try {
-      const response = await fetch('http://localhost:8080/login/redefinir-senha/solicitar', {
+      const response = await fetch('http://localhost:8080/redefinir-senha/enviar-codigo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -230,4 +231,5 @@ const PaginaMandarEmail = () => {
 };
  
 export default PaginaMandarEmail;
+ 
  
