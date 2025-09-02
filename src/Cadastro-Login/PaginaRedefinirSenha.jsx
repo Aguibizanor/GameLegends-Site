@@ -1,34 +1,57 @@
 import React, { useState } from 'react';
 import './PaginaRedefinirSenha.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.site.tcc.png";
 import mario from "../assets/mario.png";
 import esquerda from "../assets/esquerda.png";
+import RedefinirSenhaService from '../services/RedefinirSenhaService';
  
 const PaginaRedefinirSenha = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
  
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
   };
  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!senha.trim() || !confirmarSenha.trim()) {
-      alert('Por favor, preencha todos os campos de senha.');
+      setMessage('❌ Por favor, preencha todos os campos de senha.');
       return;
     }
     if (senha !== confirmarSenha) {
-      alert('As senhas não coincidem. Tente novamente.');
+      setMessage('❌ As senhas não coincidem.');
       return;
     }
     if (senha.length < 6) {
-      alert('A senha deve ter pelo menos 6 caracteres.');
+      setMessage('❌ A senha deve ter pelo menos 6 caracteres.');
       return;
     }
-    window.location.href = '/Login';
+ 
+    setLoading(true);
+    setMessage('');
+ 
+    try {
+      const sucesso = await RedefinirSenhaService.redefinirSenha(senha);
+     
+      if (sucesso) {
+        setMessage('✅ Senha redefinida com sucesso!');
+        setTimeout(() => {
+          navigate('/Login');
+        }, 2000);
+      } else {
+        setMessage('❌ Erro ao redefinir senha');
+      }
+    } catch (e) {
+      setMessage(`❌ Erro: ${e.toString()}`);
+    } finally {
+      setLoading(false);
+    }
   };
  
   return (
@@ -72,8 +95,8 @@ const PaginaRedefinirSenha = () => {
         <div className="pagina-redefinir-senha-oia">
           <div className="pagina-redefinir-senha-aaa1">
             <div className="pagina-redefinir-senha-container">
-              <h1 className="pagina-redefinir-senha-h">Redefinir Senha</h1>
-              <p className="pagina-redefinir-senha-vivi">Pronto! Agora coloque sua senha nova:</p>
+              <h1 className="pagina-redefinir-senha-h">Nova Senha</h1>
+              <p className="pagina-redefinir-senha-vivi">Agora você pode definir uma nova senha:</p>
               <div className="pagina-redefinir-senha-content">
                 <div className="pagina-redefinir-senha-side-image">
                   <img src={mario} alt="Pixel art character" className="pagina-redefinir-senha-character-icon3" />
@@ -98,17 +121,32 @@ const PaginaRedefinirSenha = () => {
                       onChange={(e) => setConfirmarSenha(e.target.value)}
                       placeholder="Confirme sua nova senha"
                     />
-                    <button type="submit" className="pagina-redefinir-senha-frufru">CONFIRMAR</button>
+                    <button type="submit" className="pagina-redefinir-senha-frufru" disabled={loading}>
+                      {loading ? 'REDEFININDO...' : 'REDEFINIR SENHA'}
+                    </button>
+                    {message && (
+                      <div style={{
+                        marginTop: '15px',
+                        padding: '10px',
+                        borderRadius: '5px',
+                        backgroundColor: message.includes('✅') ? '#d4edda' : '#f8d7da',
+                        color: message.includes('✅') ? '#155724' : '#721c24',
+                        border: message.includes('✅') ? '1px solid #c3e6cb' : '1px solid #f5c6cb'
+                      }}>
+                        {message}
+                      </div>
+                    )}
                   </form>
-                  <p className="pagina-redefinir-senha-baba">
-                    Lembrou a senha? <Link to={'/Login'}><span className="text-blue-500">Faça login</span></Link>
-                  </p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
+                    <Link to={'/MandarCodin'} style={{ color: '#666', textDecoration: 'none' }}>← Voltar</Link>
+                    <Link to={'/Login'} style={{ color: '#007bff', textDecoration: 'none' }}>Fazer login</Link>
+                  </div>
                 </div>
                 <div className="pagina-redefinir-senha-side-image">
                   <img src={mario} alt="Pixel art character" className="pagina-redefinir-senha-character-icon3" />
                 </div>
               </div>
-              <Link to={'/MandarCodin'}><img src={esquerda} alt="Seta" className="pagina-redefinir-senha-seta-log" /></Link>
+ 
             </div>
           </div>
         </div>
@@ -205,5 +243,4 @@ const PaginaRedefinirSenha = () => {
 };
  
 export default PaginaRedefinirSenha;
- 
  

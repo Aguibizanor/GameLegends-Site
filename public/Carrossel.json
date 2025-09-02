@@ -3,17 +3,17 @@
    "id": 1,
    "name": "Happy Cat Tavern",
    "descricao": "Ajude Batou a beber o máximo de milkshakes que puder enquanto os clientes da taverna o animam.",
-   "imagem":  "../src/assets/happy.png"
+   "imagem": "/src/assets/happy.png"
 },
 {
     "id": 2,
-    "name": "Coop  Catacombs: Roguelike",
+    "name": "Coop Catacombs: Roguelike",
     "descricao": "Nas masmorras, acompanhando em todos os momentos e poderá presenciar os rastros de outros aventureiros.",
-    "imagem":  "../src/assets/catacombs.png"
- },
+    "imagem": "/src/assets/catacombs.png"
+},
 {
    "id": 3,
    "name": "Subida de Pombo",
    "descricao": "Cuide do seu próprio pombo enquanto ele luta contra inimigos cada vez mais fortes e, no final, enfrente o lendário Deus Pombo.",
-   "imagem":  "../src/assets/pombo.png"
+   "imagem": "/src/assets/pombo.png"
 }]

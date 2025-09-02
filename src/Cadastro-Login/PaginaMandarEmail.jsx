@@ -1,18 +1,32 @@
-
 import React, { useState } from 'react';
 import './PaginaMandarEmail.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.site.tcc.png";
 import viva from "../assets/viva.png";
+import RedefinirSenhaService from '../services/RedefinirSenhaService';
  
 const PaginaMandarEmail = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
  
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+ 
+  const _isRealEmailProvider = (email) => {
+    if (!email.includes('@')) return false;
+   
+    const domain = email.toLowerCase().substring(email.indexOf('@'));
+    const realProviders = [
+      '@gmail.com', '@yahoo.com', '@hotmail.com', '@outlook.com',
+      '@live.com', '@icloud.com', '@protonmail.com', '@uol.com.br',
+      '@bol.com.br', '@terra.com.br'
+    ];
+   
+    return realProviders.includes(domain);
   };
  
   const handleSubmit = async (e) => {
@@ -26,29 +40,21 @@ const PaginaMandarEmail = () => {
     setMessage('');
    
     try {
-      const response = await fetch('http://localhost:8080/redefinir-senha/enviar-codigo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email })
-      });
+      const resultado = await RedefinirSenhaService.enviarCodigo(email);
      
-      const result = await response.text();
-     
-      if (response.ok) {
-        setMessage('✅ Código enviado para seu email!');
-        // Salvar email no localStorage para usar na próxima página
-        localStorage.setItem('resetEmail', email);
-        // Redirecionar após 2 segundos
+      if (resultado) {
+        const isReal = RedefinirSenhaService.isEmailReal;
+        const message = isReal
+          ? `📧 Código enviado para seu email real: ${email}`
+          : `💾 Código gerado para email cadastrado: ${email}`;
+         
+        setMessage(message);
         setTimeout(() => {
-          window.location.href = '/MandarCodin';
+          navigate('/MandarCodin');
         }, 2000);
-      } else {
-        setMessage('❌ ' + result);
       }
-    } catch (error) {
-      setMessage('❌ Erro de conexão com o servidor');
+    } catch (e) {
+      setMessage(`❌ Erro: ${e.toString().replace('Error: ', '')}`);
     } finally {
       setLoading(false);
     }
@@ -103,14 +109,28 @@ const PaginaMandarEmail = () => {
                 </div>
                 <div className="form-content">
                   <form className="For" onSubmit={handleSubmit}>
-                    <input
-                      type="email"
-                      required
-                      className="LOLO"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Digite seu email"
-                    />
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        type="email"
+                        required
+                        className="LOLO"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Digite seu email (Gmail, Yahoo, etc.)"
+                        style={{ paddingRight: email ? '40px' : '12px' }}
+                      />
+                      {email && (
+                        <span style={{
+                          position: 'absolute',
+                          right: '12px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          fontSize: '18px'
+                        }}>
+                          {_isRealEmailProvider(email) ? '📧' : '💾'}
+                        </span>
+                      )}
+                    </div>
                     <button type="submit" className="mandar_email" disabled={loading}>
                       {loading ? 'ENVIANDO...' : 'ENVIAR CÓDIGO'}
                     </button>
@@ -231,5 +251,4 @@ const PaginaMandarEmail = () => {
 };
  
 export default PaginaMandarEmail;
- 
  

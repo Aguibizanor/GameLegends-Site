@@ -1,81 +1,20 @@
 import React, { useState } from 'react';
 import './PaginaCodin.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import sonic from "../assets/sonic.png";
 import esquerda from "../assets/esquerda.png";
+import RedefinirSenhaService from '../services/RedefinirSenhaService';
  
 const PaginaCodin = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const [codigo, setCodigo] = useState(['', '', '', '', '', '']);
-  const [novaSenha, setNovaSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const [email, setEmail] = useState('');
- 
-  React.useEffect(() => {
-    // Recuperar email do localStorage
-    const savedEmail = localStorage.getItem('resetEmail');
-    if (savedEmail) {
-      setEmail(savedEmail);
-    }
-  }, []);
+  const navigate = useNavigate();
  
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
-  };
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const codigoCompleto = codigo.join('');
-    if (codigoCompleto.length !== 6) {
-      alert('Por favor, insira o código completo de 6 dígitos.');
-      return;
-    }
-   
-    if (!novaSenha || novaSenha.length < 6) {
-      alert('A nova senha deve ter pelo menos 6 caracteres.');
-      return;
-    }
-   
-    if (novaSenha !== confirmarSenha) {
-      alert('As senhas não coincidem.');
-      return;
-    }
-   
-    setLoading(true);
-    setMessage('');
-   
-    try {
-      const response = await fetch('http://localhost:8080/redefinir-senha/nova-senha', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          codigo: codigoCompleto,
-          novaSenha: novaSenha
-        })
-      });
-     
-      const result = await response.text();
-     
-      if (response.ok) {
-        setMessage('✅ Senha alterada com sucesso!');
-        localStorage.removeItem('resetEmail');
-        setTimeout(() => {
-          window.location.href = '/Login';
-        }, 2000);
-      } else {
-        setMessage('❌ ' + result);
-      }
-    } catch (error) {
-      setMessage('❌ Erro de conexão com o servidor');
-    } finally {
-      setLoading(false);
-    }
   };
  
   const handleInputChange = (index, value) => {
@@ -83,6 +22,41 @@ const PaginaCodin = () => {
       const newCodigo = [...codigo];
       newCodigo[index] = value;
       setCodigo(newCodigo);
+     
+      if (value.length === 1 && index < 5) {
+        const inputs = document.querySelectorAll('.code-inputs input');
+        inputs[index + 1].focus();
+      }
+    }
+  };
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const codigoCompleto = codigo.join('');
+    if (codigoCompleto.length !== 6) {
+      setMessage('❌ Digite o código completo de 6 dígitos');
+      return;
+    }
+   
+    setLoading(true);
+    setMessage('');
+   
+    try {
+      const valido = await RedefinirSenhaService.verificarCodigo(codigoCompleto);
+     
+      if (valido) {
+        setMessage('✅ Código verificado com sucesso!');
+        setTimeout(() => {
+          navigate('/RedefinirSenha');
+        }, 1000);
+      } else {
+        setMessage('❌ Código inválido ou expirado');
+        setCodigo(['', '', '', '', '', '']);
+      }
+    } catch (e) {
+      setMessage(`❌ Erro: ${e.toString()}`);
+    } finally {
+      setLoading(false);
     }
   };
  
@@ -110,7 +84,7 @@ const PaginaCodin = () => {
           <form className="formulario-pesquisa" action="/search">
             <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
             <button className="botao-pesquisa" aria-label="Search">
-              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
+              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
@@ -127,15 +101,32 @@ const PaginaCodin = () => {
         <div className="ÇUCA">
           <div className="AAA">
             <div className="container">
-              <h1 className="Titu">Redefinir Senha</h1>
-              <p className="OP">Coloque o código enviado para sua conta de Email:</p>
+              <h1 className="Titu">Verificar Código</h1>
+              <p className="OP">Digite o código de 6 dígitos:</p>
+              {RedefinirSenhaService.emailAtual && (
+                <div style={{
+                  padding: '12px',
+                  margin: '10px 0',
+                  backgroundColor: RedefinirSenhaService.isEmailReal ? '#d4edda' : '#cce7ff',
+                  border: `1px solid ${RedefinirSenhaService.isEmailReal ? '#c3e6cb' : '#b3d9ff'}`,
+                  borderRadius: '5px',
+                  fontSize: '13px',
+                  color: RedefinirSenhaService.isEmailReal ? '#155724' : '#004085'
+                }}>
+                  {RedefinirSenhaService.isEmailReal ? '📧' : '💾'}
+                  {RedefinirSenhaService.isEmailReal
+                    ? `Verifique sua caixa de entrada: ${RedefinirSenhaService.emailAtual}`
+                    : `Código salvo no banco para: ${RedefinirSenhaService.emailAtual}`
+                  }
+                </div>
+              )}
               <div className="content">
                 <div className="side-image">
                   <img src={sonic} alt="Pixel art character" className="character-icon1" />
                 </div>
                 <div className="form-content">
                   <form className="Form" onSubmit={handleSubmit}>
-                    <div className="code-inputs">
+                    <div className="code-inputs" style={{ display: 'flex', gap: '8px', justifyContent: 'center', margin: '20px 0' }}>
                       {codigo.map((digit, index) => (
                         <input
                           key={index}
@@ -144,39 +135,27 @@ const PaginaCodin = () => {
                           required
                           value={digit}
                           onChange={(e) => handleInputChange(index, e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Backspace' && !digit && index > 0) {
+                              const inputs = document.querySelectorAll('.code-inputs input');
+                              inputs[index - 1].focus();
+                            }
+                          }}
+                          style={{
+                            width: '50px',
+                            height: '60px',
+                            textAlign: 'center',
+                            fontSize: '24px',
+                            fontWeight: 'bold',
+                            border: '2px solid #90017F',
+                            borderRadius: '8px',
+                            color: '#90017F'
+                          }}
                         />
                       ))}
                     </div>
-                    <input
-                      type="password"
-                      placeholder="Nova senha (mínimo 6 caracteres)"
-                      value={novaSenha}
-                      onChange={(e) => setNovaSenha(e.target.value)}
-                      required
-                      style={{
-                        width: '100%',
-                        padding: '12px',
-                        margin: '10px 0',
-                        border: '1px solid #ddd',
-                        borderRadius: '5px'
-                      }}
-                    />
-                    <input
-                      type="password"
-                      placeholder="Confirmar nova senha"
-                      value={confirmarSenha}
-                      onChange={(e) => setConfirmarSenha(e.target.value)}
-                      required
-                      style={{
-                        width: '100%',
-                        padding: '12px',
-                        margin: '10px 0',
-                        border: '1px solid #ddd',
-                        borderRadius: '5px'
-                      }}
-                    />
                     <button type="submit" className="botãoconfirmar" disabled={loading}>
-                      {loading ? 'PROCESSANDO...' : 'CONFIRMAR'}
+                      {loading ? 'VERIFICANDO...' : 'VERIFICAR CÓDIGO'}
                     </button>
                     {message && (
                       <div style={{
@@ -191,9 +170,10 @@ const PaginaCodin = () => {
                       </div>
                     )}
                   </form>
-                  <p className="Pe">
-                    Lembrou a senha? <Link to={'/Login'}><span className="text-blue-500">Faça login</span></Link>
-                  </p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
+                    <Link to={'/MandarEmail'} style={{ color: '#666', textDecoration: 'none' }}>← Voltar</Link>
+                    <Link to={'/MandarEmail'} style={{ color: '#ff8c00', textDecoration: 'none' }}>Gerar novo código</Link>
+                  </div>
                 </div>
                 <div className="side-image">
                   <img src={sonic} alt="Pixel art character" className="character-icon1" />
@@ -296,4 +276,3 @@ const PaginaCodin = () => {
 };
  
 export default PaginaCodin;
- 
