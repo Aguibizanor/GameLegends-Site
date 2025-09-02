@@ -78,15 +78,6 @@ const PaginaInicial = () => {
                         </a>
                     </h1>
                     <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-                        <form className="formulario-pesquisa" action="/search">
-                            <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text" />
-                            <button className="botao-pesquisa" aria-label="Search">
-                                <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                </svg>
-                            </button>
-                        </form>
                         <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
                         <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
@@ -283,3 +274,4 @@ const PaginaInicial = () => {
 };
 
 export default PaginaInicial;
+

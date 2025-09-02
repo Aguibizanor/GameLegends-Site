@@ -88,39 +88,12 @@ const Aventura = () => {
                         </a>
                     </h1>
                     <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-                        {menuAberto && (
-                            <form className="formulario-pesquisa" action="/search" style={{
-                                width: '100%',
-                                margin: '10px 0',
-                                padding: '0 20px'
-                            }}>
-                                <input 
-                                    required="required" 
-                                    name="q" 
-                                    placeholder="Pesquisar Jogos, Tags ou Criadores" 
-                                    className="input-pesquisa" 
-                                    type="text"
-                                    style={{ width: '100%' }}
-                                />
-                                <button className="botao-pesquisa" aria-label="Search">
-                                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                    </svg>
-                                </button>
-                            </form>
-                        )}
                         <Link to={'/'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
                         <Link to={'/Inicial'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
                         <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
                         <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
                     </nav>
-                    <button className="hamburguer" onClick={toggleMenu} style={{
-                        position: menuAberto ? 'fixed' : 'static',
-                        top: menuAberto ? '195px' : 'auto',
-                        right: menuAberto ? '20px' : 'auto',
-                        zIndex: menuAberto ? 100000 : 'auto'
-                    }}>
+                    <button className="hamburguer" onClick={toggleMenu}>
                         <i className="fas fa-bars"></i>
                     </button>
                     <form className="formulario-pesquisa" action="/search" style={{
@@ -513,7 +486,9 @@ const Aventura = () => {
                  }}>
                 <i className="fab fa-instagram" style={{ color: 'white', fontSize: '20px' }}></i>
               </a>
-              <a href="#"
+              <a href="https://www.reddit.com/r/Game_Legends_jogos/s/GZVUlKiWg8"
+                 target="_blank"
+                 rel="noopener noreferrer"
                  style={{
                    backgroundColor: '#FF6B6B',
                    borderRadius: '50%',
@@ -524,7 +499,7 @@ const Aventura = () => {
                    justifyContent: 'center',
                    textDecoration: 'none'
                  }}>
-                <i className="fas fa-at" style={{ color: 'white', fontSize: '20px' }}></i>
+                <i className="fab fa-reddit" style={{ color: 'white', fontSize: '20px' }}></i>
               </a>
               <a href="#"
                  style={{
@@ -574,3 +549,4 @@ const Aventura = () => {
  
 export default Aventura;
  
+

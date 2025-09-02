@@ -461,7 +461,7 @@ const Windows = () => {
                  }}>
                 <i className="fab fa-instagram" style={{ color: 'white', fontSize: '20px' }}></i>
               </a>
-              <a href="#"
+              <a href="https://www.reddit.com/r/Game_Legends_jogos/s/GZVUlKiWg8" target="_blank" rel="noopener noreferrer"
                  style={{
                    backgroundColor: '#FF6B6B',
                    borderRadius: '50%',
@@ -471,8 +471,7 @@ const Windows = () => {
                    alignItems: 'center',
                    justifyContent: 'center',
                    textDecoration: 'none'
-                 }}>
-                <i className="fas fa-at" style={{ color: 'white', fontSize: '20px' }}></i>
+                 }}><i className="fab fa-reddit" style={{ color: 'white', fontSize: '20px' }}></i>
               </a>
               <a href="#"
                  style={{
@@ -522,3 +521,4 @@ const Windows = () => {
  
 export default Windows;
  
+
