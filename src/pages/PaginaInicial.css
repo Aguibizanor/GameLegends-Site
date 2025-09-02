@@ -22,8 +22,6 @@ body {
   color: #fff;
   padding: 10px 0;
   text-align: center;
-  position: sticky;
-  top: 0;
   z-index: 1000;
 }
 
@@ -322,17 +320,8 @@ body {
 
   .hamburguer {
       display: block;
-      position: fixed;
-      top: 20px;
-      right: 20px;
       z-index: 100000;
       transition: none;
-  }
-
-  .navegacao.ativo ~ .hamburguer {
-      position: fixed !important;
-      top: 20px !important;
-      right: 20px !important;
   }
 
   .formulario-pesquisa {
