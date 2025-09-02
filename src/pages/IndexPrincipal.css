@@ -263,7 +263,7 @@ body {
   height: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navegacao {
     display: none;
     flex-direction: column;
@@ -289,12 +289,33 @@ body {
     display: block;
   }
 
-  .intro-content {
-    flex-direction: column;
+  .intro {
+    display: block !important;
   }
 
-  .intro-text, .intro-image {
-    max-width: 100%;
+  .intro-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .intro-text {
+    flex: 1;
+    max-width: 60%;
+    text-align: left;
+  }
+
+  .intro-image {
+    flex: 0 0 35%;
+    max-width: 35%;
+    display: block !important;
+  }
+
+  .intro-image img {
+    display: block !important;
+    width: 100%;
+    height: auto;
+    max-width: 150px;
   }
 
   .intro h1 {
@@ -305,7 +326,68 @@ body {
     font-size: 1.2rem;
   }
 
+  .carrossel-section {
+    display: block !important;
+  }
+
   .carrossel-container {
-    display: none;
+    display: flex !important;
+  }
+
+  .carrossel {
+    height: 400px;
+    display: flex !important;
+  }
+
+  .carrossel .item {
+    min-width: 200px;
+    max-width: 280px;
+    display: flex !important;
+  }
+
+  .left, .right {
+    display: flex !important;
+  }
+
+  .left {
+    left: 5px;
+  }
+
+  .right {
+    right: 5px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .intro-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .intro-text {
+    flex: 1;
+    max-width: 55%;
+    text-align: left;
+  }
+
+  .intro-image {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  .intro-image img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+  }
+
+  .carrossel {
+    height: 450px;
+  }
+
+  .carrossel .item {
+    min-width: 220px;
+    max-width: 300px;
   }
 }

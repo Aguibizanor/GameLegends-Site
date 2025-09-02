@@ -32,8 +32,8 @@ import PaginaPrivacidade from "./PaginaPrivacidade";
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<IndexPrincipal />} />
-      <Route path="/Inicial" element={<PaginaInicial />} />
+      <Route path="/Index" element={<IndexPrincipal />} />
+      <Route path="/" element={<PaginaInicial />} />
       <Route path="/Sobrevivencia" element={<PaginaSobrevivencia />} />
       <Route path="/Login" element={<PaginaLogin />} />
       <Route path="/Cartas" element={<PaginaCartas />} />

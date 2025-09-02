@@ -82,7 +82,7 @@ const Terror = () => {
             <header className="cabecalho">
                 <div className="conteudo-cabecalho">
                     <h1 className="logo">
-                        <a href="/" title="Game Legends">
+                        <a href="/Index" title="Game Legends">
                             <img src={Logo} alt="Logo do Game Legends" />
                         </a>
                     </h1>

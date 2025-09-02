@@ -71,7 +71,7 @@ const PaginaSuporte = () => {
       <header className="cabecalho">
         <div className="conteudo-cabecalho">
           <h1 className="logo">
-            <Link to="/" title="Game Legends">
+            <Link to="/Index" title="Game Legends">
               <img src={Logo} alt="Logo do Game Legends" />
             </Link>
           </h1>

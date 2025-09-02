@@ -94,44 +94,17 @@ const IndexPrincipal = () => {
       <header className="cabecalho">
         <div className="conteudo-cabecalho">
           <h1 className="logo">
-            <a href="/" title="Game Legends">
+            <a href="/Index" title="Game Legends">
               <img src={Logo} alt="Logo do Game Legends" />
             </a>
           </h1>
           <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-            {menuAberto && (
-              <form className="formulario-pesquisa" action="/search" style={{
-                width: '100%',
-                margin: '10px 0',
-                padding: '0 20px'
-              }}>
-                <input 
-                  required="required" 
-                  name="q" 
-                  placeholder="Pesquisar Jogos, Tags ou Criadores" 
-                  className="input-pesquisa" 
-                  type="text"
-                  style={{ width: '100%' }}
-                />
-                <button className="botao-pesquisa" aria-label="Search">
-                  <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  </svg>
-                </button>
-              </form>
-            )}
             <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
             <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
             <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
             <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
           </nav>
-          <button className="hamburguer" onClick={toggleMenu} style={{
-            position: menuAberto ? 'fixed' : 'static',
-            top: menuAberto ? '10px' : 'auto',
-            right: menuAberto ? '280px' : 'auto',
-            zIndex: menuAberto ? 100000 : 'auto'
-          }}>
+          <button className="hamburguer" onClick={toggleMenu}>
             <i className="fas fa-bars"></i>
           </button>
           <form className="formulario-pesquisa" action="/search" style={{
@@ -178,132 +151,190 @@ const IndexPrincipal = () => {
       </header>
 
       <main className="principal">
-        <section className="intro">
-          <div className="intro-content">
-            <div className="intro-text">
-              <h1>EXPLORE O <br /> MUNDO<br /> DOS JOGOS</h1>
-              <p>Venha conhecer <br /> nossa plataforma <br />onde você poderá <br />encontrar jogos <br /> da nossa comunidade.</p>
-              <Link to={'/'}><button className="cta-button">Conheça <i className="fas fa-arrow-circle-right"></i></button></Link>
+        <div style={{ display: 'flex', flexDirection: (isMobile || isTablet) ? 'column' : 'row', gap: '20px' }}>
+          <section className="intro" style={{ order: isMobile ? 1 : 1, width: isMobile ? '100%' : 'auto' }}>
+            <div className="intro-content">
+              <div className="intro-text">
+                <h1>EXPLORE O <br /> MUNDO<br /> DOS JOGOS</h1>
+                <p>Venha conhecer <br /> nossa plataforma <br />onde você poderá <br />encontrar jogos <br /> da nossa comunidade.</p>
+                <Link to={'/'}><button className="cta-button">Conheça <i className="fas fa-arrow-circle-right"></i></button></Link>
+              </div>
+              <div className="intro-image shadowdograu">
+                <img src={shadowdograu} alt="Imagem de exemplo" />
+              </div>
             </div>
-            <div className="intro-image shadowdograu">
-              <img src={shadowdograu} alt="Imagem de exemplo" />
-            </div>
-          </div>
-        </section>
-        <section>
-          <div className="carrossel-container">
-            <button className="left" onClick={handleLeftClick}><img src={left} alt="esquerda" /></button>
-            <div className="carrossel" ref={carousel}>
-              {data.map((item, index) => {
-                const { id, name, descricao, imagem } = item;
-                const isFocused = index === focusedIndex;
-                return (
-                  <div
-                    className={`item ${isFocused ? 'focused' : ''}`}
-                    key={id}
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <div className="imag">
-                      <img src={imagem} alt={name} />
+          </section>
+          <section className="carrossel-section" style={{ order: isMobile ? 2 : 2, width: isMobile ? '100%' : 'auto' }}>
+            <div className="carrossel-container">
+              <button className="left" onClick={handleLeftClick}><img src={left} alt="esquerda" /></button>
+              <div className="carrossel" ref={carousel}>
+                {data.map((item, index) => {
+                  const { id, name, descricao, imagem } = item;
+                  const isFocused = index === focusedIndex;
+                  return (
+                    <div
+                      className={`item ${isFocused ? 'focused' : ''}`}
+                      key={id}
+                      onMouseEnter={() => handleMouseEnter(index)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <div className="imag">
+                        <img src={imagem} alt={name} />
+                      </div>
+                      <div className="info">
+                        <span className="name">{name}</span>
+                        <span className="texto">{descricao}</span>
+                        <Link to={`/Descricao/${id}`}><span className="butao">Veja Mais <i className="fas fa-arrow-circle-right"></i></span></Link>
+                      </div>
                     </div>
-                    <div className="info">
-                      <span className="name">{name}</span>
-                      <span className="texto">{descricao}</span>
-                      <Link to={`/Descricao/${id}`}><span className="butao">Veja Mais <i className="fas fa-arrow-circle-right"></i></span></Link>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+              <button className="right" onClick={handleRightClick}><img src={right} alt="direita" /></button>
             </div>
-            <button className="right" onClick={handleRightClick}><img src={right} alt="direita" /></button>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
 
-      <footer style={{ backgroundColor: '#90017F', padding: '30px 0', marginTop: '50px' }}>
-        <div style={{ textAlign: 'center', color: 'white' }}>
-          <div style={{ marginBottom: '20px' }}>
-            <h2 style={{ fontSize: '24px', margin: '0 0 15px 0' }}>
-              <span style={{ fontWeight: 'bold' }}>Game</span>Legends
-            </h2>
-            <p style={{ fontSize: '14px', margin: '0 0 20px 0', color: '#ffffff90' }}>
-              Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências.
-            </p>
-          </div>
+      <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '50px' }}>
+        <div style={{ textAlign: 'center', color: 'white', maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '32px', margin: '0 0 20px 0', fontWeight: 'bold' }}>
+            GameLegends
+          </h2>
+          <p style={{ fontSize: '16px', margin: '0 0 30px 0', lineHeight: '1.6' }}>
+            🎮 Game Legends é uma plataforma dedicada a jogos indie, fornecendo uma maneira fácil para desenvolvedores distribuírem seus jogos e para jogadores descobrirem novas experiências! 🎉
+          </p>
          
           <div style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: '30px',
-            marginBottom: '20px',
-            flexWrap: 'wrap',
-            fontSize: '14px'
+            gap: '40px',
+            marginBottom: '30px',
+            flexWrap: 'wrap'
           }}>
-            <span style={{ color: '#ffffff70' }}>
-              <i className="fas fa-phone" style={{ marginRight: '5px' }}></i>
-              (99) 99999-9999
-            </span>
-            <span style={{ color: '#ffffff70' }}>
-              <i className="fas fa-envelope" style={{ marginRight: '5px' }}></i>
-              info@gamelegends.com
-            </span>
-            <Link to="/Privacidade" style={{ color: '#ffffff70', textDecoration: 'underline' }}>
-              Política de Privacidade
-            </Link>
-          </div>
-         
-          <div style={{ marginBottom: '20px' }}>
-            <h3 style={{ fontSize: '16px', marginBottom: '15px', color: 'white' }}>Links Rápidos</h3>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '25px',
-              flexWrap: 'wrap',
-              fontSize: '14px'
-            }}>
-              <Link to="/" style={{ color: '#ffffff70', textDecoration: 'none' }}>Games</Link>
-              <Link to="/Que" style={{ color: '#ffffff70', textDecoration: 'none' }}>Sobre</Link>
-              <Link to="/Suporte" style={{ color: '#ffffff70', textDecoration: 'none' }}>Suporte</Link>
-              <Link to="/Cadastro" style={{ color: '#ffffff70', textDecoration: 'none' }}>Registre-se</Link>
-              <Link to="/Login" style={{ color: '#ffffff70', textDecoration: 'none' }}>Login</Link>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{
+                backgroundColor: '#00BCD4',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <i className="fas fa-phone" style={{ color: 'white', fontSize: '16px' }}></i>
+              </div>
+              <span style={{ fontSize: '16px' }}>(99) 99999-9999</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{
+                backgroundColor: '#FF9800',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <i className="fas fa-envelope" style={{ color: 'white', fontSize: '16px' }}></i>
+              </div>
+              <span style={{ fontSize: '16px' }}>gamelegends.jogos@gmail.com</span>
             </div>
           </div>
          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '20px',
-            marginBottom: '20px'
-          }}>
-            <a href="https://www.facebook.com/profile.php?id=61578797307500"
-               target="_blank"
-               rel="noopener noreferrer"
-               style={{ color: '#1877F2', fontSize: '20px' }}>
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/game._legends/"
-               target="_blank"
-               rel="noopener noreferrer"
-               style={{ color: '#E4405F', fontSize: '20px' }}>
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" style={{ color: '#1DA1F2', fontSize: '20px' }}>
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" style={{ color: '#0A66C2', fontSize: '20px' }}>
-              <i className="fab fa-linkedin"></i>
-            </a>
+          <div style={{ marginBottom: '30px' }}>
+            <h3 style={{ fontSize: '18px', marginBottom: '20px', color: 'white' }}>
+              🌟 Siga-nos nas Redes Sociais 🌟
+            </h3>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '15px',
+              marginBottom: '20px'
+            }}>
+              <a href="https://www.facebook.com/profile.php?id=61578797307500"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style={{
+                   backgroundColor: '#1877F2',
+                   borderRadius: '50%',
+                   width: '50px',
+                   height: '50px',
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   textDecoration: 'none'
+                 }}>
+                <i className="fab fa-facebook-f" style={{ color: 'white', fontSize: '20px' }}></i>
+              </a>
+              <a href="https://www.instagram.com/game._legends/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style={{
+                   backgroundColor: '#E4405F',
+                   borderRadius: '50%',
+                   width: '50px',
+                   height: '50px',
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   textDecoration: 'none'
+                 }}>
+                <i className="fab fa-instagram" style={{ color: 'white', fontSize: '20px' }}></i>
+              </a>
+              <a href="#"
+                 style={{
+                   backgroundColor: '#FF6B6B',
+                   borderRadius: '50%',
+                   width: '50px',
+                   height: '50px',
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   textDecoration: 'none'
+                 }}>
+                <i className="fas fa-at" style={{ color: 'white', fontSize: '20px' }}></i>
+              </a>
+              <a href="#"
+                 style={{
+                   backgroundColor: '#4FC3F7',
+                   borderRadius: '50%',
+                   width: '50px',
+                   height: '50px',
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   textDecoration: 'none'
+                 }}>
+                <i className="fas fa-globe" style={{ color: 'white', fontSize: '20px' }}></i>
+              </a>
+            </div>
           </div>
+         
+          <Link to="/Privacidade" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            backgroundColor: 'rgba(255,255,255,0.2)',
+            padding: '10px 20px',
+            borderRadius: '25px',
+            color: 'white',
+            textDecoration: 'none',
+            marginBottom: '20px',
+            fontSize: '14px'
+          }}>
+            <i className="fas fa-user-shield"></i>
+            Política de Privacidade
+          </Link>
          
           <div style={{
             borderTop: '1px solid rgba(255,255,255,0.2)',
-            paddingTop: '15px',
-            fontSize: '13px',
-            color: '#ffffff70'
+            paddingTop: '20px',
+            fontSize: '14px',
+            color: '#ffffff90'
           }}>
-            © 2024 gamelegends.com | Feito pelo time do Game Legends
+            © Game Legends ✨ | Feito com 💜 pelo nosso time incrível!
           </div>
         </div>
       </footer>
