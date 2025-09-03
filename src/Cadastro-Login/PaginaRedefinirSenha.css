@@ -8,14 +8,14 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
+  background-color: #E6D7FF;
 }
  
 .pagina-redefinir-senha-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(144, 1, 127, 1) 0%, rgba(5, 183, 231, 1) 100%);
+  background-color: #E6D7FF;
 }
  
 .pagina-redefinir-senha-cabecalho {

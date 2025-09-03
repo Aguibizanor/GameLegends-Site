@@ -1,0 +1,9 @@
+html, body, #root {
+  background-color: #E6D7FF !important;
+  min-height: 100vh;
+}
+
+.app {
+  background-color: #E6D7FF !important;
+  min-height: 100vh;
+}

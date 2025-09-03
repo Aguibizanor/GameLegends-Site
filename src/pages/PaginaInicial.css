@@ -8,13 +8,14 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
+  background-color: #E6D7FF;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #E6D7FF;
 }
 
 .cabecalho {
@@ -136,7 +137,10 @@ body {
 .principal {
   display: flex;
   flex: 1;
-  padding: 20px;
+  padding: 0;
+  margin: 0;
+  background-color: #E6D7FF;
+  min-height: calc(100vh - 80px);
 }
 
 .hamburguer-principal {
@@ -162,44 +166,78 @@ body {
 
 .barra-lateral {
   width: 20%;
-  padding: 5px;
+  padding: 0;
   background-color: #fff;
-  margin-right: 20px;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid #90017F;
+}
+
+.barra-lateral::-webkit-scrollbar {
+  display: none;
+}
+
+.barra-lateral {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .barra-lateral a {
   display: flex;
   align-items: center;
-  margin: 5px 0;
-  font-size: 20px;
+  margin: 2px 0;
+  padding: 8px 15px;
+  font-size: 15px;
   text-decoration: none;
-  color: black;
-  transition: background-color 0.3s ease;
+  color: #333;
+  transition: all 0.2s ease;
+  background: #f8f9ff;
+  border-left: 3px solid transparent;
 }
 
 .barra-lateral a:hover {
-  color: darkgray;
-  border-bottom: 2px solid;
+  background: #90017F;
+  color: #fff;
+  border-left: 3px solid #7A0169;
+  box-shadow: 0 2px 5px rgba(144, 1, 127, 0.2);
+}
+
+.barra-lateral a i {
+  margin-right: 8px;
 }
 
 .barra-lateral h1 {
   cursor: pointer;
   display: flex;
   align-items: center;
-  background: linear-gradient(to right, #5563DC, #2E3576);
-  width: 100%;
-  color: #fff;
+  background: #D4C5F9;
+  width: calc(100% + 20px);
+  color: #90017F;
+  padding: 12px 20px;
+  margin: 0 -20px 0 -10px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+  border: 2px solid #B19CD9;
+  border-radius: 5px;
+}
+
+.barra-lateral h1:hover {
+  background: #f0f0f0;
 }
 
 .triangulo {
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 10px solid black;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid #90017F;
   margin-left: 10px;
-  margin-right: 12px;
-  transition: transform 0.3s ease;
+  margin-right: 10px;
+  transition: transform 0.2s ease;
 }
 
 .triangulo.aberta {
@@ -212,13 +250,14 @@ body {
   gap: 20px;
   justify-content: center;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: transparent;
+  flex: 1;
 }
 
 .game-card-link {
   text-decoration: none;
   color: inherit;
-  width: calc(33.333% - 20px);
+  width: calc(40% - 20px);
   transition: transform 0.3s ease;
 }
 
@@ -233,19 +272,58 @@ body {
   background-color: #fff;
   text-align: center;
   padding: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   height: 100%;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  border: 2px solid #90017F;
+  margin-bottom: 10px;
+}
+
+.game-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  border-color: #7A0169;
 }
 
 .game-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Estilos para cards das categorias */
+.category-game-card {
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border: 2px solid #90017F !important;
+}
+
+.category-game-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-5px) !important;
+  border-color: #7A0169 !important;
+}
+
+.category-games-section {
+  background-color: #E6D7FF !important;
+  border: 2px solid #90017F !important;
+}
+
+/* Força estilos para todos os cards de jogos nas categorias */
+[class*="game-card"] {
+  background-color: #fff !important;
+  border: 2px solid #90017F !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+[class*="game-card"]:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-5px) !important;
+  border-color: #7A0169 !important;
+}
+
 .game-card img {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
   margin-bottom: 15px;
   border-radius: 5px;
@@ -285,7 +363,7 @@ body {
 /* Responsividade */
 @media (max-width: 1024px) {
   .game-card-link {
-    width: calc(50% - 20px);
+    width: calc(60% - 20px);
   }
 }
 
@@ -342,10 +420,6 @@ body {
       display: none;
   }
 
-  .navegacao.ativo {
-      display: flex;
-  }
-
   .logo.escondida {
       display: none;
   }
@@ -384,7 +458,12 @@ body {
       background-color: #fff;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      padding-top: 60px; /* Ajuste para ficar abaixo da navbar */
+      padding-top: 60px;
+      border-right: 3px solid #90017F;
+  }
+
+  .games-section {
+      margin-left: 0;
   }
 }
 

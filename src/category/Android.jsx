@@ -8,6 +8,12 @@ import ameixa from '../assets/ameixa.png';
 import maca from '../assets/maca.png';
 import banana from '../assets/banana.png';
 import foto from '../assets/foto.png';
+import pera from '../assets/pera.png';
+import laranja from '../assets/laranja.png';
+import limao from '../assets/limao.png';
+import mamao from '../assets/mamao.png';
+import goiaba from '../assets/goiaba.png';
+import jaca from '../assets/jaca.png';
  
 const Android = () => {
     const [isOpen, setIsOpen] = useState({
@@ -199,7 +205,7 @@ const Android = () => {
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
                     }}>
-                        <img src={carambola} alt="Digital Logic Sim" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <img src={carambola} alt="Digital Logic Sim" style={{ width: isMobile ? '220px' : (isTablet ? '260px' : '320px'), height: isMobile ? '170px' : (isTablet ? '200px' : '320px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Digital Logic Sim</a></div>
                         <button style={{
                             backgroundColor: '#90017F',

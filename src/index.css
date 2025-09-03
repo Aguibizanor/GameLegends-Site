@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  background-color: #E6D7FF !important;
+  min-height: 100vh;
+}
+
 :root {
-  background: rgb(144, 1, 127);
-  background: linear-gradient(180deg, rgba(144, 1, 127, 1) 0%, rgba(5, 183, 231, 1) 100%);
-  background-repeat:repeat-x;
+  background-color: #E6D7FF !important;
 }

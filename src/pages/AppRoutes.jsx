@@ -28,12 +28,13 @@ import PaginaCriarProjeto from "../Perfil/PaginaCriarProjeto";
 import PaginaDescricao from "./PaginaDescricao";
 import PaginaQuem from "./PaginaQuem";
 import PaginaPrivacidade from "./PaginaPrivacidade";
-
+ 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/Index" element={<IndexPrincipal />} />
-      <Route path="/" element={<PaginaInicial />} />
+      <Route path="/" element={<IndexPrincipal />} />
+      <Route path="/Games" element={<PaginaInicial />} />
       <Route path="/Sobrevivencia" element={<PaginaSobrevivencia />} />
       <Route path="/Login" element={<PaginaLogin />} />
       <Route path="/Cartas" element={<PaginaCartas />} />
@@ -64,6 +65,8 @@ const AppRoutes = () => {
     </Routes>
   );
 };
-
+ 
 export default AppRoutes;
-
+ 
+ 
+ 

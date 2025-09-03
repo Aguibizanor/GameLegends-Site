@@ -1,0 +1,24 @@
+/* Estilos específicos para cards das categorias */
+.category-game-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none !important;
+}
+
+.category-game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: none !important;
+}
+
+.category-games-section {
+    background-color: #E6D7FF !important;
+    border: 2px solid #90017F !important;
+    border-radius: 20px;
+}

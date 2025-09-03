@@ -199,7 +199,7 @@ const MacOs = () => {
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
                     }}>
-                        <img src={ourlife} alt="Our Life" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <img src={ourlife} alt="Our Life" style={{ width: isMobile ? '220px' : (isTablet ? '260px' : '320px'), height: isMobile ? '170px' : (isTablet ? '200px' : '320px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Our Life</a></div>
                         <button style={{
                             backgroundColor: '#90017F',

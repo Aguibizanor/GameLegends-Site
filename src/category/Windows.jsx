@@ -177,7 +177,7 @@ const Windows = () => {
                     alignItems: 'center',
                     maxWidth: '1200px',
                     margin: '50px auto',
-                    backgroundColor: 'transparent',
+                    backgroundColor: '#E6D7FF',
                     borderRadius: '20px'
                 }}>
                     <div className="game-card" style={{
@@ -185,22 +185,23 @@ const Windows = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        backgroundColor: '#e6d7ff',
+                        backgroundColor: '#fff',
                         padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
                         borderRadius: '15px',
-                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        boxShadow: 'none',
                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        border: 'none'
                     }}
                     onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-10px)';
-                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                        e.currentTarget.style.boxShadow = 'none';
                     }}
                     onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                        e.currentTarget.style.boxShadow = 'none';
                     }}>
-                        <img src={Cato} alt="Happy Cat Tavern" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <img src={Cato} alt="Happy Cat Tavern" style={{ width: isMobile ? '220px' : (isTablet ? '260px' : '320px'), height: isMobile ? '170px' : (isTablet ? '200px' : '320px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Happy Cat Tavern</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
@@ -217,22 +218,23 @@ const Windows = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        backgroundColor: '#e6d7ff',
+                        backgroundColor: '#fff',
                         padding: isMobile ? '15px 25px' : (isTablet ? '18px 22px' : '20px'),
                         borderRadius: '15px',
-                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                        boxShadow: 'none',
                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        border: 'none'
                     }}
                     onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-10px)';
-                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                        e.currentTarget.style.boxShadow = 'none';
                     }}
                     onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                        e.currentTarget.style.boxShadow = 'none';
                     }}>
-                        <img src={pombo} alt="Subida de pomba" style={{ width: isMobile ? '180px' : (isTablet ? '220px' : '280px'), height: isMobile ? '140px' : (isTablet ? '170px' : '280px'), objectFit: 'cover', borderRadius: '15px' }} />
+                        <img src={pombo} alt="Subida de pomba" style={{ width: isMobile ? '220px' : (isTablet ? '260px' : '320px'), height: isMobile ? '170px' : (isTablet ? '200px' : '320px'), objectFit: 'cover', borderRadius: '15px' }} />
                         <div style={{ margin: '15px 0', fontSize: '18px', fontWeight: 'bold' }}><a href="" style={{ color: 'black', textDecoration: 'none' }}>Subida de pomba</a></div>
                         <button style={{
                             backgroundColor: '#90017F',
