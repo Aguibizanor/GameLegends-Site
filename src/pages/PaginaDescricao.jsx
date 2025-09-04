@@ -6,6 +6,8 @@ import esquerda from "../assets/esquerda.png";
  
 // Imagens do projeto Happy Cat Tavern
 import happy from '../assets/happy.png';
+import gatodesc from '../assets/gatodesc.png';
+import gatodesc1 from '../assets/gatodesc1.png';
  
 const PaginaDescricao = () => {
   const [menuAberto, setMenuAberto] = useState(false);
@@ -18,7 +20,7 @@ const PaginaDescricao = () => {
   });
  
   // Imagens do carrossel
-  const imagens = [happy, happy, happy, happy];
+  const imagens = [gatodesc, gatodesc1, happy, happy];
  
   // Dados do projeto fixos para o exemplo
   const projeto = {
@@ -131,21 +133,23 @@ const PaginaDescricao = () => {
       <div className="game-profile-container">
         <div className="game-profile-content">
           <div className="main-content">
-            <img src={happy} alt={projeto.nomeProjeto} className="main-game-img" />
-            <div className="extra-images">
-              <img src={happy} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
-              <img src={happy} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
-              <img src={happy} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
+            <div className="game-images-center">
+              <img src={happy} alt={projeto.nomeProjeto} className="main-game-img" />
+              <div className="extra-images">
+                <img src={gatodesc} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
+                <img src={gatodesc1} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
+                <img src={happy} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
+              </div>
             </div>
-            <div className="description">
+            <div className="game-info-bottom">
               <h1>{projeto.nomeProjeto}</h1>
               <p>{projeto.descricao}</p>
               <div className="credits-section">
                 <p><strong>Créditos:</strong></p>
-                <p><strong>Artista:</strong> Miyasuki (Twitter / Etsy)</p>
-                <p><strong>Programador:</strong> OnyxHeart (Twitter)</p>
-                <button className="download-btn" onClick={abrirModalDownload}>Download</button>
+                <p>Artista: Miyasuki (<a href="#">Twitter</a> / <a href="#">Etsy</a>)</p>
+                <p>Programador: OnyxHeart (<a href="#">Twitter</a>)</p>
               </div>
+              <button className="download-btn" onClick={abrirModalDownload}>Baixar Jogo</button>
             </div>
           </div>
         </div>

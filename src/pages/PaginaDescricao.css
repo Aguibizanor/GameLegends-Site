@@ -16,7 +16,7 @@ body {
  
 .gradient-bg {
   min-height: 100vh;
-  background: linear-gradient(180deg, #90017f 0%, #4b0082 40%, #3a73c7 100%);
+  background: linear-gradient(135deg, #e8d5ff 0%, #f0e6ff 50%, #ffffff 100%);
 }
  
 .GIT {
@@ -127,10 +127,10 @@ body {
  
 /* Game Profile Container */
 .game-profile-container {
-  max-width: 1200px;
+  max-width: 700px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -143,27 +143,28 @@ body {
  
 .main-content {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
 }
  
 .main-game-img {
-  width: 100%;
+  width: 50%;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
+  display: block;
 }
  
 .extra-images {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 10px 0;
+  gap: 8px;
+  justify-content: center;
 }
  
 .extra-images img {
-  flex: 0 0 150px;
-  height: 100px;
-  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
   cursor: pointer;
+  object-fit: cover;
 }
  
 .description {
@@ -227,19 +228,20 @@ body {
 }
  
 .download-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin-top: 20px;
+  padding: 12px 30px;
   font-size: 16px;
+  font-weight: bold;
   color: white;
-  background-color: #6b47dc;
+  background-color: #90017F;
   border: none;
-  border-radius: 25px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
  
 .download-btn:hover {
-  background-color: #5a39bc;
+  background-color: #780069;
 }
  
 /* Modal de Imagem */
@@ -528,4 +530,70 @@ body {
  
 .credits-section a:hover {
   text-decoration: underline;
+}
+/* Layout lado a lado */
+.game-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.game-images {
+  flex: 0 0 400px;
+}
+
+.game-info {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.game-info h1 {
+  font-size: 28px;
+  color: #90017F;
+  margin-bottom: 15px;
+}
+
+.game-info p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* Responsividade para layout lado a lado */
+@media (max-width: 768px) {
+  .game-layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .game-images {
+    flex: none;
+  }
+  
+  .game-info {
+    padding-left: 0;
+  }
+}
+/* Layout vertical */
+.game-images-center {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.game-info-bottom {
+  text-align: left;
+}
+
+.game-info-bottom h1 {
+  font-size: 28px;
+  color: #90017F;
+  margin-bottom: 15px;
+}
+
+.game-info-bottom p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.6;
 }
