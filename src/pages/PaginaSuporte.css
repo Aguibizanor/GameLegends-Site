@@ -4,20 +4,23 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
+  background-color: #E6D7FF !important;
+  background-image: none !important;
 }
-
+ 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: hidden; /* Evita que a tela fique maior do que deveria */
+  overflow-x: hidden;
+  background-color: #E6D7FF !important;
+  background-image: none !important;
 }
-
+ 
 /* Header */
 .cabecalho {
   background: #90017F;
@@ -28,28 +31,28 @@ body {
   top: 0;
   z-index: 1000;
 }
-
+ 
 .conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-
+ 
 .logo {
   margin: 0;
 }
-
+ 
 .logo img {
   width: 120px;
 }
-
+ 
 .navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
+ 
 .nav-item {
   display: flex;
   align-items: center;
@@ -61,15 +64,15 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .nav-item i {
   margin-right: 8px;
 }
-
+ 
 .nav-item:hover {
   background: #A0008D;
 }
-
+ 
 .hamburguer {
   display: none;
   background: none;
@@ -78,12 +81,12 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+ 
 .formulario-pesquisa {
   display: flex;
   align-items: center;
 }
-
+ 
 .input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -93,7 +96,7 @@ body {
   transition: width 0.3s ease;
   color: #000;
 }
-
+ 
 .botao-pesquisa {
   padding: 5px 10px;
   border: none;
@@ -102,12 +105,12 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
-
+ 
 .painel-usuario {
   display: flex;
   align-items: center;
 }
-
+ 
 .link-usuario {
   color: #fff;
   text-decoration: none;
@@ -117,80 +120,100 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .link-usuario:hover {
   background: #A0008D;
 }
-
+ 
 /* FAQ Section */
 .faq-container {
   width: 80%;
   margin: 50px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 25px rgba(144, 1, 127, 0.15);
+  border: 1px solid rgba(144, 1, 127, 0.1);
 }
-
+ 
 .faq-content h1 {
   text-align: center;
   font-size: 36px;
-  color: #4b0082;
+  background: linear-gradient(135deg, #90017F, #A0008D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 40px;
+  font-weight: bold;
 }
-
+ 
 .faq-item {
-  border-bottom: 1px solid #ddd;
-  padding: 15px 0;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-
+ 
 .faq-question {
-  font-size: 20px;
-  color: #4b0082;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #90017F, #A0008D);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 10px 0;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
-
+ 
 .faq-question:hover {
-  color: #6a00b8;
+  background: linear-gradient(135deg, #A0008D, #B0009D);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-
+ 
 .faq-answer {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #333;
-  padding-left: 10px;
+  margin-top: 0;
+  font-size: 16px;
+  color: #555;
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-radius: 0 0 8px 8px;
+  border-left: 4px solid #90017F;
+  line-height: 1.6;
   transition: max-height 0.3s ease, opacity 0.3s ease;
 }
-
+ 
 .faq-answer.collapsed {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
 }
-
+ 
 .faq-answer.expanded {
   max-height: 200px;
   opacity: 1;
 }
-
+ 
 .faq-question span {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  color: #6a00b8;
+  color: #fff;
+  transition: transform 0.3s ease;
 }
-
-.faq-question span:hover {
-  color: #90017F;
+ 
+.faq-question:hover span {
+  transform: rotate(90deg);
 }
-
+ 
 .faq-list {
   margin-top: 20px;
 }
-
+ 
 /* Footer */
 .rodape {
   background: #90017F;
@@ -199,7 +222,7 @@ body {
   text-align: center;
   margin-top: auto;
 }
-
+ 
 .conteudo-rodape {
   display: flex;
   justify-content: space-around;
@@ -209,53 +232,53 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
+ 
 .secao-rodape {
   flex: 1;
   padding: 10px;
   min-width: 200px;
 }
-
+ 
 .logo-rodape {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+ 
 .contato-rodape span {
   display: block;
   margin: 10px 0;
 }
-
+ 
 .redes-sociais a {
   margin: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
+ 
 .links ul {
   list-style: none;
   padding: 0;
 }
-
+ 
 .links ul a {
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
   display: block;
 }
-
+ 
 .links ul a:hover {
   color: #A0008D;
 }
-
+ 
 .rodape-inferior {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
-
+ 
 /* Responsividade */
 @media (max-width: 768px) {
   .navegacao {
@@ -268,32 +291,33 @@ body {
     left: 0;
     z-index: 1000;
   }
-
+ 
   .nav-item {
     width: 100%;
     justify-content: center;
     margin: 0;
     border-bottom: 1px solid #A0008D;
   }
-
+ 
   .navegacao.ativo {
     display: flex;
   }
-
+ 
   .hamburguer {
     display: block;
   }
-
+ 
   .formulario-pesquisa {
     width: 100%;
     margin-top: 10px;
   }
-
+ 
   .input-pesquisa {
     width: 100%;
   }
-
+ 
   .faq-container {
     width: 95%;
   }
 }
+ 

@@ -4,20 +4,22 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #E6D7FF;
+  background-color: #E6D7FF !important;
+  background-image: none !important;
 }
-
+ 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #E6D7FF;
+  background-color: #E6D7FF !important;
+  background-image: none !important;
 }
-
+ 
 .cabecalho {
   background: #90017F;
   color: #fff;
@@ -27,28 +29,28 @@ body {
   top: 0;
   z-index: 1000;
 }
-
+ 
 .conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-
+ 
 .logo {
   margin: 0;
 }
-
+ 
 .logo img {
   width: 120px;
 }
-
+ 
 .navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
+ 
 .nav-item {
   display: flex;
   align-items: center;
@@ -60,15 +62,15 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .nav-item i {
   margin-right: 8px;
 }
-
+ 
 .nav-item:hover {
   background: #A0008D;
 }
-
+ 
 .hamburguer {
   display: none;
   background: none;
@@ -77,12 +79,12 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+ 
 .formulario-pesquisa {
   display: flex;
   align-items: center;
 }
-
+ 
 .input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -92,7 +94,7 @@ body {
   transition: width 0.3s ease;
   color: #000000;
 }
-
+ 
 .botao-pesquisa {
   padding: 5px 10px;
   border: none;
@@ -101,12 +103,12 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
-
+ 
 .painel-usuario {
   display: flex;
   align-items: center;
 }
-
+ 
 .link-usuario {
   color: #fff;
   text-decoration: none;
@@ -116,18 +118,20 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .link-usuario:hover {
   background: #A0008D;
 }
-
+ 
 .main {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #E6D7FF !important;
+  background-image: none !important;
 }
-
+ 
 .login-container {
   display: flex;
   align-items: center;
@@ -135,7 +139,7 @@ body {
   gap: 20px;
   padding: 20px;
 }
-
+ 
 .form-container {
   background-color: white;
   padding: 40px;
@@ -144,17 +148,17 @@ body {
   width: 400px;
   max-width: 100%;
 }
-
+ 
 .side-image {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+ 
 .character-icon {
   width: 150px;
 }
-
+ 
 .login-button {
   background: rgba(144, 1, 127, 1);
   border-radius: 50px;
@@ -166,31 +170,31 @@ body {
   margin: 0 auto;
   display: block;
 }
-
+ 
 .titulo {
   font-weight: 800;
   background: -webkit-linear-gradient(180deg, rgba(144, 1, 127, 1) 0%, rgba(5, 183, 231, 1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+ 
 .tipo-usuario {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
-
+ 
 .tipo-usuario label {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
-
+ 
 .tipo-usuario input {
   margin-right: 10px;
 }
-
+ 
 .rodape {
   background: #90017F;
   color: #fff;
@@ -198,7 +202,7 @@ body {
   text-align: center;
   margin-top: auto;
 }
-
+ 
 .conteudo-rodape {
   display: flex;
   justify-content: space-around;
@@ -208,53 +212,53 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
+ 
 .secao-rodape {
   flex: 1;
   padding: 10px;
   min-width: 200px;
 }
-
+ 
 .logo-rodape {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+ 
 .contato-rodape span {
   display: block;
   margin: 10px 0;
 }
-
+ 
 .redes-sociais a {
   margin: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
+ 
 .links ul {
   list-style: none;
   padding: 0;
 }
-
+ 
 .links ul a {
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
   display: block;
 }
-
+ 
 .links ul a:hover {
   color: #A0008D;
 }
-
+ 
 .rodape-inferior {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
-
+ 
 @media (max-width: 768px) {
   .navegacao {
     display: none;
@@ -266,43 +270,43 @@ body {
     left: 0;
     z-index: 1000;
   }
-
+ 
   .nav-item {
     width: 100%;
     justify-content: center;
     margin: 0;
     border-bottom: 1px solid #A0008D;
   }
-
+ 
   .navegacao.ativo {
     display: flex;
   }
-
+ 
   .hamburguer {
     display: block;
   }
-
+ 
   .principal {
     flex-direction: column;
   }
-
+ 
   .formulario-pesquisa {
     width: 100%;
     margin-top: 10px;
   }
-
+ 
   .input-pesquisa {
     width: 100%;
   }
-
+ 
   .login-container {
     flex-direction: column;
   }
-
+ 
   .side-image {
     display: none;
   }
-
+ 
   .form-container {
     width: 90%;
     max-width: 100%;

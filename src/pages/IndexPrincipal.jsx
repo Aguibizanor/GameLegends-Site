@@ -100,7 +100,7 @@ const IndexPrincipal = () => {
           </h1>
           <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
             <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
-            <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
+            <Link to={'/Games'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
             <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
             <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
           </nav>
@@ -157,7 +157,7 @@ const IndexPrincipal = () => {
               <div className="intro-text">
                 <h1>EXPLORE O <br /> MUNDO<br /> DOS JOGOS</h1>
                 <p>Venha conhecer <br /> nossa plataforma <br />onde você poderá <br />encontrar jogos <br /> da nossa comunidade.</p>
-                <Link to={'/'}><button className="cta-button">Conheça <i className="fas fa-arrow-circle-right"></i></button></Link>
+                <Link to={'/Games'}><button className="cta-button">Conheça <i className="fas fa-arrow-circle-right"></i></button></Link>
               </div>
               <div className="intro-image shadowdograu">
                 <img src={shadowdograu} alt="Imagem de exemplo" />

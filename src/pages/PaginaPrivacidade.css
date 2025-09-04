@@ -1,7 +1,7 @@
 Pagina de privacidade 
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, rgba(144, 1, 127, 1) 0%, rgba(5, 183, 231, 1) 100%);
+  background-color: #E6D7FF;
 }
  
 .privacy-main {
@@ -11,6 +11,7 @@ body {
   width: 100%;
   min-height: calc(100vh - 120px);
   padding: 40px 0;
+  background-color: #E6D7FF !important;
 }
  
 .privacy-box {

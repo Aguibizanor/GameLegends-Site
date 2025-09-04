@@ -30,7 +30,7 @@ const PaginaPrivacidade = () => {
   );
  
   return (
-    <div className="app">
+    <div className="app" style={{backgroundColor: '#E6D7FF'}}>
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
@@ -74,7 +74,7 @@ const PaginaPrivacidade = () => {
         </div>
       </header>
  
-      <main className="privacy-main">
+      <main className="privacy-main" style={{backgroundColor: '#E6D7FF'}}>
         <div className="privacy-box">
           <h1 className="privacy-title">Política de Privacidade</h1>
           <p className="privacy-intro">
@@ -98,7 +98,7 @@ const PaginaPrivacidade = () => {
         </div>
       </main>
  
-      <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '50px' }}>
+      <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '0px' }}>
         <div style={{ textAlign: 'center', color: 'white', maxWidth: '800px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '32px', margin: '0 0 20px 0', fontWeight: 'bold' }}>
             GameLegends

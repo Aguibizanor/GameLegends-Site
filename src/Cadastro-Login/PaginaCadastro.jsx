@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.site.tcc.png";
+import celestegirl from "../assets/celestegirl.png";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './PaginaCadastro.css';
@@ -140,6 +141,9 @@ function PaginaCadastro() {
                 </div>
             </header>
             <main className="conteudo-formulario">
+                <div className="side-image">
+                    <img src={celestegirl} alt="Pixel art character" className="character-icon" />
+                </div>
                 <div className="formulario">
                     <h2 className="titulo-formulario">CRIAR CONTA</h2>
                     <form onSubmit={handleSubmit} className="grade-formulario">
@@ -192,6 +196,9 @@ function PaginaCadastro() {
                     <div className="rodape-formulario">
                         <span>Já tem uma conta? Faça login: <Link to={'/Login'} className="link-formulario">Login</Link></span>
                     </div>
+                </div>
+                <div className="side-image">
+                    <img src={celestegirl} alt="Pixel art character" className="character-icon" />
                 </div>
             </main>
             <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '50px' }}>

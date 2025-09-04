@@ -17,26 +17,33 @@ function PaginaLogin() {
     e.preventDefault();
  
     // Regex para validar o formato do email
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@(yahoo|gmail|email)\.com(\.br)?$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
-      setErrorMessage("Formato de email inválido. Use um email válido como yahoo, gmail ou email.");
+      setErrorMessage("Formato de email inválido.");
       return;
     }
  
     try {
+      console.log('Tentando login com:', { email, senha });
       const response = await axios.post("http://localhost:8080/login", {
         email: email,
         senha: senha,
       });
  
+      console.log('Resposta do servidor:', response);
       if (response.status === 200) {
         localStorage.setItem('usuario', JSON.stringify(response.data));
         alert("Login realizado com sucesso!");
         navigate('/');
       }
     } catch (error) {
-      setErrorMessage("Email ou senha incorretos.");
-      console.error(error);
+      console.error('Erro completo:', error);
+      console.error('Resposta do erro:', error.response);
+      if (error.response) {
+        setErrorMessage(`Erro: ${error.response.data}`);
+      } else {
+        setErrorMessage("Erro de conexão com o servidor.");
+      }
     }
   };
  
@@ -125,6 +132,18 @@ function PaginaLogin() {
               <div className="flex items-center justify-between">
                 <button className="login-button" type="submit">
                   LOGIN
+                </button>
+              </div>
+              <div className="text-center mt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEmail('admin@gamelegends.com');
+                    setSenha('admin123');
+                  }}
+                  className="text-sm text-blue-500 underline"
+                >
+                  Usar credenciais de teste
                 </button>
               </div>
             </form>
@@ -301,4 +320,5 @@ function PaginaLogin() {
  
 export default PaginaLogin;
  
-
+ 
+ 

@@ -4,20 +4,20 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #E6D7FF !important;
 }
-
+ 
 .pagina-perfil-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden;
 }
-
+ 
 .cabecalho {
   background: #90017F;
   color: #fff;
@@ -27,28 +27,28 @@ body {
   top: 0;
   z-index: 1000;
 }
-
+ 
 .conteudo-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-
+ 
 .logo {
   margin: 0;
 }
-
+ 
 .logo img {
   width: 120px;
 }
-
+ 
 .navegacao {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
+ 
 .nav-item {
   display: flex;
   align-items: center;
@@ -60,15 +60,15 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .nav-item i {
   margin-right: 8px;
 }
-
+ 
 .nav-item:hover {
   background: #A0008D;
 }
-
+ 
 .hamburguer {
   display: none;
   background: none;
@@ -77,12 +77,12 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+ 
 .formulario-pesquisa {
   display: flex;
   align-items: center;
 }
-
+ 
 .input-pesquisa {
   padding: 5px;
   border-radius: 5px 0 0 5px;
@@ -92,7 +92,7 @@ body {
   transition: width 0.3s ease;
   color: #000;
 }
-
+ 
 .botao-pesquisa {
   padding: 5px 10px;
   border: none;
@@ -101,12 +101,12 @@ body {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
-
+ 
 .painel-usuario {
   display: flex;
   align-items: center;
 }
-
+ 
 .link-usuario {
   color: #fff;
   text-decoration: none;
@@ -116,63 +116,149 @@ body {
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-
+ 
 .link-usuario:hover {
   background: #A0008D;
 }
-
+ 
 .pagina-perfil-main {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
+  background-color: #E6D7FF;
 }
-
+ 
 .pagina-perfil-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 15px;
-  padding: 30px 40px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  max-width: 600px;
-  width: 100%;
-  margin: 40px auto;
-  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #E6D7FF;
 }
-
+ 
+.profile-header {
+  background: linear-gradient(135deg, #90017F, #A0008D);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+ 
+.profile-info-section {
+  background-color: white;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+ 
 .pagina-perfil-avatar {
   width: 120px;
   height: 120px;
-  background-color: #ddd;
   border-radius: 50%;
-  margin-bottom: 20px;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/149/149071.png');
-  background-size: cover;
-  background-position: center;
+  cursor: pointer;
+  border: 4px solid white;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  overflow: hidden;
+  margin: 0 auto 20px;
+  background-color: white;
+  position: relative;
 }
-
-.pagina-perfil-info {
-  width: 100%;
+ 
+.pagina-perfil-avatar:hover {
+  transform: scale(1.05);
+}
+ 
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+ 
+.profile-email {
+  font-size: 14px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+ 
+.camera-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #90017F;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+ 
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 18px 25px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 18px;
+}
+ 
+.info-item:last-child {
+  border-bottom: none;
+}
+ 
+.info-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+}
+ 
+.info-content {
+  flex: 1;
+}
+ 
+.info-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+ 
+.info-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+ 
+.action-buttons {
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  gap: 15px;
 }
-
-.pagina-perfil-info p {
-  font-size: 1.1rem;
-  color: #333;
-  background-color: #f8f8f8;
-  padding: 10px 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  text-align: center;
+ 
+.action-buttons button:hover,
+.action-buttons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
 }
-
+ 
+.action-buttons button:active,
+.action-buttons a:active {
+  transform: translateY(0);
+}
+ 
 .pagina-perfil-info button,
 .pagina-perfil-info a {
   padding: 10px 15px;
@@ -184,34 +270,34 @@ body {
   transition: background-color 0.3s ease;
   width: fit-content;
 }
-
+ 
 .pagina-perfil-info button {
   background-color: #6b47dc;
   color: white;
 }
-
+ 
 .pagina-perfil-info button:hover {
   background-color: #5a39bc;
 }
-
+ 
 .pagina-perfil-delete {
   background: #f44336;
   color: white;
 }
-
+ 
 .pagina-perfil-delete:hover {
   background-color: #d32f2f;
 }
-
+ 
 .pagina-perfil-info a {
   background-color: #00c853;
   color: white;
 }
-
+ 
 .pagina-perfil-info a:hover {
   background-color: #00a344;
 }
-
+ 
 .pagina-perfil-modal {
   position: fixed;
   top: 0;
@@ -224,7 +310,7 @@ body {
   align-items: center;
   z-index: 1000;
 }
-
+ 
 .pagina-perfil-modal-content {
   background-color: #fff;
   border-radius: 10px;
@@ -233,17 +319,17 @@ body {
   width: 90%;
   max-width: 500px;
 }
-
+ 
 .pagina-perfil-modal-content h2 {
   margin-bottom: 20px;
   color: #6b47dc;
 }
-
+ 
 .pagina-perfil-modal-content label {
   display: block;
   margin-bottom: 10px;
 }
-
+ 
 .pagina-perfil-modal-content input {
   width: 100%;
   padding: 10px;
@@ -251,7 +337,7 @@ body {
   border: 1px solid #ccc;
   margin-bottom: 15px;
 }
-
+ 
 .pagina-perfil-modal-content button {
   padding: 10px;
   background: #6b47dc;
@@ -261,11 +347,11 @@ body {
   cursor: pointer;
   transition: background 0.3s;
 }
-
+ 
 .pagina-perfil-modal-content button:hover {
   background: #5a39bc;
 }
-
+ 
 .rodape {
   background: #90017F;
   color: #fff;
@@ -273,7 +359,7 @@ body {
   text-align: center;
   margin-top: auto;
 }
-
+ 
 .conteudo-rodape {
   display: flex;
   justify-content: space-around;
@@ -283,53 +369,53 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
+ 
 .secao-rodape {
   flex: 1;
   padding: 10px;
   min-width: 200px;
 }
-
+ 
 .logo-rodape {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+ 
 .contato-rodape span {
   display: block;
   margin: 10px 0;
 }
-
+ 
 .redes-sociais a {
   margin: 0 10px;
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
+ 
 .links ul {
   list-style: none;
   padding: 0;
 }
-
+ 
 .links ul a {
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
   display: block;
 }
-
+ 
 .links ul a:hover {
   color: #A0008D;
 }
-
+ 
 .rodape-inferior {
   text-align: center;
   padding: 10px;
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
-
+ 
 /* Responsividade */
 @media (max-width: 768px) {
   .navegacao {
@@ -342,27 +428,27 @@ body {
     left: 0;
     z-index: 1000;
   }
-
+ 
   .nav-item {
     width: 100%;
     justify-content: center;
     margin: 0;
     border-bottom: 1px solid #A0008D;
   }
-
+ 
   .navegacao.ativo {
     display: flex;
   }
-
+ 
   .hamburguer {
     display: block;
   }
-
+ 
   .formulario-pesquisa {
     width: 100%;
     margin-top: 10px;
   }
-
+ 
   .input-pesquisa {
     width: 100%;
   }

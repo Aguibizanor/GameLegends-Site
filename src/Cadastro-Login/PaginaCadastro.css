@@ -126,16 +126,34 @@ body {
 }
 
 .conteudo-formulario {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    gap: 40px;
+}
+
+.side-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.character-icon {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+}
+
+.formulario {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    flex: 1;
+    max-width: 600px;
 }
 
 .titulo-formulario {
@@ -290,6 +308,15 @@ body {
 
 /* Responsive styling */
 @media (max-width: 768px) {
+    .conteudo-formulario {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .side-image {
+        display: none;
+    }
+    
     .navegacao {
         display: none;
         flex-direction: column;

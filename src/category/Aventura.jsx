@@ -399,7 +399,7 @@ const Aventura = () => {
                     </div>
                 </section>
             </main>
-            <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '50px' }}>
+            <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '0px' }}>
         <div style={{ textAlign: 'center', color: 'white', maxWidth: '800px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '32px', margin: '0 0 20px 0', fontWeight: 'bold' }}>
             GameLegends

@@ -27,20 +27,20 @@ const PaginaSuporte = () => {
  
   const faqData = [
     {
-      question: "Como posso visualizar ou alterar minhas configurações de conta?",
-      answer: "Clique no ícone de perfil no canto superior direito e selecione 'Configurações da Conta' para visualizar ou editar suas informações pessoais e preferências."
+      question: "Como posso baixar e jogar os jogos disponíveis na plataforma?",
+      answer: "Navegue pela nossa biblioteca de jogos, clique no jogo desejado e use o botão 'Download' na página do jogo. Todos os jogos são gratuitos e podem ser baixados diretamente."
     },
     {
-      question: "Onde posso encontrar o histórico das doações nos projetos?",
-      answer: "Vá para 'Minha Conta' e selecione 'Histórico de Compras' para ver todas as suas transações anteriores."
+      question: "Como posso publicar meu jogo indie na Game Legends?",
+      answer: "Crie uma conta como desenvolvedor, acesse seu perfil e clique em 'Publicar Jogo'. Preencha as informações do seu projeto, faça upload dos arquivos e aguarde a aprovação da nossa equipe."
     },
     {
       question: "Esqueci minha senha. Como posso recuperá-la?",
       answer: "Clique em 'Esqueci minha senha' na página de login e siga as instruções para redefinir sua senha."
     },
     {
-      question: "Como posso encontrar as últimas notícias e atualizações sobre os jogos?",
-      answer: "Acesse a seção de notícias no menu principal para ver as últimas novidades sobre os projetos e lançamentos."
+      question: "Como posso navegar e filtrar os jogos disponíveis no site?",
+      answer: "Use a barra lateral esquerda para filtrar jogos por gênero (Terror, Esporte, Aventura, etc.), plataforma (Windows, Mac, Android, iOS), data de postagem (Hoje, Essa semana, Esse mês) ou status de desenvolvimento (Desenvolvido, Desenvolvendo)."
     },
     {
       question: "Como posso deixar um comentário ou avaliação para um jogo?",
@@ -274,4 +274,5 @@ const PaginaSuporte = () => {
  
 export default PaginaSuporte;
  
-
+ 
+ 

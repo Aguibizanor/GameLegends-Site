@@ -98,42 +98,49 @@ const PaginaMandarEmail = () => {
       </header>
  
       <main className="main">
-        <div className="MINERIO">
-          <div className="AAA1">
-            <div className="container">
-              <h1 className="W">Redefinir Senha</h1>
-              <p className="Redef">Para redefinir sua senha, coloque seu Email:</p>
-              <div className="content">
-                <div className="side-image">
-                  <img src={viva} alt="Pixel art character" className="character-icon2" />
+        <div className="login-container">
+          <div className="side-image">
+            <img src={viva} alt="Pixel art character" className="character-icon" />
+          </div>
+          <div className="form-container">
+            <div className="header text-center mb-6">
+              <h1 className="titulo text-2xl font-bold text-transparent bg-clip-text gradient-button">
+                Redefinir Senha
+              </h1>
+              <p className="text-gray-600 mb-4">Para redefinir sua senha, coloque seu Email:</p>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="input-single mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                  Email:
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    className="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Digite seu email (Gmail, Yahoo, etc.)"
+                    style={{ paddingRight: email ? '40px' : '12px' }}
+                  />
+                  {email && (
+                    <span style={{
+                      position: 'absolute',
+                      right: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      fontSize: '18px'
+                    }}>
+                      {_isRealEmailProvider(email) ? '📧' : '💾'}
+                    </span>
+                  )}
                 </div>
-                <div className="form-content">
-                  <form className="For" onSubmit={handleSubmit}>
-                    <div style={{ position: 'relative' }}>
-                      <input
-                        type="email"
-                        required
-                        className="LOLO"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Digite seu email (Gmail, Yahoo, etc.)"
-                        style={{ paddingRight: email ? '40px' : '12px' }}
-                      />
-                      {email && (
-                        <span style={{
-                          position: 'absolute',
-                          right: '12px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          fontSize: '18px'
-                        }}>
-                          {_isRealEmailProvider(email) ? '📧' : '💾'}
-                        </span>
-                      )}
-                    </div>
-                    <button type="submit" className="mandar_email" disabled={loading}>
-                      {loading ? 'ENVIANDO...' : 'ENVIAR CÓDIGO'}
-                    </button>
+              </div>
+              <button type="submit" className="mandar_email" disabled={loading}>
+                {loading ? 'ENVIANDO...' : 'ENVIAR CÓDIGO'}
+              </button>
                     {message && (
                       <div style={{
                         marginTop: '15px',
@@ -145,17 +152,19 @@ const PaginaMandarEmail = () => {
                       }}>
                         {message}
                       </div>
-                    )}
-                  </form>
-                  <p className="KI">
-                    Lembrou a senha? <Link to={'/Login'}><span className="text-blue-500">Faça login</span></Link>
-                  </p>
-                </div>
-                <div className="side-image">
-                  <img src={viva} alt="Pixel art character" className="character-icon2" />
-                </div>
-              </div>
+                )}
+            </form>
+            <div className="text-center mt-4">
+              <p className="text-gray-500 text-sm">
+                Lembrou a senha?{" "}
+                <Link to="/Login">
+                  <span className="text-blue-500">Faça login</span>
+                </Link>
+              </p>
             </div>
+          </div>
+          <div className="side-image">
+            <img src={viva} alt="Pixel art character" className="character-icon" />
           </div>
         </div>
       </main>
