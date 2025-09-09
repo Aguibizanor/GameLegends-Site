@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import "../Pages/PaginaInicial.css";
+import "./category-styles.css"
 import carambola from '../assets/carambola.png';
 import amora from '../assets/amora.png';
 import ameixa from '../assets/ameixa.png';

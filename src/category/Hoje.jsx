@@ -6,6 +6,7 @@ import self from '../assets/self.png';
 import kiddo from '../assets/kiddo.png';
 import kama from '../assets/kama.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const Hoje = () => {
     const [isOpen, setIsOpen] = useState({

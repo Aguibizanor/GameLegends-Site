@@ -8,6 +8,7 @@ import Imagem4 from '../assets/Img4.png';
 import Imagem5 from '../assets/Img5.png';
 import Imagem6 from '../assets/Img6.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const Sobrevivencia = () => {
     const [isOpen, setIsOpen] = useState({

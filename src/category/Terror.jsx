@@ -8,6 +8,7 @@ import salada from '../assets/salada.png';
 import tangerina from '../assets/tangerina.png';
 import tamara from '../assets/tamara.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const Terror = () => {
     const [isOpen, setIsOpen] = useState({

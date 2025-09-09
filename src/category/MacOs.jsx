@@ -8,6 +8,7 @@ import manga from '../assets/manga.png';
 import img2 from '../assets/img2.png';
 import img6 from '../assets/img6.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const MacOs = () => {
     const [isOpen, setIsOpen] = useState({

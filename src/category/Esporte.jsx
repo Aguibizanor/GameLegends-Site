@@ -8,6 +8,7 @@ import mamao from '../assets/mamao.png';
 import manga from '../assets/manga.png';
 import morango from '../assets/morango.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const Esporte = () => {
     const [isOpen, setIsOpen] = useState({

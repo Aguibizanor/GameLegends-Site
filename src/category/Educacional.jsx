@@ -8,6 +8,7 @@ import img06 from '../assets/img06.png';
 import salada from '../assets/salada.png';
 import mirror from '../assets/mirror.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const Educacional = () => {
     const [isOpen, setIsOpen] = useState({

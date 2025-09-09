@@ -8,6 +8,7 @@ import goiaba from '../assets/goiaba.png';
 import framboesa from '../assets/framboesa.png';
 import damasco from '../assets/damasco.png';
 import "../Pages/PaginaInicial.css";
+import "./category-styles.css"
  
 const Aventura = () => {
     const [isOpen, setIsOpen] = useState({

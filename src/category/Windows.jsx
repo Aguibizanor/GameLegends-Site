@@ -9,6 +9,7 @@ import goiaba from '../assets/goiaba.png';
 import diaba from '../assets/diaba.png';
 import marquin from '../assets/marquin.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const Windows = () => {
     const [isOpen, setIsOpen] = useState({

@@ -8,6 +8,7 @@ import Imagem04 from '../assets/Img04.png';
 import Imagem05 from '../assets/Img05.png';
 import Imagem06 from '../assets/Img06.png';
 import "../Pages/PaginaInicial.css";
+import "./category-styles.css"
  
 const Cartas = () => {
     const [isOpen, setIsOpen] = useState({

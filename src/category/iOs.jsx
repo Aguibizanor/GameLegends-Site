@@ -8,6 +8,7 @@ import ceu from '../assets/ceu.png';
 import sixit from '../assets/sixit.png';
 import imost from '../assets/imost.png';
 import "../Pages/PaginaInicial.css"
+import "./category-styles.css"
  
 const iOs = () => {
     const [isOpen, setIsOpen] = useState({

@@ -530,3 +530,95 @@ body {
   border-top: 1px solid #A0008D;
   margin-top: 10px;
 }
+
+/* Layout mobile específico para 1000px a 1030px */
+@media (min-width: 1000px) and (max-width: 1030px) {
+  .navegacao {
+    display: none !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background: #90017F !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 99999 !important;
+  }
+ 
+  .navegacao.ativo {
+    display: flex !important;
+  }
+ 
+  .nav-item {
+    width: 100% !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+ 
+  .hamburguer {
+    display: block !important;
+  }
+ 
+  .formulario-pesquisa {
+    background: white !important;
+  }
+ 
+  .input-pesquisa {
+    color: #333 !important;
+  }
+ 
+  .input-pesquisa::placeholder {
+    color: #666 !important;
+  }
+ 
+  .botao-pesquisa {
+    color: #333 !important;
+  }
+  
+  .logo img {
+    width: 140px !important;
+  }
+}
+
+/* Layout mobile específico para 700px a 999px */
+@media (min-width: 700px) and (max-width: 999px) {
+  .navegacao {
+    display: none !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background: #90017F !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 99999 !important;
+  }
+ 
+  .navegacao.ativo {
+    display: flex !important;
+  }
+ 
+  .nav-item {
+    width: 100% !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+ 
+  .hamburguer {
+    display: block !important;
+  }
+ 
+  .formulario-pesquisa {
+    background: white !important;
+  }
+ 
+  .input-pesquisa {
+    color: #333 !important;
+  }
+ 
+  .input-pesquisa::placeholder {
+    color: #666 !important;
+  }
+ 
+  .botao-pesquisa {
+    color: #333 !important;
+  }
+}
