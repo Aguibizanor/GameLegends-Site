@@ -1,51 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import './PaginaDescricao.css';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
-import DeveloperService from '../services/DeveloperService';
 
-const JogoDescricao = () => {
+// Imagens do projeto Happy Cat Tavern
+import happy from '../assets/happy.png';
+import gatodesc from '../assets/gatodesc.png';
+import gatodesc1 from '../assets/gatodesc1.png';
+
+const JogoCarrossel = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [menuAberto, setMenuAberto] = useState(false);
   const [modalImagemAberto, setModalImagemAberto] = useState(false);
   const [imagemAtual, setImagemAtual] = useState(0);
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
-  const [modalExclusaoAberto, setModalExclusaoAberto] = useState(false);
-  const [projeto, setProjeto] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     usuario: ""
   });
 
-  // Imagens padrão para projetos sem imagens específicas
-  const imagensPadrao = [
-    `http://localhost:8080/projetos/${id}/foto`,
-    `http://localhost:8080/projetos/${id}/foto`,
-    `http://localhost:8080/projetos/${id}/foto`
-  ];
+  // Imagens do carrossel
+  const imagens = [gatodesc, gatodesc1, happy, happy];
+
+  // Dados estáticos para os jogos do carrossel
+  const jogosEstaticos = {
+    '1': {
+      id: 1,
+      nomeProjeto: "Happy Cat Tavern: Typing Challenge",
+      descricao: "Batou quer beber o máximo de milkshakes que puder enquanto os clientes da taverna o animam. Cada palavra é um milkshake para Batou beber. Digite com rapidez e precisão para ganhar pontos e desbloquear conquistas!",
+      genero: "Typing Challenge / Casual",
+      tecnologias: "Unity",
+      dataInicio: "2024",
+      statusProjeto: "Concluído"
+    },
+    '2': {
+      id: 2,
+      nomeProjeto: "Coop Catacombs: Roguelike",
+      descricao: "Nas masmorras, acompanhando em todos os momentos e poderá presenciar os rastros de outros aventureiros. Um jogo cooperativo de exploração e sobrevivência.",
+      genero: "Roguelike / Cooperativo",
+      tecnologias: "Unity",
+      dataInicio: "2024",
+      statusProjeto: "Em Desenvolvimento"
+    },
+    '3': {
+      id: 3,
+      nomeProjeto: "Subida de Pombo",
+      descricao: "Cuide do seu próprio pombo enquanto ele luta contra inimigos cada vez mais fortes e, no final, enfrente o lendário Deus Pombo. Uma aventura épica de crescimento e desafios.",
+      genero: "Aventura / Ação",
+      tecnologias: "Unity",
+      dataInicio: "2024",
+      statusProjeto: "Concluído"
+    }
+  };
+
+  const projeto = jogosEstaticos[id];
 
   useEffect(() => {
-    if (id) {
-      // Busca apenas no banco de dados
-      fetch(`http://localhost:8080/projetos/${id}`)
-        .then(response => {
-          if (!response.ok) throw new Error('Projeto não encontrado');
-          return response.json();
-        })
-        .then(data => {
-          setProjeto(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error('Erro ao buscar projeto:', error);
-          setLoading(false);
-        });
-    }
-
-    // Verifica se o usuário está logado
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
     if (usuarioData) {
       setFormData({
@@ -53,41 +64,16 @@ const JogoDescricao = () => {
         usuario: usuarioData.usuario
       });
     }
-  }, [id]);
+  }, []);
 
   const toggleMenu = () => setMenuAberto(!menuAberto);
   const abrirModalImagem = (index) => { setImagemAtual(index); setModalImagemAberto(true); };
   const fecharModalImagem = () => setModalImagemAberto(false);
-  const imagemAnterior = () => setImagemAtual((imagemAtual - 1 + imagensPadrao.length) % imagensPadrao.length);
-  const proximaImagem = () => setImagemAtual((imagemAtual + 1) % imagensPadrao.length);
+  const imagemAnterior = () => setImagemAtual((imagemAtual - 1 + imagens.length) % imagens.length);
+  const proximaImagem = () => setImagemAtual((imagemAtual + 1) % imagens.length);
   const abrirModalDownload = () => setModalDownloadAberto(true);
   const fecharModalDownload = () => setModalDownloadAberto(false);
-  const abrirModalExclusao = () => setModalExclusaoAberto(true);
-  const fecharModalExclusao = () => setModalExclusaoAberto(false);
-  
-  const excluirProjeto = async () => {
-    const sucesso = await DeveloperService.deleteProject(projeto.id);
-    
-    if (sucesso) {
-      alert('Projeto excluído com sucesso!');
-      navigate('/');
-    } else {
-      alert('Erro ao excluir projeto. Tente novamente.');
-    }
-    
-    fecharModalExclusao();
-  };
-  
-  const podeExcluir = () => {
-    return DeveloperService.canDeleteProject(projeto);
-  };
 
-  if (loading) return (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'linear-gradient(135deg, #90017F 0%, #B19CD9 100%)', color: 'white', fontSize: '1.5rem'}}>
-      🎮 Carregando seu jogo incrível...
-    </div>
-  );
-  
   if (!projeto) return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%)', color: 'white', textAlign: 'center'}}>
       <div style={{fontSize: '4rem', marginBottom: '20px'}}>😭</div>
@@ -180,41 +166,26 @@ const JogoDescricao = () => {
           <div className="main-content">
             <div className="game-images-center">
               <img 
-                src={`http://localhost:8080/projetos/${projeto.id}/foto`} 
+                src={happy} 
                 alt={projeto.nomeProjeto} 
                 className="main-game-img" 
               />
               <div className="extra-images">
-                <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
-                <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
-                <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
+                <img src={gatodesc} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
+                <img src={gatodesc1} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
+                <img src={happy} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
               </div>
             </div>
             <div className="game-info-bottom">
               <h1>{projeto.nomeProjeto}</h1>
               <p>{projeto.descricao}</p>
               <div className="credits-section">
-                <p><strong>🎮 Gênero:</strong> {projeto.genero || 'Não informado'}</p>
-                <p><strong>⚙️ Tecnologias:</strong> {projeto.tecnologias || 'Não informado'}</p>
-                <p><strong>📅 Data de Início:</strong> {projeto.dataInicio || 'Não informado'}</p>
-                <p><strong>🚀 Status:</strong> {projeto.statusProjeto || 'Não informado'}</p>
+                <p><strong>🎮 Gênero:</strong> {projeto.genero}</p>
+                <p><strong>⚙️ Tecnologias:</strong> {projeto.tecnologias}</p>
+                <p><strong>📅 Data de Início:</strong> {projeto.dataInicio}</p>
+                <p><strong>🚀 Status:</strong> {projeto.statusProjeto}</p>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                <button className="download-btn" onClick={abrirModalDownload}>Baixar Jogo</button>
-                {podeExcluir() && (
-                  <button 
-                    className="download-btn" 
-                    onClick={abrirModalExclusao}
-                    style={{ 
-                      backgroundColor: '#dc3545', 
-                      borderColor: '#dc3545',
-                      marginLeft: 'auto'
-                    }}
-                  >
-                    <i className="fas fa-trash"></i> Excluir Projeto
-                  </button>
-                )}
-              </div>
+              <button className="download-btn" onClick={abrirModalDownload}>Baixar Jogo</button>
             </div>
           </div>
         </div>
@@ -222,7 +193,7 @@ const JogoDescricao = () => {
       {modalImagemAberto && (
         <div className="modal-imagem">
           <span className="fechar" onClick={fecharModalImagem}>&times;</span>
-          <img className="modal-conteudo" src={imagensPadrao[imagemAtual]} alt={`Imagem ${imagemAtual + 1}`} />
+          <img className="modal-conteudo" src={imagens[imagemAtual]} alt={`Imagem ${imagemAtual + 1}`} />
           <a className="anterior" onClick={imagemAnterior}>&#10094;</a>
           <a className="proxima" onClick={proximaImagem}>&#10095;</a>
         </div>
@@ -238,28 +209,6 @@ const JogoDescricao = () => {
               <button className="download-option">Linux</button>
               <button className="download-option">Android</button>
               <button className="download-option">iOS</button>
-            </div>
-          </div>
-        </div>
-      )}
-      {modalExclusaoAberto && (
-        <div className="modal-download">
-          <div className="modal-download-content">
-            <span className="fechar" onClick={fecharModalExclusao}>&times;</span>
-            <h2>Excluir Projeto</h2>
-            <p>Tem certeza que deseja excluir o projeto "{projeto.nomeProjeto}"?</p>
-            <p style={{ color: '#dc3545', fontSize: '14px' }}>Esta ação não pode ser desfeita.</p>
-            <div className="download-options">
-              <button 
-                className="download-option" 
-                onClick={excluirProjeto}
-                style={{ backgroundColor: '#dc3545', borderColor: '#dc3545' }}
-              >
-                Confirmar Exclusão
-              </button>
-              <button className="download-option" onClick={fecharModalExclusao}>
-                Cancelar
-              </button>
             </div>
           </div>
         </div>
@@ -413,5 +362,4 @@ const JogoDescricao = () => {
   );
 };
 
-export default JogoDescricao;
-
+export default JogoCarrossel;

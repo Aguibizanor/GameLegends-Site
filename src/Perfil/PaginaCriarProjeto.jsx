@@ -91,6 +91,7 @@ function PaginaCriarProjeto() {
     form.append("dataInicio", dataInicio);   // String
     form.append("tecnologias", tecnologias); // String
     form.append("genero", genero);           // String
+    form.append("emailDesenvolvedor", formData.email); // Email do desenvolvedor
     if (fotoFile) {
       form.append("foto", fotoFile);         // byte[] no backend
     }

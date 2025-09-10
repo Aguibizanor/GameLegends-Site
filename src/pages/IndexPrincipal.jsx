@@ -184,7 +184,7 @@ const IndexPrincipal = () => {
                       <div className="info">
                         <span className="name">{name}</span>
                         <span className="texto">{descricao}</span>
-                        <Link to={`/Descricao/${id}`}><span className="butao">Veja Mais <i className="fas fa-arrow-circle-right"></i></span></Link>
+                        <Link to={`/Carrossel/${id}`}><span className="butao">Veja Mais <i className="fas fa-arrow-circle-right"></i></span></Link>
                       </div>
                     </div>
                   );

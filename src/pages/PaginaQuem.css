@@ -8,18 +8,18 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
+}
+ 
+/* Mantém o fundo lilás global */
+html, body, #root {
+  background-color: #E6D7FF !important;
 }
  
 .app1 {
   display: flex;
   flex-direction: column;
   min-height: 120vh;
-  background-image: url('../assets/Pessoas.png') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
+  background: #E6D7FF !important;
 }
  
 /* Header */
@@ -294,4 +294,5 @@ body {
     margin-right: auto;
   }
 }
+ 
  

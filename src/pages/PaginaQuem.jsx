@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './PaginaQuem.css';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
-import Pessoas from "../assets/Pessoas.png";
  
 const PaginaQuem = () => {
   const [menuAberto, setMenuAberto] = useState(false);
@@ -26,12 +25,7 @@ const PaginaQuem = () => {
   };
  
   return (
-    <div className="app1" style={{
-      backgroundImage: `url(${Pessoas})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}>
+    <div className="app1">
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
@@ -246,6 +240,7 @@ const PaginaQuem = () => {
 };
  
 export default PaginaQuem;
+ 
  
  
  
