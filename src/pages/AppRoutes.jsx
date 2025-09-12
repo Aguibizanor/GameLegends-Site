@@ -26,9 +26,10 @@ import PaginaRedefinirSenha from "../Cadastro-Login/PaginaRedefinirSenha";
 import PaginaPerfil from "../Perfil/PaginaPerfil";
 import PaginaCriarProjeto from "../Perfil/PaginaCriarProjeto";
 import PaginaDescricao from "./PaginaDescricao";
-import JogoDescricao from "./JogoDescricao";
+import PaginaDescricao2 from "./PaginaDescricao2";
+import PaginaDescricao3 from "./PaginaDescricao3";
+import JogoDetalhes from "./JogoDetalhes";
 import JogoCarrossel from "./JogoCarrossel";
-import TesteDescricao from "./TesteDescricao";
 import PaginaQuem from "./PaginaQuem";
 import PaginaPrivacidade from "./PaginaPrivacidade";
  
@@ -61,9 +62,13 @@ const AppRoutes = () => {
       <Route path="/RedefinirSenha" element={<PaginaRedefinirSenha />} />
       <Route path="/Perfil" element={<PaginaPerfil />} />
       <Route path="/Criar" element={<PaginaCriarProjeto />} />
-      <Route path="/Descricao/:id" element={<JogoDescricao />} />
+      <Route path="/Descricao/1" element={<PaginaDescricao />} />
+      <Route path="/Descricao/2" element={<PaginaDescricao2 />} />
+      <Route path="/Descricao/3" element={<PaginaDescricao3 />} />
+      <Route path="/jogo" element={<JogoDetalhes />} />
+      <Route path="/Descricao2" element={<PaginaDescricao2 />} />
+      <Route path="/Descricao3" element={<PaginaDescricao3 />} />
       <Route path="/Carrossel/:id" element={<JogoCarrossel />} />
-      <Route path="/Teste/:id" element={<TesteDescricao />} />
       <Route path="*" element={<PaginaInicial />} />
       <Route path="/Que" element={<PaginaQuem />} />
       <Route path="/Privacidade" element={<PaginaPrivacidade />} />
@@ -72,6 +77,7 @@ const AppRoutes = () => {
 };
  
 export default AppRoutes;
+ 
  
  
  

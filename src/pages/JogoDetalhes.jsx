@@ -1,43 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './PaginaDescricao.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
- 
-// Imagens do projeto Happy Cat Tavern
-import happy from '../assets/happy.png';
-import gatodesc from '../assets/gatodesc.png';
-import gatodesc1 from '../assets/gatodesc1.png';
- 
-const PaginaDescricao = () => {
+import DeveloperService from '../services/DeveloperService';
+
+const JogoDetalhes = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [projeto, setProjeto] = useState(location.state?.projeto || null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [menuAberto, setMenuAberto] = useState(false);
   const [modalImagemAberto, setModalImagemAberto] = useState(false);
   const [imagemAtual, setImagemAtual] = useState(0);
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
+  const [modalExclusaoAberto, setModalExclusaoAberto] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     usuario: "",
     nome: ""
   });
- 
-  // Imagens do carrossel
-  const imagens = [gatodesc, gatodesc1, happy, happy];
- 
-  // Dados do projeto fixos para o exemplo
-  const projeto = {
-    nomeProjeto: "Happy Cat Tavern: Typing Challenge",
-    descricao: "Batou quer beber o máximo de milkshakes que puder enquanto os clientes da taverna o animam. Cada palavra é um milkshake para Batou beber. Digite com rapidez e precisão para ganhar pontos e desbloquear conquistas!",
-    objetivo: "O jogador deve digitar palavras que aparecem na tela com rapidez e precisão. Cada palavra digitada corretamente conta como um 'milixinale' que Balsou bebe. O objetivo é acumular pontos bebendo o máximo possível.",
-    progressao: "O jogo inclui um sistema de pontuação e conquistas (achievements) para serem desbloqueadas, incentivando a rejogabilidade e a melhoria das habilidades de digitação.",
-    genero: "Typing Challenge / Casual",
-    tecnologias: "Unity",
-    dataInicio: "2024",
-    statusProjeto: "Concluído",
-    estetica: "Temática de fantasia casual com estética animada e fofinha (devido ao nome 'Happy Cat' e à arte de Miyasuki)"
-  };
- 
+
   useEffect(() => {
-    // Verifica se o usuário está logado
+    if (!projeto) {
+      setError('Nenhum projeto selecionado');
+    }
+
     const usuarioData = JSON.parse(localStorage.getItem('usuario'));
     if (usuarioData) {
       setFormData({
@@ -46,16 +35,100 @@ const PaginaDescricao = () => {
         nome: usuarioData.nome
       });
     }
-  }, []);
- 
+  }, [projeto]);
+
   const toggleMenu = () => setMenuAberto(!menuAberto);
   const abrirModalImagem = (index) => { setImagemAtual(index); setModalImagemAberto(true); };
   const fecharModalImagem = () => setModalImagemAberto(false);
-  const imagemAnterior = () => setImagemAtual((imagemAtual - 1 + imagens.length) % imagens.length);
-  const proximaImagem = () => setImagemAtual((imagemAtual + 1) % imagens.length);
+  const imagemAnterior = () => setImagemAtual((imagemAtual - 1 + 3) % 3);
+  const proximaImagem = () => setImagemAtual((imagemAtual + 1) % 3);
   const abrirModalDownload = () => setModalDownloadAberto(true);
   const fecharModalDownload = () => setModalDownloadAberto(false);
- 
+  const abrirModalExclusao = () => setModalExclusaoAberto(true);
+  const fecharModalExclusao = () => setModalExclusaoAberto(false);
+  
+  const excluirProjeto = async () => {
+    const sucesso = await DeveloperService.deleteProject(projeto.id);
+    
+    if (sucesso) {
+      alert('Projeto excluído com sucesso!');
+      navigate('/');
+    } else {
+      alert('Erro ao excluir projeto. Tente novamente.');
+    }
+    
+    fecharModalExclusao();
+  };
+  
+  const podeExcluir = () => {
+    return DeveloperService.canDeleteProject(projeto);
+  };
+
+  const getProjetoImagem = () => {
+    return `http://localhost:8080/projetos/${projeto?.id}/foto`;
+  };
+
+  // Array de imagens para o modal (usando a mesma imagem 3 vezes como nas páginas estáticas)
+  const imagens = [
+    getProjetoImagem(),
+    getProjetoImagem(), 
+    getProjetoImagem()
+  ];
+
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white',
+        fontSize: '1.5rem'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '20px' }}>🎮</div>
+          <p>Carregando jogo...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !projeto) {
+    return (
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        background: 'linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%)',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        <div style={{ fontSize: '4rem', marginBottom: '20px' }}>😭</div>
+        <h2 style={{ fontSize: '2rem', marginBottom: '15px' }}>Oops! Jogo não encontrado</h2>
+        <p style={{ fontSize: '1.2rem', marginBottom: '30px' }}>
+          {error || 'Parece que este jogo saiu para uma aventura!'}
+        </p>
+        <Link 
+          to="/Games" 
+          style={{
+            background: 'white',
+            color: '#FF6B35',
+            padding: '15px 30px',
+            borderRadius: '25px',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            fontSize: '1.1rem'
+          }}
+        >
+          🎆 Voltar para os Jogos
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="GIT gradient-bg">
       <head>
@@ -132,30 +205,50 @@ const PaginaDescricao = () => {
           </div>
         </header>
       </div>
+      
       <div className="game-profile-container">
         <div className="game-profile-content">
           <div className="main-content">
             <div className="game-images-center">
-              <img src={happy} alt={projeto.nomeProjeto} className="main-game-img" />
+              <img src={getProjetoImagem()} alt={projeto.nomeProjeto} className="main-game-img" />
               <div className="extra-images">
-                <img src={gatodesc} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
-                <img src={gatodesc1} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
-                <img src={happy} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
+                <img src={getProjetoImagem()} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
+                <img src={getProjetoImagem()} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
+                <img src={getProjetoImagem()} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
               </div>
             </div>
             <div className="game-info-bottom">
               <h1>{projeto.nomeProjeto}</h1>
               <p>{projeto.descricao}</p>
               <div className="credits-section">
-                <p><strong>Créditos:</strong></p>
-                <p>Artista: Miyasuki (<a href="#">Twitter</a> / <a href="#">Etsy</a>)</p>
-                <p>Programador: OnyxHeart (<a href="#">Twitter</a>)</p>
+                <p><strong>Gênero:</strong> {projeto.genero}</p>
+                <p><strong>Tecnologias:</strong> {projeto.tecnologias}</p>
+                <p><strong>Data de Início:</strong> {projeto.dataInicio}</p>
+                {projeto.statusProjeto && (
+                  <p><strong>Status:</strong> {projeto.statusProjeto}</p>
+                )}
+                {projeto.emailDesenvolvedor && (
+                  <p><strong>Desenvolvedor:</strong> {projeto.emailDesenvolvedor}</p>
+                )}
               </div>
               <button className="download-btn" onClick={abrirModalDownload}>Baixar Jogo</button>
+              {podeExcluir() && (
+                <button className="delete-btn" onClick={abrirModalExclusao} style={{
+                  backgroundColor: '#ff4444',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  marginLeft: '10px',
+                  fontSize: '16px'
+                }}>Excluir Projeto</button>
+              )}
             </div>
           </div>
         </div>
       </div>
+      
       {modalImagemAberto && (
         <div className="modal-imagem">
           <span className="fechar" onClick={fecharModalImagem}>&times;</span>
@@ -164,6 +257,7 @@ const PaginaDescricao = () => {
           <a className="proxima" onClick={proximaImagem}>&#10095;</a>
         </div>
       )}
+      
       {modalDownloadAberto && (
         <div className="modal-download">
           <div className="modal-download-content">
@@ -179,7 +273,38 @@ const PaginaDescricao = () => {
           </div>
         </div>
       )}
+      
+      {modalExclusaoAberto && (
+        <div className="modal-download">
+          <div className="modal-download-content">
+            <span className="fechar" onClick={fecharModalExclusao}>&times;</span>
+            <h2>Excluir Projeto</h2>
+            <p>Tem certeza que deseja excluir o projeto "{projeto.nomeProjeto}"?</p>
+            <p style={{ color: '#ff4444', fontSize: '14px' }}>Esta ação não pode ser desfeita.</p>
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
+              <button onClick={fecharModalExclusao} style={{
+                backgroundColor: '#ccc',
+                color: '#333',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}>Cancelar</button>
+              <button onClick={excluirProjeto} style={{
+                backgroundColor: '#ff4444',
+                color: 'white',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}>Excluir</button>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <Link to={'/'}><img src={esquerda} alt="Seta" className="seta" /></Link>
+      
       <footer style={{ backgroundColor: '#90017F', padding: '40px 20px', marginTop: '50px' }}>
         <div style={{ textAlign: 'center', color: 'white', maxWidth: '800px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '32px', margin: '0 0 20px 0', fontWeight: 'bold' }}>
@@ -327,6 +452,5 @@ const PaginaDescricao = () => {
     </div>
   );
 };
- 
-export default PaginaDescricao;
 
+export default JogoDetalhes;

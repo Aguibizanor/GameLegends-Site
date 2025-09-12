@@ -134,18 +134,7 @@ function PaginaLogin() {
                   LOGIN
                 </button>
               </div>
-              <div className="text-center mt-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail('admin@gamelegends.com');
-                    setSenha('admin123');
-                  }}
-                  className="text-sm text-blue-500 underline"
-                >
-                  Usar credenciais de teste
-                </button>
-              </div>
+
             </form>
             <div className="text-center mt-4">
               <p className="text-gray-500 text-sm">

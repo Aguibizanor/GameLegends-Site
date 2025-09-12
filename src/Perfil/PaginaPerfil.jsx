@@ -167,7 +167,7 @@ function PaginaPerfil() {
                                 to={`/Perfil?tipo=${formData.usuario}`}
                                 className="link-usuario"
                             >
-                                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
                             </Link>
                         ) : (
                             <>

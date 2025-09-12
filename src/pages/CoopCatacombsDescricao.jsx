@@ -4,36 +4,36 @@ import { Link } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
  
-// Imagens do projeto Happy Cat Tavern
-import happy from '../assets/happy.png';
-import gatodesc from '../assets/gatodesc.png';
-import gatodesc1 from '../assets/gatodesc1.png';
+// Imagens do projeto Coop Catacombs
+import catacombs from '../assets/catacombs.png';
+import coop1 from '../assets/coop1.png';
+import coop2 from '../assets/coop2.png';
+import coop3 from '../assets/coop3.png';
  
-const PaginaDescricao = () => {
+const CoopCatacombsDescricao = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const [modalImagemAberto, setModalImagemAberto] = useState(false);
   const [imagemAtual, setImagemAtual] = useState(0);
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    usuario: "",
-    nome: ""
+    usuario: ""
   });
  
   // Imagens do carrossel
-  const imagens = [gatodesc, gatodesc1, happy, happy];
+  const imagens = [coop1, coop2, coop3, catacombs];
  
-  // Dados do projeto fixos para o exemplo
+  // Dados do projeto Coop Catacombs
   const projeto = {
-    nomeProjeto: "Happy Cat Tavern: Typing Challenge",
-    descricao: "Batou quer beber o máximo de milkshakes que puder enquanto os clientes da taverna o animam. Cada palavra é um milkshake para Batou beber. Digite com rapidez e precisão para ganhar pontos e desbloquear conquistas!",
-    objetivo: "O jogador deve digitar palavras que aparecem na tela com rapidez e precisão. Cada palavra digitada corretamente conta como um 'milixinale' que Balsou bebe. O objetivo é acumular pontos bebendo o máximo possível.",
-    progressao: "O jogo inclui um sistema de pontuação e conquistas (achievements) para serem desbloqueadas, incentivando a rejogabilidade e a melhoria das habilidades de digitação.",
-    genero: "Typing Challenge / Casual",
-    tecnologias: "Unity",
+    nomeProjeto: "Coop Catacombs: Roguelike",
+    descricao: "Explore masmorras perigosas em cooperativo! Nas catacumbas sombrias, você e seus aliados enfrentarão desafios únicos a cada descida. Colete tesouros, derrote monstros e descubra os segredos enterrados nas profundezas. Cada aventura é diferente com elementos roguelike que garantem rejogabilidade infinita.",
+    objetivo: "Aventure-se nas profundezas das catacumbas em modo cooperativo, enfrentando hordas de inimigos e coletando tesouros valiosos. Trabalhe em equipe para sobreviver aos perigos crescentes de cada andar.",
+    progressao: "Sistema de progressão baseado em loot e habilidades desbloqueáveis. Cada run oferece novas combinações de itens e desafios, garantindo uma experiência única a cada partida.",
+    genero: "Roguelike / Cooperativo / Dungeon Crawler",
+    tecnologias: "Unity, C#, Multiplayer Networking",
     dataInicio: "2024",
-    statusProjeto: "Concluído",
-    estetica: "Temática de fantasia casual com estética animada e fofinha (devido ao nome 'Happy Cat' e à arte de Miyasuki)"
+    statusProjeto: "Em Desenvolvimento",
+    estetica: "Arte pixel art com atmosfera sombria e misteriosa, inspirada em masmorras clássicas com elementos de terror leve"
   };
  
   useEffect(() => {
@@ -42,8 +42,7 @@ const PaginaDescricao = () => {
     if (usuarioData) {
       setFormData({
         email: usuarioData.email,
-        usuario: usuarioData.usuario,
-        nome: usuarioData.nome
+        usuario: usuarioData.usuario
       });
     }
   }, []);
@@ -120,7 +119,7 @@ const PaginaDescricao = () => {
                   to={`/Perfil?tipo=${formData.usuario}`}
                   className="link-usuario"
                 >
-                  <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
+                  <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
                 </Link>
               ) : (
                 <>
@@ -136,11 +135,11 @@ const PaginaDescricao = () => {
         <div className="game-profile-content">
           <div className="main-content">
             <div className="game-images-center">
-              <img src={happy} alt={projeto.nomeProjeto} className="main-game-img" />
+              <img src={catacombs} alt={projeto.nomeProjeto} className="main-game-img" />
               <div className="extra-images">
-                <img src={gatodesc} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
-                <img src={gatodesc1} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
-                <img src={happy} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
+                <img src={coop1} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
+                <img src={coop2} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
+                <img src={coop3} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
               </div>
             </div>
             <div className="game-info-bottom">
@@ -148,8 +147,8 @@ const PaginaDescricao = () => {
               <p>{projeto.descricao}</p>
               <div className="credits-section">
                 <p><strong>Créditos:</strong></p>
-                <p>Artista: Miyasuki (<a href="#">Twitter</a> / <a href="#">Etsy</a>)</p>
-                <p>Programador: OnyxHeart (<a href="#">Twitter</a>)</p>
+                <p>Desenvolvedor: DungeonMaster Studios (<a href="#">Twitter</a> / <a href="#">Steam</a>)</p>
+                <p>Artista: CryptArt (<a href="#">Portfolio</a>)</p>
               </div>
               <button className="download-btn" onClick={abrirModalDownload}>Baixar Jogo</button>
             </div>
@@ -328,5 +327,4 @@ const PaginaDescricao = () => {
   );
 };
  
-export default PaginaDescricao;
-
+export default CoopCatacombsDescricao;

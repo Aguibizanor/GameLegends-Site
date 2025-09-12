@@ -7,7 +7,8 @@ const PaginaPrivacidade = () => {
   const [menuAberto, setMenuAberto] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    usuario: ""
+    usuario: "",
+    nome: ""
   });
  
   useEffect(() => {
@@ -15,7 +16,8 @@ const PaginaPrivacidade = () => {
     if (usuarioData) {
       setFormData({
         email: usuarioData.email,
-        usuario: usuarioData.usuario
+        usuario: usuarioData.usuario,
+        nome: usuarioData.nome
       });
     }
   }, []);
@@ -62,7 +64,7 @@ const PaginaPrivacidade = () => {
           <div className="painel-usuario">
             {formData.usuario ? (
               <Link to={`/Perfil?tipo=${formData.usuario}`} className="link-usuario">
-                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
               </Link>
             ) : (
               <>

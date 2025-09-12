@@ -16,7 +16,8 @@ const IndexPrincipal = () => {
   const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
   const [formData, setFormData] = useState({
     email: "",
-    usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+    usuario: "", // Pode ser "Cliente" ou "Desenvolvedor"
+    nome: ""
   });
   const carousel = useRef(null);
 
@@ -34,7 +35,8 @@ const IndexPrincipal = () => {
     if (usuarioData) {
       setFormData({
         email: usuarioData.email,
-        usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+        usuario: usuarioData.usuario, // "Cliente" ou "Desenvolvedor"
+        nome: usuarioData.nome
       });
     }
     
@@ -137,7 +139,7 @@ const IndexPrincipal = () => {
                 to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
                 className="link-usuario"
               >
-                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
               </Link>
             ) : (
               // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
@@ -184,7 +186,7 @@ const IndexPrincipal = () => {
                       <div className="info">
                         <span className="name">{name}</span>
                         <span className="texto">{descricao}</span>
-                        <Link to={`/Carrossel/${id}`}><span className="butao">Veja Mais <i className="fas fa-arrow-circle-right"></i></span></Link>
+                        <Link to={id === 1 ? `/Carrossel/${id}` : id === 2 ? '/Descricao2' : '/Descricao3'}><span className="butao">Veja Mais <i className="fas fa-arrow-circle-right"></i></span></Link>
                       </div>
                     </div>
                   );

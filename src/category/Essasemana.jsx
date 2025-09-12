@@ -24,7 +24,8 @@ const Essasemana = () => {
     const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
     const [formData, setFormData] = useState({
         email: "",
-        usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+        usuario: "", // Pode ser "Cliente" ou "Desenvolvedor"
+        nome: ""
       });
 
     useEffect(() => {
@@ -46,7 +47,8 @@ const Essasemana = () => {
     if (usuarioData) {
         setFormData({
             email: usuarioData.email,
-            usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+            usuario: usuarioData.usuario, // "Cliente" ou "Desenvolvedor"
+            nome: usuarioData.nome
           });
         }
       }, []);
@@ -100,7 +102,7 @@ const Essasemana = () => {
                 to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
                 className="link-usuario"
               >
-                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
               </Link>
             ) : (
               // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado

@@ -16,7 +16,8 @@ const PaginaInicial = () => {
     const [projetos, setProjetos] = useState([]);
     const [formData, setFormData] = useState({
         email: "",
-        usuario: "" // Pode ser "Cliente" ou "Desenvolvedor"
+        usuario: "", // Pode ser "Cliente" ou "Desenvolvedor"
+        nome: ""
     });
 
     useEffect(() => {
@@ -42,7 +43,8 @@ const PaginaInicial = () => {
         if (usuarioData) {
             setFormData({
                 email: usuarioData.email,
-                usuario: usuarioData.usuario // "Cliente" ou "Desenvolvedor"
+                usuario: usuarioData.usuario, // "Cliente" ou "Desenvolvedor"
+                nome: usuarioData.nome
             });
         }
     }, []);
@@ -101,7 +103,7 @@ const PaginaInicial = () => {
                                 to={`/Perfil?tipo=${formData.usuario}`}
                                 className="link-usuario"
                             >
-                                <i className="fas fa-user-circle"></i> Perfil ({formData.usuario})
+                                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
                             </Link>
                         ) : (
                             <>
@@ -169,7 +171,7 @@ const PaginaInicial = () => {
                 </section>
                 <section className="games-section">
                     {projetos.map(projeto => (
-                        <Link key={projeto.id} to={`/Descricao/${projeto.id}`} className="game-card-link">
+                        <Link key={projeto.id} to={`/jogo`} state={{ projeto }} className="game-card-link">
                             <div className="game-card">
                                 {getProjetoImagem(projeto) ? (
                                     <img src={getProjetoImagem(projeto)} alt={projeto.nomeProjeto} />
