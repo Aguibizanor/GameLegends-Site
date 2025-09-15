@@ -27,7 +27,7 @@ const PaginaDescricao2 = () => {
   // Dados do projeto Coop Catacombs
   const projeto = {
     nomeProjeto: "Coop Catacombs: Roguelike",
-    descricao: "Explore masmorras perigosas em cooperativo! Nas catacumbas sombrias, você e seus aliados enfrentarão desafios únicos a cada descida. Colete tesouros, derrote monstros e descubra os segredos enterrados nas profundezas. Cada aventura é diferente com elementos roguelike que garantem rejogabilidade infinita.",
+    descricao: "Explore masmorras perigosas em cooperativo! Nas catacumbas sombrias, você e seus aliados enfrentarão desafios únicos a cada descida. Colete tesouros, derrote monstros e descubra os segredos enterrados nas profundezas. Cada aventura é diferente com elementos roguelike que garantem rejogabilidade infinita!",
     genero: "Roguelike / Cooperativo / Dungeon Crawler",
     tecnologias: "Unity, C#, Multiplayer Networking",
     dataInicio: "2024",
@@ -104,6 +104,10 @@ const PaginaDescricao2 = () => {
             <div className="game-info-bottom">
               <h1>{projeto.nomeProjeto}</h1>
               <p>{projeto.descricao}</p>
+              <p>🎮 <strong>Gênero:</strong> {projeto.genero}</p>
+              <p>⚙️ <strong>Tecnologias:</strong> {projeto.tecnologias}</p>
+              <p>📅 <strong>Data de Início:</strong> {projeto.dataInicio}</p>
+              <p>🚀 <strong>Status:</strong> {projeto.statusProjeto}</p>
               <div className="credits-section">
                 <p><strong>Créditos:</strong></p>
                 <p>Desenvolvedor: DungeonMaster Studios (<a href="#">Twitter</a> / <a href="#">Steam</a>)</p>
@@ -143,3 +147,4 @@ const PaginaDescricao2 = () => {
 };
  
 export default PaginaDescricao2;
+ 

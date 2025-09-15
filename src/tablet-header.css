@@ -1,0 +1,98 @@
+/* Estilo de cabeçalho para tablets/iPads - Aplicado globalmente */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .conteudo-cabecalho {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .logo {
+    flex-shrink: 0;
+  }
+
+  .logo img {
+    width: 80px;
+  }
+
+  .navegacao {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    background: transparent;
+    border-radius: 5px;
+    white-space: nowrap;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-item i {
+    margin-right: 4px;
+    font-size: 0.8rem;
+  }
+
+  .hamburguer {
+    display: none !important;
+  }
+
+  .formulario-pesquisa {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    padding: 6px 12px;
+    margin-left: auto;
+  }
+
+  .input-pesquisa {
+    width: 180px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+  }
+
+  .input-pesquisa::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .botao-pesquisa {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 4px;
+  }
+
+  .painel-usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  .link-usuario {
+    padding: 4px 0;
+    margin: 0;
+    font-size: 0.8rem;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .link-usuario:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}

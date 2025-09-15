@@ -101,6 +101,10 @@ const PaginaDescricao3 = () => {
             <div className="game-info-bottom">
               <h1>{projeto.nomeProjeto}</h1>
               <p>{projeto.descricao}</p>
+              <p>🎮 <strong>Gênero:</strong> {projeto.genero}</p>
+              <p>⚙️ <strong>Tecnologias:</strong> {projeto.tecnologias}</p>
+              <p>📅 <strong>Data de Início:</strong> {projeto.dataInicio}</p>
+              <p>🚀 <strong>Status:</strong> {projeto.statusProjeto}</p>
               <div className="credits-section">
                 <p><strong>Créditos:</strong></p>
                 <p>Desenvolvedor: SkyClimber Games (<a href="#">Twitter</a> / <a href="#">Itch.io</a>)</p>
@@ -140,3 +144,4 @@ const PaginaDescricao3 = () => {
 };
  
 export default PaginaDescricao3;
+ 
