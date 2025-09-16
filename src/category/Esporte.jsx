@@ -123,6 +123,15 @@ const Esporte = () => {
                             </svg>
                         </button>
                     </form>
+                    <form className="formulario-pesquisa-mobile" action="/search">
+                        <input required="required" name="q" placeholder="Pesquisar" className="input-pesquisa-mobile" type="text" />
+                        <button className="botao-pesquisa-mobile" aria-label="Search">
+                            <svg version="1.1" width="16" height="16" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </form>
                     <div className="painel-usuario">
                     {formData.usuario ? (
               // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário

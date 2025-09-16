@@ -121,6 +121,15 @@ const Terror = () => {
                             </svg>
                         </button>
                     </form>
+                    <form className="formulario-pesquisa-mobile" action="/search">
+                        <input required="required" name="q" placeholder="Pesquisar" className="input-pesquisa-mobile" type="text" />
+                        <button className="botao-pesquisa-mobile" aria-label="Search">
+                            <svg version="1.1" width="16" height="16" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </form>
                     <div className="painel-usuario">
                     {formData.usuario ? (
               // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
@@ -146,50 +155,7 @@ const Terror = () => {
                 </button>
                 <section className={`barra-lateral ${isMobileOpen ? 'aberta' : ''}`} style={{backgroundColor: 'white'}}>
                     <div>
-                        {isTablet && (
-                            <form className="formulario-pesquisa-tablet" action="/search" style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                margin: '10px 0 20px 0',
-                                padding: '0 10px',
-                                position: 'relative',
-                                zIndex: isSearchFocused ? 1000 : 'auto',
-                                boxShadow: isSearchFocused ? '0 4px 20px rgba(0,0,0,0.15)' : 'none',
-                                borderRadius: isSearchFocused ? '8px' : 'initial',
-                                backgroundColor: isSearchFocused ? 'white' : 'transparent'
-                            }}>
-                                <input 
-                                    required="required" 
-                                    name="q" 
-                                    placeholder="Pesquisar Jogos, Tags ou Criadores" 
-                                    className="input-pesquisa" 
-                                    type="text"
-                                    onFocus={() => setIsSearchFocused(true)}
-                                    onBlur={() => setIsSearchFocused(false)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        borderRadius: '5px 0 0 5px',
-                                        border: 'none',
-                                        outline: 'none',
-                                        color: '#000000'
-                                    }}
-                                />
-                                <button className="botao-pesquisa" aria-label="Search" style={{
-                                    padding: '8px 12px',
-                                    border: 'none',
-                                    background: '#780069',
-                                    color: '#fff',
-                                    cursor: 'pointer',
-                                    borderRadius: '0 5px 5px 0'
-                                }}>
-                                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                    </svg>
-                                </button>
-                            </form>
-                        )}
+
                         <h1 onClick={() => toggleList('genero')}>
                             <span className={`triangulo ${isOpen.genero ? 'aberta' : ''}`}></span>
                             Gênero

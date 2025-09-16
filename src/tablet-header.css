@@ -1,98 +1,421 @@
-/* Estilo de cabeçalho para tablets/iPads - Aplicado globalmente */
+/* Estilo de cabeçalho para tablets/iPads - Similar ao mobile */
 @media (min-width: 768px) and (max-width: 1199px) {
+  .cabecalho {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+  }
+
   .conteudo-cabecalho {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    gap: 20px;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+    position: relative !important;
   }
 
   .logo {
-    flex-shrink: 0;
+    flex-shrink: 0 !important;
+    order: 1 !important;
   }
 
   .logo img {
-    width: 80px;
+    width: 120px !important;
+  }
+
+  /* Nova barra de pesquisa para tablet */
+  .formulario-pesquisa-mobile {
+    display: flex !important;
+    align-items: center !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 25px !important;
+    padding: 5px !important;
+    position: absolute !important;
+    left: 40% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .input-pesquisa-mobile {
+    width: 180px !important;
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    outline: none !important;
+  }
+
+  .input-pesquisa-mobile::placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .botao-pesquisa-mobile {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Esconder navegação principal - similar ao mobile */
+  .navegacao {
+    display: none !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background: #90017F !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    z-index: 999 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+  }
+
+  .navegacao.ativo {
+    display: flex !important;
+  }
+
+  .navegacao.ativo .formulario-pesquisa {
+    display: flex !important;
+    background: white !important;
+    margin: 15px 20px !important;
+    border-radius: 25px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    order: -1 !important;
+  }
+
+  .navegacao.ativo .input-pesquisa {
+    color: #333 !important;
+    background: white !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 25px 0 0 25px !important;
+    width: 100% !important;
+  }
+
+  .navegacao.ativo .input-pesquisa::placeholder {
+    color: #666 !important;
+  }
+
+  .navegacao.ativo .botao-pesquisa {
+    color: #fff !important;
+    background: #90017F !important;
+    border-radius: 0 25px 25px 0 !important;
+    padding: 10px 15px !important;
+  }
+
+  .nav-item {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    color: #333 !important;
+    padding: 15px 20px !important;
+    margin: 5px 20px !important;
+    background: #f8f9ff !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    border-left: 3px solid transparent !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    width: calc(100% - 40px) !important;
+  }
+
+  .nav-item:hover {
+    background: #90017F !important;
+    color: #fff !important;
+    border-left: 3px solid #7A0169 !important;
+    box-shadow: 0 2px 5px rgba(144, 1, 127, 0.2) !important;
+    border: 1px solid rgba(0,0,0,0.2) !important;
+  }
+
+  .nav-item i {
+    margin-right: 8px !important;
+  }
+
+  /* Mostrar hambúrguer - similar ao mobile */
+  .hamburguer {
+    display: block !important;
+    z-index: 1001 !important;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: none !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 1.5rem !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+  }
+
+  /* Esconder formulário de pesquisa do cabeçalho */
+  .conteudo-cabecalho .formulario-pesquisa {
+    display: none !important;
+  }
+
+  /* Mostrar painel de usuário no cabeçalho */
+  .painel-usuario {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-right: 60px !important;
+  }
+
+  .link-usuario {
+    color: #fff !important;
+    text-decoration: none !important;
+    margin: 0 5px !important;
+    background: #780069 !important;
+    padding: 10px 15px !important;
+    border-radius: 6px !important;
+    transition: background 0.3s ease !important;
+    font-size: 0.9rem !important;
+    white-space: nowrap !important;
+  }
+
+  .link-usuario:hover {
+    background: #A0008D !important;
+  }
+
+  /* Esconder barra original no tablet */
+  .formulario-pesquisa {
+    display: none !important;
+  }
+
+  /* Mostrar painel de usuário no menu */
+  .navegacao.ativo .painel-usuario {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+    padding: 0 20px 15px 20px !important;
+  }
+
+  .navegacao.ativo .link-usuario {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    color: #333 !important;
+    padding: 15px 20px !important;
+    margin: 5px 0 !important;
+    background: #f8f9ff !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    border-left: 3px solid transparent !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    width: calc(100% - 40px) !important;
+  }
+
+  .navegacao.ativo .link-usuario:hover {
+    background: #90017F !important;
+    color: #fff !important;
+    border-left: 3px solid #7A0169 !important;
+    box-shadow: 0 2px 5px rgba(144, 1, 127, 0.2) !important;
+    border: 1px solid rgba(0,0,0,0.2) !important;
+  }
+}
+
+/* Estilo para tela de notebook e computador - botões ao lado da barra de pesquisa */
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .conteudo-cabecalho {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+  }
+
+  .logo {
+    flex-shrink: 0 !important;
+    order: 1 !important;
   }
 
   .navegacao {
     display: flex !important;
-    align-items: center;
-    gap: 10px;
+    align-items: center !important;
+    order: 2 !important;
   }
 
-  .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 6px 8px;
-    font-size: 0.8rem;
-    background: transparent;
-    border-radius: 5px;
-    white-space: nowrap;
-    color: #fff;
-    text-decoration: none;
+  .formulario-pesquisa {
+    display: flex !important;
+    margin: 0 !important;
+    order: 3 !important;
   }
 
-  .nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-item i {
-    margin-right: 4px;
-    font-size: 0.8rem;
+  .painel-usuario {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 0 10px !important;
+    order: 4 !important;
   }
 
   .hamburguer {
     display: none !important;
   }
+}
+
+/* Estilo para tela de celular - barra de pesquisa e botões no cabeçalho */
+@media (max-width: 767px) {
+  .conteudo-cabecalho {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 15px !important;
+    position: relative !important;
+  }
+
+  .logo {
+    flex-shrink: 0 !important;
+    order: 1 !important;
+  }
+
+  .logo img {
+    width: 70px !important;
+  }
 
   .formulario-pesquisa {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 25px;
-    padding: 6px 12px;
-    margin-left: auto;
+    display: flex !important;
+    flex: 1 !important;
+    max-width: 140px !important;
+    margin: 0 !important;
+    order: 2 !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 20px !important;
+    padding: 3px !important;
+    z-index: 1 !important;
   }
 
   .input-pesquisa {
-    width: 180px;
-    padding: 4px 8px;
-    font-size: 0.8rem;
-    background: transparent;
-    border: none;
-    color: #fff;
+    width: 100% !important;
+    padding: 5px 8px !important;
+    font-size: 0.75rem !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    outline: none !important;
   }
 
   .input-pesquisa::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 
   .botao-pesquisa {
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding: 4px;
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 26px !important;
+    height: 26px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .painel-usuario {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 10px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-right: 45px !important;
   }
 
   .link-usuario {
-    padding: 4px 0;
-    margin: 0;
-    font-size: 0.8rem;
-    background: transparent;
-    color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
+    color: #fff !important;
+    text-decoration: none !important;
+    background: #780069 !important;
+    padding: 8px 12px !important;
+    border-radius: 5px !important;
+    font-size: 0.75rem !important;
+    white-space: nowrap !important;
+    transition: background 0.3s ease !important;
   }
 
   .link-usuario:hover {
-    color: rgba(255, 255, 255, 0.8);
+    background: #A0008D !important;
+  }
+
+  .hamburguer {
+    display: block !important;
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1002 !important;
+    background: none !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 1.3rem !important;
+    cursor: pointer !important;
+    padding: 5px !important;
+  }
+
+  .navegacao {
+    display: none !important;
+  }
+
+  .navegacao.ativo {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: #90017F !important;
+    z-index: 999 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+  }
+
+  /* Nova barra de pesquisa para mobile */
+  .formulario-pesquisa-mobile {
+    display: flex !important;
+    align-items: center !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 20px !important;
+    padding: 3px !important;
+    position: absolute !important;
+    left: 35% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .input-pesquisa-mobile {
+    width: 120px !important;
+    padding: 5px 8px !important;
+    font-size: 0.75rem !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    outline: none !important;
+  }
+
+  .input-pesquisa-mobile::placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .botao-pesquisa-mobile {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 24px !important;
+    height: 24px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Esconder barra original no mobile */
+  .formulario-pesquisa {
+    display: none !important;
+  }
+}
+
+/* Esconder nova barra em telas muito grandes */
+@media (min-width: 1200px) {
+  .formulario-pesquisa-mobile {
+    display: none !important;
   }
 }
