@@ -1,0 +1,381 @@
+/* Header Component Styles */
+.cabecalho {
+  background: #90017F;
+  color: #fff;
+  padding: 10px 0;
+}
+
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .conteudo-cabecalho {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    position: relative !important;
+    gap: 15px !important;
+  }
+
+  .logo {
+    flex-shrink: 0 !important;
+    order: 1 !important;
+  }
+
+  .navegacao {
+    display: flex !important;
+    align-items: center !important;
+    order: 2 !important;
+  }
+
+  .nav-item {
+    padding: 10px 15px !important;
+    font-size: 0.85rem !important;
+    margin: 0 5px !important;
+  }
+
+  .formulario-pesquisa {
+    display: flex !important;
+    flex: 1 !important;
+    max-width: 180px !important;
+    margin: 0 8px !important;
+    order: 3 !important;
+  }
+
+  .painel-usuario {
+    display: flex !important;
+    flex-shrink: 0 !important;
+    order: 4 !important;
+    margin-right: 50px !important;
+    gap: 3px !important;
+  }
+
+  .painel-usuario .link-usuario {
+    padding: 10px 15px !important;
+    font-size: 0.85rem !important;
+    margin: 0 4px !important;
+  }
+
+  .hamburguer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .conteudo-cabecalho {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    position: relative !important;
+  }
+
+  .logo {
+    flex-shrink: 0 !important;
+    order: 1 !important;
+  }
+
+  .formulario-pesquisa {
+    display: flex !important;
+    flex: 1 !important;
+    max-width: 220px !important;
+    margin: 0 10px !important;
+    order: 2 !important;
+  }
+
+  .painel-usuario {
+    display: flex !important;
+    flex-shrink: 0 !important;
+    order: 3 !important;
+    margin-right: 50px !important;
+    gap: 5px !important;
+  }
+
+  .painel-usuario .link-usuario {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+    margin: 0 2px !important;
+  }
+
+  .navegacao {
+    display: none !important;
+    order: 4 !important;
+  }
+
+  .hamburguer {
+    display: block !important;
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1002 !important;
+    order: 5 !important;
+  }
+}
+
+.conteudo-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.logo img {
+  width: 120px;
+  border: none;
+  outline: none;
+}
+
+.logo {
+  border: none;
+  outline: none;
+}
+
+.logo a {
+  border: none;
+  outline: none;
+}
+
+.navegacao {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 0 5px;
+  background: #780069;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.nav-item i {
+  margin-right: 8px;
+}
+
+.nav-item:hover {
+  background: #A0008D;
+}
+
+.hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.painel-usuario {
+  display: flex;
+  align-items: center;
+}
+
+.link-usuario {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 8px;
+  background: #780069;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.link-usuario:hover {
+  background: #A0008D;
+}
+
+.formulario-pesquisa {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 5px;
+  margin: 0 20px;
+}
+
+.input-pesquisa {
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 8px 15px;
+  outline: none;
+  width: 250px;
+  border-radius: 25px;
+}
+
+.input-pesquisa::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.botao-pesquisa {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+}
+
+.botao-pesquisa:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.formulario-pesquisa-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .cabecalho {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+  }
+
+  .conteudo-cabecalho {
+    position: relative !important;
+  }
+
+  .navegacao {
+    display: none !important;
+    flex-direction: column !important;
+    width: calc(100% - 160px) !important;
+    background: #90017F !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 80px !important;
+    right: 80px !important;
+    z-index: 999 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    border-radius: 15px !important;
+    margin-top: 10px !important;
+  }
+
+  .navegacao.ativo {
+    display: flex !important;
+  }
+
+  .navegacao.ativo .formulario-pesquisa {
+    display: flex !important;
+    background: white !important;
+    margin: 15px 20px !important;
+    border-radius: 25px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    order: -1 !important;
+  }
+
+  .navegacao.ativo .input-pesquisa {
+    color: #333 !important;
+    background: white !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 25px 0 0 25px !important;
+  }
+
+  .navegacao.ativo .input-pesquisa::placeholder {
+    color: #666 !important;
+  }
+
+  .navegacao.ativo .botao-pesquisa {
+    color: #fff !important;
+    background: #90017F !important;
+    border-radius: 0 25px 25px 0 !important;
+    padding: 10px 15px !important;
+  }
+
+  .navegacao.ativo .botao-pesquisa:hover {
+    background: #780069 !important;
+  }
+
+  .conteudo-cabecalho .formulario-pesquisa {
+    display: none !important;
+  }
+
+  .nav-item {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    color: #fff !important;
+    padding: 15px 20px !important;
+    margin: 5px 15px !important;
+    background: #f8f9ff !important;
+    color: #333 !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+    border-left: 3px solid transparent !important;
+  }
+
+  .nav-item:hover {
+    background: #90017F !important;
+    color: #fff !important;
+    border-left: 3px solid #7A0169 !important;
+    box-shadow: 0 2px 5px rgba(144, 1, 127, 0.2) !important;
+  }
+
+  .nav-item i {
+    margin-right: 8px !important;
+  }
+
+  .hamburguer {
+    display: block !important;
+    z-index: 1001 !important;
+    position: absolute !important;
+    right: 50px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    color: #fff !important;
+    font-size: 1.5rem !important;
+    cursor: pointer !important;
+    padding: 12px 16px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .hamburguer:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    transform: translateY(-50%) scale(1.05) !important;
+  }
+
+  .painel-usuario {
+    display: none !important;
+  }
+
+  .navegacao.ativo .painel-usuario {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+    padding: 0 15px 15px 15px !important;
+  }
+
+  .navegacao.ativo .link-usuario {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    color: #333 !important;
+    padding: 12px 20px !important;
+    margin: 2px 0 !important;
+    background: #f8f9ff !important;
+    border-radius: 5px !important;
+    transition: all 0.2s ease !important;
+    border-left: 3px solid transparent !important;
+  }
+
+  .navegacao.ativo .link-usuario:hover {
+    background: #90017F !important;
+    color: #fff !important;
+    border-left: 3px solid #7A0169 !important;
+    box-shadow: 0 2px 5px rgba(144, 1, 127, 0.2) !important;
+  }
+}

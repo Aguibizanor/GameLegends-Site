@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PaginaDescricao.css';
 import { Link } from 'react-router-dom';
-import Logo from "../assets/logo.site.tcc.png";
+import Header from '../components/Header';
 import esquerda from "../assets/esquerda.png";
  
 // Imagens do projeto Happy Cat Tavern
@@ -10,15 +10,9 @@ import gatodesc from '../assets/gatodesc.png';
 import gatodesc1 from '../assets/gatodesc1.png';
  
 const PaginaDescricao = () => {
-  const [menuAberto, setMenuAberto] = useState(false);
   const [modalImagemAberto, setModalImagemAberto] = useState(false);
   const [imagemAtual, setImagemAtual] = useState(0);
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    usuario: "",
-    nome: ""
-  });
  
   // Imagens do carrossel
   const imagens = [gatodesc, gatodesc1, happy, happy];
@@ -36,19 +30,7 @@ const PaginaDescricao = () => {
     estetica: "Temática de fantasia casual com estética animada e fofinha (devido ao nome 'Happy Cat' e à arte de Miyasuki)"
   };
  
-  useEffect(() => {
-    // Verifica se o usuário está logado
-    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
-    if (usuarioData) {
-      setFormData({
-        email: usuarioData.email,
-        usuario: usuarioData.usuario,
-        nome: usuarioData.nome
-      });
-    }
-  }, []);
- 
-  const toggleMenu = () => setMenuAberto(!menuAberto);
+
   const abrirModalImagem = (index) => { setImagemAtual(index); setModalImagemAberto(true); };
   const fecharModalImagem = () => setModalImagemAberto(false);
   const imagemAnterior = () => setImagemAtual((imagemAtual - 1 + imagens.length) % imagens.length);
@@ -61,77 +43,7 @@ const PaginaDescricao = () => {
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
-      <div className="app7">
-        <header className="cabecalho">
-          <div className="conteudo-cabecalho">
-            <h1 className="logo">
-              <a href="/Index" title="Game Legends">
-                <img src={Logo} alt="Logo do Game Legends" />
-              </a>
-            </h1>
-            <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-              {menuAberto && (
-                <form className="formulario-pesquisa" action="/search" style={{
-                  width: '100%',
-                  margin: '10px 0',
-                  padding: '0 20px'
-                }}>
-                  <input
-                    required="required"
-                    name="q"
-                    placeholder="Pesquisar Jogos, Tags ou Criadores"
-                    className="input-pesquisa"
-                    type="text"
-                    style={{ width: '100%' }}
-                  />
-                  <button className="botao-pesquisa" aria-label="Search">
-                    <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                  </button>
-                </form>
-              )}
-              <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
-              <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
-              <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
-              <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
-            </nav>
-            <button className="hamburguer" onClick={toggleMenu} style={{
-              position: menuAberto ? 'fixed' : 'static',
-              top: menuAberto ? '195px' : 'auto',
-              right: menuAberto ? '20px' : 'auto',
-              zIndex: menuAberto ? 100000 : 'auto'
-            }}>
-              <i className="fas fa-bars"></i>
-            </button>
-            <form className="formulario-pesquisa" action="/search">
-              <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text"/>
-              <button className="botao-pesquisa" aria-label="Search">
-                <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </button>
-            </form>
-            <div className="painel-usuario">
-              {formData.usuario ? (
-                <Link
-                  to={`/Perfil?tipo=${formData.usuario}`}
-                  className="link-usuario"
-                >
-                  <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
-                </Link>
-              ) : (
-                <>
-                  <Link to={'/Login'} className="link-usuario">Login</Link>
-                  <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
-                </>
-              )}
-            </div>
-          </div>
-        </header>
-      </div>
+      <Header />
       <div className="game-profile-container">
         <div className="game-profile-content">
           <div className="main-content">

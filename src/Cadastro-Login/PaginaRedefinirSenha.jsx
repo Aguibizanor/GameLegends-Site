@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import './PaginaRedefinirSenha.css';
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.site.tcc.png";
+import Header from '../components/Header';
 import mario from "../assets/mario.png";
 import esquerda from "../assets/esquerda.png";
 import RedefinirSenhaService from '../services/RedefinirSenhaService';
  
 const PaginaRedefinirSenha = () => {
-  const [menuAberto, setMenuAberto] = useState(false);
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
- 
-  const toggleMenu = () => {
-    setMenuAberto(!menuAberto);
-  };
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,41 +50,11 @@ const PaginaRedefinirSenha = () => {
   };
  
   return (
-    <div className="pagina-redefinir-senha-app">
+    <div className="app">
       <head>
           <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
       </head>
-      <header className="pagina-redefinir-senha-cabecalho">
-        <div className="pagina-redefinir-senha-conteudo-cabecalho">
-          <h1 className="pagina-redefinir-senha-logo">
-            <Link to="/" title="Game Legends">
-              <img src={Logo} alt="Logo do Game Legends" />
-            </Link>
-          </h1>
-          <nav className={`pagina-redefinir-senha-navegacao ${menuAberto ? 'ativo' : ''}`}>
-            <Link to={'/Index'} className="pagina-redefinir-senha-nav-text pagina-redefinir-senha-nav-item"><i className="fas fa-home"></i><span className="pagina-redefinir-senha-nav-label">Início</span></Link>
-            <Link to={'/'} className="pagina-redefinir-senha-nav-text pagina-redefinir-senha-nav-item"><i className="fas fa-gamepad"></i><span className="pagina-redefinir-senha-nav-label">Games</span></Link>
-            <Link to={'/Que'} className="pagina-redefinir-senha-nav-text pagina-redefinir-senha-nav-item"><i className="fas fa-question-circle"></i><span className="pagina-redefinir-senha-nav-label">Sobre</span></Link>
-            <Link to={'/Suporte'} className="pagina-redefinir-senha-nav-text pagina-redefinir-senha-nav-item"><i className="fas fa-headset"></i><span className="pagina-redefinir-senha-nav-label">Suporte</span></Link>
-          </nav>
-          <button className="pagina-redefinir-senha-hamburguer" onClick={toggleMenu}>
-            <i className="fas fa-bars"></i>
-          </button>
-          <form className="pagina-redefinir-senha-formulario-pesquisa" action="/search">
-            <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="pagina-redefinir-senha-input-pesquisa" type="text"/>
-            <button className="pagina-redefinir-senha-botao-pesquisa" aria-label="Search">
-              <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="pagina-redefinir-senha-icone-pesquisa" stroke="currentColor">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </button>
-          </form>
-          <div className="pagina-redefinir-senha-painel-usuario">
-            <Link className="pagina-redefinir-senha-link-usuario" to="/Login">Login</Link>
-            <Link className="pagina-redefinir-senha-link-usuario" to="/Cadastro">Registre-se</Link>
-          </div>
-        </div>
-      </header>
+      <Header />
  
       <main className="pagina-redefinir-senha-main">
         <div className="pagina-redefinir-senha-oia">

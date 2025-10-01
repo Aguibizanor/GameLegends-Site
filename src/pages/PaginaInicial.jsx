@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import Logo from "../assets/logo.site.tcc.png";
+import Header from '../components/Header';
 import "./PaginaInicial.css";
 
 const PaginaInicial = () => {
@@ -12,13 +12,9 @@ const PaginaInicial = () => {
     });
 
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-    const [menuAberto, setMenuAberto] = useState(false);
     const [projetos, setProjetos] = useState([]);
-    const [formData, setFormData] = useState({
-        email: "",
-        usuario: "", // Pode ser "Cliente" ou "Desenvolvedor"
-        nome: ""
-    });
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
 
     useEffect(() => {
         // Fetch projects from API
@@ -38,24 +34,20 @@ const PaginaInicial = () => {
                 setProjetos([]);
             });
 
-        // Verifica se o usuário está logado/cadastrado ao carregar a página
-        const usuarioData = JSON.parse(localStorage.getItem('usuario'));
-        if (usuarioData) {
-            setFormData({
-                email: usuarioData.email,
-                usuario: usuarioData.usuario, // "Cliente" ou "Desenvolvedor"
-                nome: usuarioData.nome
-            });
-        }
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+            setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+        };
+        
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const toggleList = (section) => {
         setIsOpen({ ...isOpen, [section]: !isOpen[section] });
     };
 
-    const toggleMenu = () => {
-        setMenuAberto(!menuAberto);
-    };
+
 
     const toggleMobileMenu = () => {
         setIsMobileOpen(!isMobileOpen);
@@ -72,57 +64,7 @@ const PaginaInicial = () => {
             <head>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
             </head>
-            <header className="cabecalho">
-                <div className="conteudo-cabecalho">
-                    <h1 className={`logo ${menuAberto ? 'escondida' : ''}`}>
-                        <a href="/Index" title="Game Legends">
-                            <img src={Logo} alt="Logo do Game Legends" />
-                        </a>
-                    </h1>
-                    <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-                        <Link to={'/Index'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
-                        <Link to={'/'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
-                        <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
-                        <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
-                    </nav>
-                    <button className="hamburguer" onClick={toggleMenu}>
-                        <i className="fas fa-bars"></i>
-                    </button>
-                    <form className="formulario-pesquisa" action="/search">
-                        <input required="required" name="q" placeholder="Pesquisar Jogos, Tags ou Criadores" className="input-pesquisa" type="text" />
-                        <button className="botao-pesquisa" aria-label="Search">
-                            <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </button>
-                    </form>
-                    <form className="formulario-pesquisa-mobile" action="/search">
-                        <input required="required" name="q" placeholder="Pesquisar" className="input-pesquisa-mobile" type="text" />
-                        <button className="botao-pesquisa-mobile" aria-label="Search">
-                            <svg version="1.1" width="16" height="16" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" stroke="currentColor">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </button>
-                    </form>
-                    <div className="painel-usuario">
-                        {formData.usuario ? (
-                            <Link
-                                to={`/Perfil?tipo=${formData.usuario}`}
-                                className="link-usuario"
-                            >
-                                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
-                            </Link>
-                        ) : (
-                            <>
-                                <Link to={'/Login'} className="link-usuario">Login</Link>
-                                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </header>
+            <Header />
             <main className="principal">
                 <button className={`hamburguer-principal ${isMobileOpen ? 'aberto' : ''}`} onClick={toggleMobileMenu}>
                     <i className={`fas ${isMobileOpen ? 'fa-chevron-left' : 'fa-chevron-right'}`}></i>
@@ -180,17 +122,20 @@ const PaginaInicial = () => {
                 </section>
                 <section className="games-section">
                     {projetos.map(projeto => (
-                        <Link key={projeto.id} to={`/jogo`} state={{ projeto }} className="game-card-link">
-                            <div className="game-card">
-                                {getProjetoImagem(projeto) ? (
-                                    <img src={getProjetoImagem(projeto)} alt={projeto.nomeProjeto} />
-                                ) : (
-                                    <div className="no-image">sem imagem</div>
-                                )}
+                        <div key={projeto.id} className="game-card">
+                            <img 
+                                src={getProjetoImagem(projeto)} 
+                                alt={projeto.nomeProjeto} 
+                                className="game-image" 
+                            />
+                            <div className="game-info">
                                 <h3>{projeto.nomeProjeto}</h3>
-                                <p className="game-description">{projeto.descricao}</p>
+                                <p>{projeto.descricao}</p>
+                                <Link to={`/Descricao/${projeto.id}`}>
+                                    <button className="btn-primary">Ver Detalhes</button>
+                                </Link>
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </section>
             </main>

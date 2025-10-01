@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import Logo from "../assets/logo.site.tcc.png";
+import Header from '../components/Header';
 import tomate from '../assets/tomate.png';
 import melancia from '../assets/melancia.png';
 import uva from '../assets/uva.png';
@@ -19,31 +19,15 @@ const Terror = () => {
     });
  
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-    const [menuAberto, setMenuAberto] = useState(false);
     const [produtos, setProdutos] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
-    const [isSearchFocused, setIsSearchFocused] = useState(false);
-    const [formData, setFormData] = useState({
-        email: "",
-        usuario: "", // Pode ser "Cliente" ou "Desenvolvedor"
-        nome: ""
-      });
  
     useEffect(() => {
         // Simulação de busca de dados do banco de dados
         fetch('/api/produtos?genero=terror')
             .then(response => response.json())
             .then(data => setProdutos(data));
-    // Verifica se o usuário está logado/cadastrado ao carregar a página
-    const usuarioData = JSON.parse(localStorage.getItem('usuario'));
-    if (usuarioData) {
-        setFormData({
-            email: usuarioData.email,
-            usuario: usuarioData.usuario, // "Cliente" ou "Desenvolvedor"
-            nome: usuarioData.nome
-          });
-        }
         
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -58,97 +42,16 @@ const Terror = () => {
         setIsOpen({ ...isOpen, [section]: !isOpen[section] });
     };
  
-    const toggleMenu = () => {
-        setMenuAberto(!menuAberto);
-    };
- 
     const toggleMobileMenu = () => {
         setIsMobileOpen(!isMobileOpen);
     };
  
     return (
         <div className="app" style={{ backgroundColor: 'transparent' }}>
-            {isSearchFocused && (
-                <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0,0,0,0.3)',
-                    zIndex: 999
-                }} onClick={() => setIsSearchFocused(false)} />
-            )}
             <head>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
             </head>
-            <header className="cabecalho">
-                <div className="conteudo-cabecalho">
-                    <h1 className="logo">
-                        <a href="/Index" title="Game Legends">
-                            <img src={Logo} alt="Logo do Game Legends" />
-                        </a>
-                    </h1>
-                    <nav className={`navegacao ${menuAberto ? 'ativo' : ''}`}>
-                        <Link to={'/'} className="nav-text nav-item"><i className="fas fa-home"></i><span className="nav-label">Início</span></Link>
-                        <Link to={'/Inicial'} className="nav-text nav-item"><i className="fas fa-gamepad"></i><span className="nav-label">Games</span></Link>
-                        <Link to={'/Que'} className="nav-text nav-item"><i className="fas fa-question-circle"></i><span className="nav-label">Sobre</span></Link>
-                        <Link to={'/Suporte'} className="nav-text nav-item"><i className="fas fa-headset"></i><span className="nav-label">Suporte</span></Link>
-                    </nav>
-                    <button className="hamburguer" onClick={toggleMenu}>
-                        <i className="fas fa-bars"></i>
-                    </button>
-                    <form className="formulario-pesquisa" action="/search" style={{
-                        position: isSearchFocused ? 'relative' : 'static',
-                        zIndex: isSearchFocused ? 1000 : 'auto',
-                        boxShadow: isSearchFocused ? '0 4px 20px rgba(0,0,0,0.15)' : 'none',
-                        borderRadius: isSearchFocused ? '8px' : 'initial',
-                        backgroundColor: isSearchFocused ? 'white' : 'transparent'
-                    }}>
-                        <input 
-                            required="required" 
-                            name="q" 
-                            placeholder="Pesquisar Jogos, Tags ou Criadores" 
-                            className="input-pesquisa" 
-                            type="text"
-                            onFocus={() => setIsSearchFocused(true)}
-                            onBlur={() => setIsSearchFocused(false)}
-                        />
-                        <button className="botao-pesquisa" aria-label="Search">
-                            <svg version="1.1" width="18" height="18" role="img" viewBox="0 0 24 24" aria-hidden="true" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" className="icone-pesquisa" stroke="currentColor">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </button>
-                    </form>
-                    <form className="formulario-pesquisa-mobile" action="/search">
-                        <input required="required" name="q" placeholder="Pesquisar" className="input-pesquisa-mobile" type="text" />
-                        <button className="botao-pesquisa-mobile" aria-label="Search">
-                            <svg version="1.1" width="16" height="16" role="img" viewBox="0 0 24 24" aria-hidden="true" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" stroke="currentColor">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </button>
-                    </form>
-                    <div className="painel-usuario">
-                    {formData.usuario ? (
-              // Exibe o botão "Perfil" com o ícone de perfil e tipo de usuário
-              <Link
-                to={`/Perfil?tipo=${formData.usuario}`} // Passa o tipo de usuário como parâmetro na URL
-                className="link-usuario"
-              >
-                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
-              </Link>
-            ) : (
-              // Exibe os botões "Login" e "Registre-se" se o usuário não estiver logado/cadastrado
-              <>
-                <Link to={'/Login'} className="link-usuario">Login</Link>
-                <Link to={'/Cadastro'} className="link-usuario">Registre-se</Link>
-              </>
-            )}
-                    </div>
-                </div>
-            </header>
+            <Header />
             <main className="principal">
                 <button className={`hamburguer-principal ${isMobileOpen ? 'aberto' : ''}`} onClick={toggleMobileMenu}>
                     <i className={`fas ${isMobileOpen ? 'fa-chevron-left' : 'fa-chevron-right'}`}></i>
@@ -561,4 +464,3 @@ const Terror = () => {
 };
  
 export default Terror;
-
