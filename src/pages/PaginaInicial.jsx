@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import ApiService from '../services/ApiService';
 import "./PaginaInicial.css";
 
 const PaginaInicial = () => {
@@ -18,13 +19,7 @@ const PaginaInicial = () => {
 
     useEffect(() => {
         // Fetch projects from API
-        fetch('http://localhost:8080/projetos')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro ao carregar projetos: ${response.status}`);
-                }
-                return response.json();
-            })
+        ApiService.buscarProjetos()
             .then(data => {
                 console.log('Projetos carregados:', data);
                 setProjetos(data || []);
@@ -56,7 +51,7 @@ const PaginaInicial = () => {
     // Função utilitária para obter a URL da imagem do projeto (retorna endpoint de bytes)
     const getProjetoImagem = (projeto) => {
         // Sempre retorna o endpoint que serve o byte[] convertido em imagem
-        return `http://localhost:8080/projetos/${projeto.id}/foto`;
+        return ApiService.getFotoProjetoUrl(projeto.id);
     };
 
     return (

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from '../components/Header';
 import mario from "../assets/mario.png";
 import esquerda from "../assets/esquerda.png";
-import RedefinirSenhaService from '../services/RedefinirSenhaService';
+import RedefinirSenhaService from '../services/ApiService';
  
 const PaginaRedefinirSenha = () => {
   const [senha, setSenha] = useState('');

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
 import DeveloperService from '../services/DeveloperService';
+import ApiService from '../services/ApiService';
 
 const JogoDetalhes = () => {
   const location = useLocation();
@@ -65,7 +66,7 @@ const JogoDetalhes = () => {
   };
 
   const getProjetoImagem = () => {
-    return `http://localhost:8080/projetos/${projeto?.id}/foto`;
+    return ApiService.getFotoProjetoUrl(projeto?.id);
   };
 
   // Array de imagens para o modal (usando a mesma imagem 3 vezes como nas páginas estáticas)

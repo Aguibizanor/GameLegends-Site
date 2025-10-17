@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './IndexPrincipal.css'; // Usar o mesmo CSS para consistência
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import ApiService from '../services/ApiService';
 import left from "../assets/left.png";
 import right from "../assets/right.png";
 import shadowdograu from "../assets/shadowdograu.png"; // Importando a nova imagem
@@ -16,10 +17,16 @@ const IndexPrincipal = () => {
 
   useEffect(() => {
     // Carregar dados do carrossel
-    fetch('/Carrossel.json')
-      .then((response) => response.json())
-      .then(setData)
-      .catch((error) => console.error('Erro ao carregar os dados:', error));
+    const carregarDados = async () => {
+      try {
+        const dados = await ApiService.carregarCarrossel();
+        setData(dados);
+      } catch (error) {
+        console.error('Erro ao carregar os dados:', error);
+      }
+    };
+    
+    carregarDados();
   }, []);
 
   useEffect(() => {
@@ -58,9 +65,6 @@ const IndexPrincipal = () => {
 
   return (
     <div className="app">
-      <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-      </head>
       <Header />
 
       <main className="principal">

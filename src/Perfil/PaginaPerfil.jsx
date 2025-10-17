@@ -3,6 +3,7 @@ import './PaginaPerfil.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import moment from "moment";
+import ApiService from '../services/ApiService';
  
 function PaginaPerfil() {
     const [formData, setFormData] = useState({
@@ -11,7 +12,8 @@ function PaginaPerfil() {
         dataNascimento: null,
         email: "",
         telefone: "",
-        usuario: ""
+        usuario: "",
+        tipoUsuario: ""
     });
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
@@ -28,7 +30,8 @@ function PaginaPerfil() {
                 dataNascimento: usuarioData.datanascimento,
                 email: usuarioData.email,
                 telefone: usuarioData.telefone,
-                usuario: usuarioData.usuario
+                usuario: usuarioData.usuario,
+                tipoUsuario: usuarioData.tipoUsuario
             });
             setLoading(false);
         } else {
@@ -36,7 +39,7 @@ function PaginaPerfil() {
         }
     }, [navigate]);
  
-    const handleDelete = () => {
+    const handleDelete = async () => {
         const usuarioData = JSON.parse(localStorage.getItem('usuario'));
         const idUsuario = usuarioData?.id;
  
@@ -46,21 +49,14 @@ function PaginaPerfil() {
         }
  
         if (window.confirm("Tem certeza que deseja excluir seu perfil?")) {
-            fetch(`http://localhost:8080/cadastro/${idUsuario}`, {
-                method: "DELETE",
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Erro ao deletar o perfil.");
-                    }
-                    alert("Perfil deletado com sucesso!");
-                    localStorage.removeItem('usuario');
-                    navigate('/Login');
-                })
-                .catch(error => {
-                    console.error("Erro ao deletar o perfil:", error);
-                    alert("Erro ao deletar o perfil: " + error.message);
-                });
+            try {
+                await ApiService.deletarPerfil(idUsuario);
+                alert("Perfil deletado com sucesso!");
+                localStorage.removeItem('usuario');
+                navigate('/Login');
+            } catch (error) {
+                alert("Erro ao deletar o perfil: " + error.message);
+            }
         }
     };
  
@@ -76,35 +72,27 @@ function PaginaPerfil() {
         }
     };
  
-    const handleSave = (updatedData) => {
+    const handleSave = async (updatedData) => {
         const usuarioData = JSON.parse(localStorage.getItem('usuario'));
  
-        fetch(`http://localhost:8080/cadastro`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
+        try {
+            await ApiService.atualizarPerfil({
                 ...usuarioData,
                 ...updatedData,
                 dataNascimento: updatedData.dataNascimento || null
-            }),
-        })
-            .then(response => response.json())
-            .then(() => {
-                const updatedUserData = {
-                    ...usuarioData,
-                    ...updatedData,
-                };
-                setFormData(updatedUserData);
-                localStorage.setItem('usuario', JSON.stringify(updatedUserData));
-                alert("Perfil atualizado com sucesso!");
-                setModalVisible(false);
-            })
-            .catch(error => {
-                console.error("Erro ao atualizar o perfil:", error);
-                alert("Erro ao atualizar o perfil.");
             });
+            
+            const updatedUserData = {
+                ...usuarioData,
+                ...updatedData,
+            };
+            setFormData(updatedUserData);
+            localStorage.setItem('usuario', JSON.stringify(updatedUserData));
+            alert("Perfil atualizado com sucesso!");
+            setModalVisible(false);
+        } catch (error) {
+            alert("Erro ao atualizar o perfil: " + error.message);
+        }
     };
 
  
@@ -239,7 +227,7 @@ function PaginaPerfil() {
                                 boxShadow: '0 4px 15px rgba(144, 1, 127, 0.3)'
                             }}>✏️ Editar Perfil</button>
                            
-                            {formData.usuario === "Desenvolvedor" &&
+                            {formData.tipoUsuario === "DESENVOLVEDOR" &&
                                 <Link to="/Criar" style={{
                                     backgroundColor: '#00c853',
                                     color: 'white',

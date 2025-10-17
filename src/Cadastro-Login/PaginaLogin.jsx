@@ -3,7 +3,7 @@ import "./PaginaLogin.css";
 import { Link, useNavigate } from "react-router-dom";
 import Header from '../components/Header';
 import stardew from "../assets/stardew.png";
-import axios from "axios";
+import ApiService from '../services/ApiService';
  
 function PaginaLogin() {
   const [email, setEmail] = useState('');
@@ -23,48 +23,18 @@ function PaginaLogin() {
     }
  
     try {
-      console.log('Tentando login com:', { email, senha });
-      const response = await axios.post("http://localhost:8080/login", {
-        email: email,
-        senha: senha,
-      });
- 
-      console.log('Resposta do servidor:', response);
-      console.log('Dados recebidos:', response.data);
-      
-      if (response.status === 200 && response.data) {
-        localStorage.setItem('usuario', JSON.stringify(response.data));
-        alert("Login realizado com sucesso!");
-        navigate('/Index');
-      } else {
-        setErrorMessage("Credenciais inválidas.");
-      }
+      const userData = await ApiService.login(email, senha);
+      localStorage.setItem('usuario', JSON.stringify(userData));
+      alert("Login realizado com sucesso!");
+      navigate('/Index');
     } catch (error) {
-      console.error('Erro completo:', error);
-      console.error('Resposta do erro:', error.response);
-      
-      if (error.response) {
-        if (error.response.status === 401) {
-          setErrorMessage("Email ou senha incorretos.");
-        } else if (error.response.status === 404) {
-          setErrorMessage("Usuário não encontrado.");
-        } else {
-          setErrorMessage(`Erro: ${error.response.data || 'Erro no servidor'}`);
-        }
-      } else if (error.request) {
-        setErrorMessage("Servidor não responde. Verifique se o backend está rodando.");
-      } else {
-        setErrorMessage("Erro de conexão com o servidor.");
-      }
+      setErrorMessage(error.message);
     }
   };
 
  
   return (
     <div className="app">
-      <head>
-          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-      </head>
       <Header />
  
       <main className="main">

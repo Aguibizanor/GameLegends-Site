@@ -3,7 +3,7 @@ import './PaginaMandarEmail.css';
 import { Link, useNavigate } from "react-router-dom";
 import Header from '../components/Header';
 import viva from "../assets/viva.png";
-import RedefinirSenhaService from '../services/RedefinirSenhaService';
+import ApiService from '../services/ApiService';
  
 const PaginaMandarEmail = () => {
   const [email, setEmail] = useState('');
@@ -11,18 +11,7 @@ const PaginaMandarEmail = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
  
-  const _isRealEmailProvider = (email) => {
-    if (!email.includes('@')) return false;
-   
-    const domain = email.toLowerCase().substring(email.indexOf('@'));
-    const realProviders = [
-      '@gmail.com', '@yahoo.com', '@hotmail.com', '@outlook.com',
-      '@live.com', '@icloud.com', '@protonmail.com', '@uol.com.br',
-      '@bol.com.br', '@terra.com.br'
-    ];
-   
-    return realProviders.includes(domain);
-  };
+
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,10 +24,10 @@ const PaginaMandarEmail = () => {
     setMessage('');
    
     try {
-      const resultado = await RedefinirSenhaService.enviarCodigo(email);
+      const resultado = await ApiService.enviarCodigoRedefinicao(email);
      
-      if (resultado) {
-        const isReal = RedefinirSenhaService.isEmailReal;
+      if (resultado.success) {
+        const isReal = ApiService.isEmailReal(email);
         const message = isReal
           ? `📧 Código enviado para seu email real: ${email}`
           : `💾 Código gerado para email cadastrado: ${email}`;
@@ -47,9 +36,11 @@ const PaginaMandarEmail = () => {
         setTimeout(() => {
           navigate('/MandarCodin');
         }, 2000);
+      } else {
+        setMessage(`❌ ${resultado.message}`);
       }
-    } catch (e) {
-      setMessage(`❌ Erro: ${e.toString().replace('Error: ', '')}`);
+    } catch (error) {
+      setMessage(`❌ Erro: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -98,7 +89,7 @@ const PaginaMandarEmail = () => {
                       transform: 'translateY(-50%)',
                       fontSize: '18px'
                     }}>
-                      {_isRealEmailProvider(email) ? '📧' : '💾'}
+                      {ApiService.isEmailReal(email) ? '📧' : '💾'}
                     </span>
                   )}
                 </div>

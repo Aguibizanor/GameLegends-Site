@@ -9,7 +9,8 @@ const Header = () => {
     const [formData, setFormData] = useState({
         email: "",
         usuario: "",
-        nome: ""
+        nome: "",
+        tipoUsuario: ""
     });
 
     useEffect(() => {
@@ -18,7 +19,8 @@ const Header = () => {
             setFormData({
                 email: usuarioData.email,
                 usuario: usuarioData.usuario,
-                nome: usuarioData.nome
+                nome: usuarioData.nome,
+                tipoUsuario: usuarioData.tipoUsuario
             });
         }
     }, []);
@@ -101,12 +103,12 @@ const Header = () => {
                         </button>
                     </form>
                     <div className="painel-usuario">
-                        {formData.usuario ? (
+                        {formData.tipoUsuario ? (
                             <Link
-                                to={`/Perfil?tipo=${formData.usuario}`}
+                                to={`/Perfil?tipo=${formData.tipoUsuario}`}
                                 className="link-usuario"
                             >
-                                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.usuario})
+                                <i className="fas fa-user-circle"></i> Perfil ({formData.nome?.split(' ')[0] || formData.tipoUsuario})
                             </Link>
                         ) : (
                             <>

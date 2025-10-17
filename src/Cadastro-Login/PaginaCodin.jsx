@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import sonic from "../assets/sonic.png";
 import esquerda from "../assets/esquerda.png";
-import RedefinirSenhaService from '../services/RedefinirSenhaService';
+import RedefinirSenhaService from '../services/ApiService' //'../services/RedefinirSenhaService';
  
 const PaginaCodin = () => {
   const [codigo, setCodigo] = useState(['', '', '', '', '', '']);

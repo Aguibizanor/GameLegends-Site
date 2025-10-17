@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import celestegirl from "../assets/celestegirl.png";
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import ApiService from '../services/ApiService';
 import Header from '../components/Header';
 import './PaginaCadastro.css';
  
@@ -15,6 +15,7 @@ function PaginaCadastro() {
         telefone: '',
         senha: '',
         confirmarSenha: '',
+        tipoUsuario: '',
     });
  
     const [message, setMessage] = useState('');
@@ -76,25 +77,18 @@ function PaginaCadastro() {
             return;
         }
  
-        const cadastroData = { ...formData, datanascimento: formData.dataNascimento }; // Prepare os dados para o envio
+        const cadastroData = { 
+            ...formData, 
+            datanascimento: formData.dataNascimento,
+            tipoUsuario: formData.tipoUsuario
+        };
  
         try {
-            const response = await axios.post('http://localhost:8080/cadastro', cadastroData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
- 
-            if (response.status === 201) { // Verifica se o cadastro foi bem-sucedido
-                alert("Cadastro realizado com sucesso!");
-                navigate('/Login'); // Redireciona após sucesso
-            } else {
-                const errorResponse = response.data;
-                setMessage(errorResponse.message || 'Erro no cadastro.');
-            }
+            await ApiService.cadastro(cadastroData);
+            alert("Cadastro realizado com sucesso!");
+            navigate('/Login');
         } catch (error) {
-            console.error("Erro na requisição:", error);
-            setMessage('Erro ao se conectar ao servidor. Tente novamente.');
+            setMessage(error.message);
         }
     };
  
@@ -102,9 +96,6 @@ function PaginaCadastro() {
  
     return (
         <div className="pagina-cadastro">
-            <head>
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-            </head>
             <Header />
             <main className="conteudo-formulario">
                 <div className="side-image">
@@ -145,13 +136,12 @@ function PaginaCadastro() {
                             <label htmlFor="confirmarSenha">Confirmar Senha:</label>
                             <input type="password" id="confirmarSenha" name="confirmarSenha" value={formData.confirmarSenha} onChange={handleChange} className="input-formulario" required />
                         </div>
-                        <div className="input-single">
-                            <label>Tipo de Usuário:</label>
-                            <select name="usuario" value={formData.usuario} onChange={handleChange} required>
+                        <div className="grupo-formulario">
+                            <label htmlFor="tipoUsuario">Tipo de Usuário:</label>
+                            <select id="tipoUsuario" name="tipoUsuario" value={formData.tipoUsuario} onChange={handleChange} className="input-formulario" required>
                                 <option value="">Selecione</option>
-                                <option value="ADM">Administrador</option>
-                                <option value="Cliente">Cliente</option>
-                                <option value="Desenvolvedor">Desenvolvedor</option>
+                                <option value="CLIENTE">Cliente</option>
+                                <option value="DESENVOLVEDOR">Desenvolvedor</option>
                             </select>
                         </div>
                         <div className="acoes-formulario">

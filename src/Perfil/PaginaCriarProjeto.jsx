@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import './PaginaCriarProjeto.css';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import ApiService from '../services/ApiService';
 import Header from '../components/Header';
 
 function PaginaCriarProjeto() {
   const [formData, setFormData] = useState({
     email: "",
     usuario: "",
-    nome: ""
+    nome: "",
+    id: null
   });
 
   // Alinhamento com o banco:
   // nomeProjeto, descricao, dataInicio, tecnologias, genero, foto (byte[])
-  const [nomeProjeto, setNomeProjeto] = useState("");
+  const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [dataInicio, setDataInicio] = useState("");
   const [tecnologias, setTecnologias] = useState("");
@@ -31,7 +32,9 @@ function PaginaCriarProjeto() {
       setFormData({
         email: usuarioData.email,
         usuario: usuarioData.usuario,
-        nome: usuarioData.nome
+        tipoUsuario: usuarioData.tipoUsuario,
+        nome: usuarioData.nome,
+        id: usuarioData.id
       });
     }
   }, []);
@@ -70,12 +73,12 @@ function PaginaCriarProjeto() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!nomeProjeto || !descricao || !dataInicio || !tecnologias || !genero) {
+    if (!nome || !descricao || !dataInicio || !tecnologias || !genero) {
       setError("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
 
-    if (!formData.usuario || !formData.email) {
+    if (!formData.id || !formData.email) {
       setError("Você precisa estar logado para criar um projeto. Faça login e tente novamente.");
       return;
     }
@@ -83,73 +86,42 @@ function PaginaCriarProjeto() {
     setError("");
     setSuccessMessage("");
 
-    // Alinhamento dos campos com o banco:
+    // Criar FormData no formato especificado
     const form = new FormData();
-    form.append("nomeProjeto", nomeProjeto); // String
-    form.append("descricao", descricao);     // String
-    form.append("dataInicio", dataInicio);   // String
-    form.append("tecnologias", tecnologias); // String
-    form.append("genero", genero);           // String
-    form.append("emailDesenvolvedor", formData.email); // Email do desenvolvedor
+    form.append("nome", nome);
+    form.append("generoJogo", genero);
+    form.append("descricao", descricao);
+    form.append("contato", tecnologias);
+    form.append("idUsuario", formData.id);
+    form.append("dataInicio", dataInicio);
+    form.append("statusProjeto", "Ativo");
     if (fotoFile) {
-      form.append("foto", fotoFile);         // byte[] no backend
+      form.append("foto", fotoFile);
+    }
+
+    // Imprimir o objeto criado no console
+    console.log("Objeto FormData criado:");
+    for (let [key, value] of form.entries()) {
+      console.log(key, value);
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/projetos/createComFoto",
-        form,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
-      if (response.status === 200) {
-        setSuccessMessage("Projeto criado com sucesso! Criação do projeto concluída.");
-        setNomeProjeto("");
-        setDescricao("");
-        setDataInicio("");
-        setTecnologias("");
-        setGenero("");
-        setFotoPreview("");
-        setFotoFile(null);
-      } else {
-        setError(`Resposta inesperada do servidor: ${response.status}`);
-      }
+      await ApiService.criarProjeto(form);
+      setSuccessMessage("Projeto criado com sucesso! Criação do projeto concluída.");
+      setNome("");
+      setDescricao("");
+      setDataInicio("");
+      setTecnologias("");
+      setGenero("");
+      setFotoPreview("");
+      setFotoFile(null);
     } catch (error) {
-      console.error("Erro completo:", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-        config: error.config
-      });
-
-      if (error.code === 'ECONNABORTED') {
-        setError("Tempo de conexão esgotado. O servidor demorou muito para responder.");
-      } else if (error.response) {
-        const serverError = error.response.data;
-        setError(
-          serverError.message ||
-          serverError.error ||
-          `Erro ${error.response.status}: ${error.response.statusText}` ||
-          "Erro no servidor. Tente novamente mais tarde."
-        );
-      } else if (error.request) {
-        setError(`
-          Não foi possível conectar ao servidor. Verifique:
-          1. Se o servidor está rodando (http://localhost:8080)
-          2. Sua conexão com a internet
-          3. Se há problemas de CORS (verifique o console)
-        `);
-      } else {
-        setError(`Erro ao configurar a requisição: ${error.message}`);
-      }
+      setError(error.message);
     }
   };
 
   return (
     <div className="pagina-criar-projeto-app">
-      <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-      </head>
       <Header />
 
       <main className="pagina-criar-projeto-main">
@@ -197,8 +169,8 @@ function PaginaCriarProjeto() {
               <label>Nome do Projeto: <span className="pagina-criar-projeto-required">*</span></label>
               <input
                 type="text"
-                value={nomeProjeto}
-                onChange={(e) => setNomeProjeto(e.target.value)}
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
                 className="pagina-criar-projeto-input"
                 placeholder="Digite o nome do seu projeto"
                 maxLength={100}

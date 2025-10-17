@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import Logo from "../assets/logo.site.tcc.png";
 import esquerda from "../assets/esquerda.png";
 import DeveloperService from '../services/DeveloperService';
+import ApiService from '../services/ApiService';
 
 const JogoDescricao = () => {
   const { id } = useParams();
@@ -22,19 +23,15 @@ const JogoDescricao = () => {
 
   // Imagens padrão para projetos sem imagens específicas
   const imagensPadrao = [
-    `http://localhost:8080/projetos/${id}/foto`,
-    `http://localhost:8080/projetos/${id}/foto`,
-    `http://localhost:8080/projetos/${id}/foto`
+    ApiService.getFotoProjetoUrl(id),
+    ApiService.getFotoProjetoUrl(id),
+    ApiService.getFotoProjetoUrl(id)
   ];
 
   useEffect(() => {
     if (id) {
       // Busca apenas no banco de dados
-      fetch(`http://localhost:8080/projetos/${id}`)
-        .then(response => {
-          if (!response.ok) throw new Error('Projeto não encontrado');
-          return response.json();
-        })
+      ApiService.buscarProjetoPorId(id)
         .then(data => {
           setProjeto(data);
           setLoading(false);
@@ -101,9 +98,6 @@ const JogoDescricao = () => {
 
   return (
     <div className="GIT gradient-bg">
-      <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-      </head>
       <div className="app7">
         <header className="cabecalho">
           <div className="conteudo-cabecalho">
@@ -180,14 +174,14 @@ const JogoDescricao = () => {
           <div className="main-content">
             <div className="game-images-center">
               <img 
-                src={`http://localhost:8080/projetos/${projeto.id}/foto`} 
+                src={ApiService.getFotoProjetoUrl(projeto.id)} 
                 alt={projeto.nomeProjeto} 
                 className="main-game-img" 
               />
               <div className="extra-images">
-                <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
-                <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
-                <img src={`http://localhost:8080/projetos/${projeto.id}/foto`} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
+                <img src={ApiService.getFotoProjetoUrl(projeto.id)} alt="Screenshot 1" className="extra-img" onClick={() => abrirModalImagem(0)} />
+                <img src={ApiService.getFotoProjetoUrl(projeto.id)} alt="Screenshot 2" className="extra-img" onClick={() => abrirModalImagem(1)} />
+                <img src={ApiService.getFotoProjetoUrl(projeto.id)} alt="Screenshot 3" className="extra-img" onClick={() => abrirModalImagem(2)} />
               </div>
             </div>
             <div className="game-info-bottom">
